@@ -1,0 +1,184 @@
+client ManageInventories;
+component TRNINV;
+layer Cust;
+projection InventoryHandling;
+description "Put some useful description here ...";
+
+--------------------------------- FRAGMENTS ---------------------------------
+include fragment TrnBranchCardFragment;
+
+----------------------------- NAVIGATOR ENTRIES -----------------------------
+navigator {
+   entry InventoryDetailsNavEntry parent TrninvNavigatorRoot.ManageInventoriesNavEntry at index 0 {
+
+      label = "Inventory Details";
+
+      page TrnInventoryDetailsPage;
+   }
+}
+
+
+
+-------------------------------- MAIN PAGES ---------------------------------
+page TrnInventoryDetailsPage using TrnInventorySet {
+
+   label = "Inventory Details";
+
+   crudactions {
+      new {
+         enabled = [true];
+      }
+   }
+
+   editmode = Inline;
+
+   selector TrnInventoryS1Selector;
+   group TrnInventoryGroup bind TrnInventoryS1Selector;
+   list TrnInventoryCommMethodList(TrnInventoryCommMethodArray) bind TrnInventoryS1Selector;
+}
+
+
+--------------------------------- COMMANDS ----------------------------------
+
+
+--------------------------------- SELECTORS ---------------------------------
+
+selector TrnInventoryS1Selector for TrnInventory {
+
+   label = "";
+   static CompanyId;
+   static TrnBranchRef.BranchId;
+   static InventoryId;
+   static Name;
+   static PickingLeadTime;
+}
+
+selector TrnlovBranchS1Selector for TrnBranch {
+
+   static BranchId;
+   static Name;
+   static TimeOffset;
+   static CountryId;
+   static AreaId;
+
+
+}
+
+
+
+---------------------------------- GROUPS -----------------------------------
+group TrnInventoryGroup for TrnInventory {
+
+   field TrnCompanyRef {
+      label = "Company Id";
+      validate command {
+         execute {
+            info("Company ID ${CompanyId} is added");
+
+         }
+
+
+      }
+
+   }
+//   field TrnBranchRef {
+//      label = "Branch Id";
+   //   }
+
+   lov TrnBranchRef with TrnlovBranchS1Selector {
+      label = "Branch Id";
+      preview = TrnBranchCard;
+      details = "page/ManageCompanies/TrnBranchOverview?$filter=CompanyId eq $[CompanyId] and BranchId eq $[BranchId]";
+      search = BranchId, CountryId, AreaId;
+
+
+   }
+   field InventoryId;
+   field Name;
+   field PickingLeadTime {
+      editable = [false];
+
+   }
+   field TrnBranchRef.CountryId;
+   field CountryName;
+   field TrnBranchRef.AreaId;
+   field AreaName;
+}
+
+
+----------------------------------- LISTS -----------------------------------
+list TrnInventoryCommMethodList for TrnInventoryCommMethod {
+
+   editmode = MultiRowEdit;
+
+   crudactions {
+      new {
+         enabled = [true];
+      }
+      edit {
+         enabled = [parent.BranchId != "COL-01"];
+      }
+   }
+
+   field InventoryCommId;
+   field Address;
+   field CommunicationType;
+   field DefaultAddress;
+
+}
+
+
+----------------------------------- CARDS -----------------------------------
+//card TrnBranchCard for TrnBranch {
+//   label = "${BranchId}";
+//   field BranchId;
+//   field Name;
+////   field CompanyId;
+//   field TrnCompanyRef {
+//      label = "Company Id";
+//   }
+//   field TrnCompanyRef.Name;
+//
+//   field TimeOffset;
+//   field TrnCountryRef {
+//      label = "Country Id";
+//
+//   }
+////   field CountryId;
+//   field TrnCountryRef.Country;
+////   field TrnAreaRef {
+////      label = "Area Id";
+////
+////   }
+//   field AreaId;
+//   field TrnAreaRef.Area {
+//      label = "Area Name";
+//   }
+//}
+
+---------------------------------- DIALOGS ----------------------------------
+
+
+
+-------------------------------- SINGLETONS ---------------------------------
+
+
+---------------------------------- CHARTS -----------------------------------
+
+
+--------------------------------- CALENDERS ---------------------------------
+
+
+---------------------------------- SHEETS -----------------------------------
+
+
+----------------------------- STATE INDICATORS ------------------------------
+
+
+----------------------------------- TREES -----------------------------------
+
+
+---------------------------------- PLUGINS ----------------------------------
+
+
+------------------------------- IMAGE VIEWERS -------------------------------

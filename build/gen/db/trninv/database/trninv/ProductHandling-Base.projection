@@ -1,0 +1,665 @@
+projection ProductHandling;
+component  TRNINV;
+layer      Base;
+description "";
+
+
+
+entity TrnUnit {
+   crud = Create,Read,Update,Delete;
+   from = "TRN_UNIT";
+   exec = "Trn_Unit_API";
+   basetable = "TRN_UNIT_TAB";
+   keys = Unit {
+      where = "unit = :Unit";
+   }
+   attribute Objgrants Text {
+      fetch     = "NULL";
+      label     = "Granted access";
+      maxlength = 2000;
+      editable  = [false];
+      insertable = [false];
+      updatable  = [false];
+   }
+   attribute Unit Text {
+      fetch      = "unit";
+      dbcolumn = "unit";
+      label      = "Unit";
+      maxlength  = 10;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(10)";
+   }
+   attribute Description Text {
+      fetch      = "description";
+      dbcolumn = "description";
+      label      = "Description";
+      maxlength  = 1000;
+      insertable  = [true];
+      updatable   = [true];
+      implementationtype = "VARCHAR2(1000)";
+   }
+   function DefaultCopy Entity(TrnUnit) {
+      parameter CopyValues Structure(TrnUnitCopyValues);
+   }
+}
+
+structure TrnUnitCopyValues$ {
+   attribute ModifiedSource Entity(TrnUnit) {
+      implementationtype = "VARCHAR2";
+   }
+}
+
+entity TrnProduct {
+   crud = Create,Read,Update,Delete;
+   from = "TRN_PRODUCT";
+   exec = "Trn_Product_API";
+   basetable = "TRN_PRODUCT_TAB";
+   keys = CompanyId,ProductId {
+      where = "company_id = :CompanyId AND product_id = :ProductId";
+   }
+   attribute Objgrants Text {
+      fetch     = "NULL";
+      label     = "Granted access";
+      maxlength = 2000;
+      editable  = [false];
+      insertable = [false];
+      updatable  = [false];
+   }
+   attribute CompanyId Text {
+      fetch      = "company_id";
+      dbcolumn = "company_id";
+      label      = "Company ID";
+      maxlength  = 20;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(20)";
+   }
+   attribute ProductId Number {
+      fetch      = "product_id";
+      dbcolumn = "product_id";
+      label      = "Product ID";
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      lovcolumn        = [true];
+      implementationtype = "NUMBER";
+   }
+   attribute Description Text {
+      fetch      = "description";
+      dbcolumn = "description";
+      label      = "Description";
+      maxlength  = 1000;
+      insertable  = [true];
+      updatable   = [true];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(1000)";
+   }
+   attribute Price Number {
+      fetch      = "price";
+      dbcolumn = "price";
+      label      = "Price";
+      required   = [true];
+      insertable  = [true];
+      updatable   = [true];
+      lovcolumn        = [true];
+      implementationtype = "NUMBER";
+   }
+   attribute Comments Text {
+      fetch      = "comments";
+      dbcolumn = "comments";
+      label      = "Comments";
+      maxlength  = 2000;
+      insertable  = [true];
+      updatable   = [true];
+      implementationtype = "VARCHAR2(2000)";
+   }
+   attribute Unit Text {
+      fetch      = "unit";
+      dbcolumn = "unit";
+      label      = "Unit";
+      maxlength  = 10;
+      insertable  = [true];
+      updatable   = [true];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(10)";
+   }
+   attribute BrandId Text {
+      fetch      = "brand_id";
+      dbcolumn = "brand_id";
+      label      = "Brand ID";
+      maxlength  = 10;
+      insertable  = [true];
+      updatable   = [true];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(10)";
+   }
+   attribute CategoryId Text {
+      fetch      = "category_id";
+      dbcolumn = "category_id";
+      label      = "Category ID";
+      maxlength  = 10;
+      insertable  = [true];
+      updatable   = [true];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(10)";
+   }
+   attribute ModelId Text {
+      fetch      = "model_id";
+      dbcolumn = "model_id";
+      label      = "Model ID";
+      maxlength  = 100;
+      insertable  = [true];
+      updatable   = [true];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(100)";
+   }
+   function DefaultCopy Entity(TrnProduct) {
+      parameter CopyValues Structure(TrnProductCopyValues);
+   }
+}
+
+structure TrnProductCopyValues$ {
+   attribute ModifiedSource Entity(TrnProduct) {
+      implementationtype = "VARCHAR2";
+   }
+}
+
+entity TrnBrand {
+   crud = Create,Read,Update,Delete;
+   from = "TRN_BRAND";
+   exec = "Trn_Brand_API";
+   basetable = "TRN_BRAND_TAB";
+   keys = BrandId {
+      where = "brand_id = :BrandId";
+   }
+   attribute Objgrants Text {
+      fetch     = "NULL";
+      label     = "Granted access";
+      maxlength = 2000;
+      editable  = [false];
+      insertable = [false];
+      updatable  = [false];
+   }
+   attribute BrandId Text {
+      fetch      = "brand_id";
+      dbcolumn = "brand_id";
+      label      = "Brand ID";
+      maxlength  = 10;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(10)";
+   }
+   attribute Name Text {
+      fetch      = "name";
+      dbcolumn = "name";
+      label      = "Name";
+      maxlength  = 1000;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [true];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(1000)";
+   }
+   attribute Comments Text {
+      fetch      = "comments";
+      dbcolumn = "comments";
+      label      = "Comments";
+      maxlength  = 2000;
+      insertable  = [true];
+      updatable   = [true];
+      implementationtype = "VARCHAR2(2000)";
+   }
+   function DefaultCopy Entity(TrnBrand) {
+      parameter CopyValues Structure(TrnBrandCopyValues);
+   }
+}
+
+structure TrnBrandCopyValues$ {
+   attribute ModifiedSource Entity(TrnBrand) {
+      implementationtype = "VARCHAR2";
+   }
+}
+
+entity TrnProdCategory {
+   crud = Create,Read,Update,Delete;
+   from = "TRN_PROD_CATEGORY";
+   exec = "Trn_Prod_Category_API";
+   basetable = "TRN_PROD_CATEGORY_TAB";
+   keys = CategoryId {
+      where = "category_id = :CategoryId";
+   }
+   attribute Objgrants Text {
+      fetch     = "NULL";
+      label     = "Granted access";
+      maxlength = 2000;
+      editable  = [false];
+      insertable = [false];
+      updatable  = [false];
+   }
+   attribute CategoryId Text {
+      fetch      = "category_id";
+      dbcolumn = "category_id";
+      label      = "Category ID";
+      maxlength  = 10;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(10)";
+   }
+   attribute Name Text {
+      fetch      = "name";
+      dbcolumn = "name";
+      label      = "Name";
+      maxlength  = 1000;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [true];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(1000)";
+   }
+   attribute Comments Text {
+      fetch      = "comments";
+      dbcolumn = "comments";
+      label      = "Comments";
+      maxlength  = 2000;
+      insertable  = [true];
+      updatable   = [true];
+      implementationtype = "VARCHAR2(2000)";
+   }
+   function DefaultCopy Entity(TrnProdCategory) {
+      parameter CopyValues Structure(TrnProdCategoryCopyValues);
+   }
+}
+
+structure TrnProdCategoryCopyValues$ {
+   attribute ModifiedSource Entity(TrnProdCategory) {
+      implementationtype = "VARCHAR2";
+   }
+}
+
+entity TrnProdCategoryBrand {
+   crud = Create,Read,Update,Delete;
+   from = "TRN_PROD_CATEGORY_BRAND";
+   exec = "Trn_Prod_Category_Brand_API";
+   basetable = "TRN_PROD_CATEGORY_BRAND_TAB";
+   keys = BrandId,CategoryId {
+      where = "brand_id = :BrandId AND category_id = :CategoryId";
+   }
+   attribute Objgrants Text {
+      fetch     = "NULL";
+      label     = "Granted access";
+      maxlength = 2000;
+      editable  = [false];
+      insertable = [false];
+      updatable  = [false];
+   }
+   attribute BrandId Text {
+      fetch      = "brand_id";
+      dbcolumn = "brand_id";
+      label      = "Brand ID";
+      maxlength  = 10;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      implementationtype = "VARCHAR2(10)";
+   }
+   attribute CategoryId Text {
+      fetch      = "category_id";
+      dbcolumn = "category_id";
+      label      = "Category ID";
+      maxlength  = 10;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      implementationtype = "VARCHAR2(10)";
+   }
+   function DefaultCopy Entity(TrnProdCategoryBrand) {
+      parameter CopyValues Structure(TrnProdCategoryBrandCopyValues);
+   }
+}
+
+structure TrnProdCategoryBrandCopyValues$ {
+   attribute ModifiedSource Entity(TrnProdCategoryBrand) {
+      implementationtype = "VARCHAR2";
+   }
+}
+
+entity TrnModel {
+   crud = Create,Read,Update,Delete;
+   from = "TRN_MODEL";
+   exec = "Trn_Model_API";
+   basetable = "TRN_MODEL_TAB";
+   keys = BrandId,CategoryId,ModelId {
+      where = "brand_id = :BrandId AND category_id = :CategoryId AND model_id = :ModelId";
+   }
+   attribute Objgrants Text {
+      fetch     = "NULL";
+      label     = "Granted access";
+      maxlength = 2000;
+      editable  = [false];
+      insertable = [false];
+      updatable  = [false];
+   }
+   attribute BrandId Text {
+      fetch      = "brand_id";
+      dbcolumn = "brand_id";
+      label      = "Brand ID";
+      maxlength  = 10;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      implementationtype = "VARCHAR2(10)";
+   }
+   attribute CategoryId Text {
+      fetch      = "category_id";
+      dbcolumn = "category_id";
+      label      = "Category ID";
+      maxlength  = 10;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      implementationtype = "VARCHAR2(10)";
+   }
+   attribute ModelId Text {
+      fetch      = "model_id";
+      dbcolumn = "model_id";
+      label      = "Model ID";
+      maxlength  = 100;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(100)";
+   }
+   attribute Description Text {
+      fetch      = "description";
+      dbcolumn = "description";
+      label      = "Description";
+      maxlength  = 2000;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [true];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(2000)";
+   }
+   function DefaultCopy Entity(TrnModel) {
+      parameter CopyValues Structure(TrnModelCopyValues);
+   }
+}
+
+structure TrnModelCopyValues$ {
+   attribute ModifiedSource Entity(TrnModel) {
+      implementationtype = "VARCHAR2";
+   }
+}
+
+entity TrnInventoryProduct {
+   crud = Create,Read,Update,Delete;
+   from = "TRN_INVENTORY_PRODUCT";
+   exec = "Trn_Inventory_Product_API";
+   basetable = "TRN_INVENTORY_PRODUCT_TAB";
+   keys = CompanyId,BranchId,InventoryId,ProductId {
+      where = "company_id = :CompanyId AND branch_id = :BranchId AND inventory_id = :InventoryId AND product_id = :ProductId";
+   }
+   attribute Objgrants Text {
+      fetch     = "NULL";
+      label     = "Granted access";
+      maxlength = 2000;
+      editable  = [false];
+      insertable = [false];
+      updatable  = [false];
+   }
+   attribute CompanyId Text {
+      fetch      = "company_id";
+      dbcolumn = "company_id";
+      label      = "Company ID";
+      maxlength  = 20;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      implementationtype = "VARCHAR2(20)";
+   }
+   attribute BranchId Text {
+      fetch      = "branch_id";
+      dbcolumn = "branch_id";
+      label      = "Branch ID";
+      maxlength  = 20;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      implementationtype = "VARCHAR2(20)";
+   }
+   attribute InventoryId Number {
+      fetch      = "inventory_id";
+      dbcolumn = "inventory_id";
+      label      = "Inventory ID";
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      implementationtype = "NUMBER";
+   }
+   attribute ProductId Number {
+      fetch      = "product_id";
+      dbcolumn = "product_id";
+      label      = "Product ID";
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      implementationtype = "NUMBER";
+   }
+   attribute Quantity Number {
+      fetch      = "quantity";
+      dbcolumn = "quantity";
+      label      = "Quantity";
+      required   = [true];
+      insertable  = [true];
+      updatable   = [true];
+      lovcolumn        = [true];
+      implementationtype = "NUMBER";
+   }
+   attribute ReorderLevel Number {
+      fetch      = "reorder_level";
+      dbcolumn = "reorder_level";
+      label      = "Reorder Level";
+      required   = [true];
+      insertable  = [true];
+      updatable   = [true];
+      implementationtype = "NUMBER";
+   }
+   attribute ReservedQuantity Number {
+      fetch      = "reserved_quantity";
+      dbcolumn = "reserved_quantity";
+      label      = "Reserved Quantity";
+      required   = [true];
+      insertable  = [true];
+      updatable   = [true];
+      implementationtype = "NUMBER";
+   }
+   function DefaultCopy Entity(TrnInventoryProduct) {
+      parameter CopyValues Structure(TrnInventoryProductCopyValues);
+   }
+}
+
+structure TrnInventoryProductCopyValues$ {
+   attribute ModifiedSource Entity(TrnInventoryProduct) {
+      implementationtype = "VARCHAR2";
+   }
+}
+
+entity TrnInventory {
+   crud = Read;
+   from = "TRN_INVENTORY";
+   exec = "Trn_Inventory_API";
+   basetable = "TRN_INVENTORY_TAB";
+   keys = CompanyId,BranchId,InventoryId {
+      where = "company_id = :CompanyId AND branch_id = :BranchId AND inventory_id = :InventoryId";
+   }
+   attribute Objgrants Text {
+      fetch     = "NULL";
+      label     = "Granted access";
+      maxlength = 2000;
+      editable  = [false];
+      insertable = [false];
+      updatable  = [false];
+   }
+   attribute CompanyId Text {
+      fetch      = "company_id";
+      dbcolumn = "company_id";
+      label      = "Company ID";
+      maxlength  = 20;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      implementationtype = "VARCHAR2(20)";
+   }
+   attribute BranchId Text {
+      fetch      = "branch_id";
+      dbcolumn = "branch_id";
+      label      = "Branch ID";
+      maxlength  = 20;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      implementationtype = "VARCHAR2(20)";
+   }
+   attribute InventoryId Number {
+      fetch      = "inventory_id";
+      dbcolumn = "inventory_id";
+      label      = "Inventory ID";
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      lovcolumn        = [true];
+      implementationtype = "NUMBER";
+   }
+   attribute Name Text {
+      fetch      = "name";
+      dbcolumn = "name";
+      label      = "Name";
+      maxlength  = 200;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [true];
+      implementationtype = "VARCHAR2(200)";
+   }
+   attribute PickingLeadTime Number {
+      fetch      = "picking_lead_time";
+      dbcolumn = "picking_lead_time";
+      label      = "Picking Lead Time";
+      required   = [true];
+      insertable  = [true];
+      updatable   = [true];
+      implementationtype = "NUMBER";
+   }
+}
+
+
+
+entityset Reference_TrnInventory for TrnInventory;
+entity TrnBranch {
+   crud = Read;
+   from = "TRN_BRANCH";
+   exec = "Trn_Branch_API";
+   basetable = "TRN_BRANCH_TAB";
+   keys = CompanyId,BranchId {
+      where = "company_id = :CompanyId AND branch_id = :BranchId";
+   }
+   attribute Objgrants Text {
+      fetch     = "NULL";
+      label     = "Granted access";
+      maxlength = 2000;
+      editable  = [false];
+      insertable = [false];
+      updatable  = [false];
+   }
+   attribute CompanyId Text {
+      fetch      = "company_id";
+      dbcolumn = "company_id";
+      label      = "Company Id";
+      maxlength  = 20;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(20)";
+   }
+   attribute BranchId Text {
+      fetch      = "branch_id";
+      dbcolumn = "branch_id";
+      label      = "Branch Id";
+      maxlength  = 20;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [false];
+      editable   = [ETag = null];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(20)";
+   }
+   attribute Name Text {
+      fetch      = "name";
+      dbcolumn = "name";
+      label      = "Name";
+      maxlength  = 1000;
+      required   = [true];
+      insertable  = [true];
+      updatable   = [true];
+      lovcolumn        = [true];
+      implementationtype = "VARCHAR2(1000)";
+   }
+   attribute TimeOffset Number {
+      fetch      = "time_offset";
+      dbcolumn = "time_offset";
+      label      = "Time Offset";
+      required   = [true];
+      insertable  = [true];
+      updatable   = [true];
+      implementationtype = "NUMBER";
+   }
+   attribute CountryId Text {
+      fetch      = "country_id";
+      dbcolumn = "country_id";
+      label      = "Country Id";
+      maxlength  = 10;
+      insertable  = [true];
+      updatable   = [true];
+      implementationtype = "VARCHAR2(10)";
+   }
+   attribute AreaId Text {
+      fetch      = "area_id";
+      dbcolumn = "area_id";
+      label      = "Area Id";
+      maxlength  = 10;
+      insertable  = [true];
+      updatable   = [true];
+      implementationtype = "VARCHAR2(10)";
+   }
+}
+
+
+
+entityset Reference_TrnBranch for TrnBranch;

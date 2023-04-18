@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TranslatableResources type="LU" module="TRNINV" version="1.0" layer="Cust" xmlns="types.scan.translation.fnd.ifsworld.com">
+   <TranslatableResource type="Logical Unit" ID="TrnUnit" name="TrnUnit">
+      <Text><![CDATA[Trn Unit]]></Text>
+      <Resource subtype="View" ID="TrnUnit.TRN_UNIT" control="TRN_UNIT">
+         <Text><![CDATA[Trn Unit]]></Text>
+         <Resource subtype="Column" ID="TrnUnit.TRN_UNIT.UNIT" control="UNIT">
+            <Text><![CDATA[Unit]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnUnit.TRN_UNIT.DESCRIPTION" control="DESCRIPTION">
+            <Text><![CDATA[Description]]></Text>
+         </Resource>
+      </Resource>
+   </TranslatableResource>
+</TranslatableResources>

@@ -1,0 +1,57 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnInventory
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Company_Id IS
+   Flags      = 'PMI--'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'Company ID';
+COLUMN Branch_Id IS
+   Flags      = 'PMI--'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'Branch ID'
+   Ref        = 'TrnBranch(company_id)';
+COLUMN Inventory_Id IS
+   Flags      = 'K-I-L'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Inventory ID';
+COLUMN Name IS
+   Flags      = 'AMIU-'
+   Datatype   = 'STRING(200)'
+   Prompt     = 'Name';
+COLUMN Picking_Lead_Time IS
+   Flags      = 'AMIU-'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Picking Lead Time';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Trn_Inventory IS
+   Prompt     = 'Trn Inventory'
+   Table      = 'TRN_INVENTORY_TAB'
+SELECT
+       company_id                     company_id,
+       branch_id                      branch_id,
+       inventory_id                   inventory_id,
+       name                           name,
+       picking_lead_time              picking_lead_time,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   trn_inventory_tab;

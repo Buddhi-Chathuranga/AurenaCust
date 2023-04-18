@@ -1,0 +1,85 @@
+projection ProductHandling;
+component TRNINV;
+layer Cust;
+description "Used to handle all Product related activities";
+
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+----------------------------- MAIN ENTRY POINTS -----------------------------
+
+
+------------------------------ ENTITY DETAILS -------------------------------
+
+
+------------------------------- ENUMERATIONS --------------------------------
+
+
+---------------------------------- QUERIES ----------------------------------
+
+
+---------------------------------- ACTIONS ----------------------------------
+action MoveProduct {
+   initialcheck none;
+   ludependencies = TrnInventoryProduct;
+
+
+   parameter CompanyId Text;
+   parameter SourceBranchId Text;
+   parameter SourceInventoryId Number;
+   parameter ProductId Number;
+   parameter DestBranchId Text;
+   parameter DestInventoryId Number;
+   parameter QuantitytoMove Number;
+
+}
+
+
+--------------------------------- FUNCTIONS ---------------------------------
+
+function GetCurrentQuantity Number {
+   parameter ParaCompanyId Text;
+   parameter ParaBranchId Text;
+   parameter ParaInventoryId Number;
+   parameter ParaProductId Number;
+
+}
+
+
+
+-------------------------------- STRUCTURES ---------------------------------
+
+structure MoveProductDataStructure {
+
+   attribute CompanyId Text;
+   attribute ProductId Number;
+
+   attribute SourceBranchId Text;
+   attribute SourceInventoryId Number;
+   attribute SourceQuantity Number;
+
+   attribute DestBranchId Text {
+      required = [true];
+   }
+   attribute DestInventoryId Number {
+      required = [true];
+   }
+   attribute QuantityAlreadyAvailable Number;
+   attribute QuantityToMove Number {
+      required = [true];
+   }
+
+   reference TrnInventoryRef(CompanyId, DestBranchId, DestInventoryId) to TrnInventory(CompanyId, BranchId, InventoryId);
+   reference TrnBranchtoInventoryRef(CompanyId, DestBranchId) to TrnBranch(CompanyId, BranchId);
+
+}
+
+
+
+--------------------------------- VIRTUALS ----------------------------------
+
+
+--------------------------------- SUMMARIES ---------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------

@@ -1,0 +1,238 @@
+client ManageProducts;
+component TRNINV;
+layer Cust;
+description "Put some useful description here ...";
+
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+----------------------------- NAVIGATOR ENTRIES -----------------------------
+
+-------------------------------- MAIN PAGES ---------------------------------
+@Override
+page TrnInventoryProductsOverview using TrnInventoryProductSet {
+
+   commandgroup TestCommandGroup {
+      command TestNavigateCommand;
+      command TestMessageCommand;
+   }
+
+}
+
+
+--------------------------------- COMMANDS ----------------------------------
+
+command TestNavigateCommand for TrnInventoryProduct {
+   label = "Navigate to Product";
+   enabled = [true];
+   icon = "gesture-point-alt";
+   emphasis Progress12 = [true];
+
+
+   mode = Global;
+
+//   bulkexecute {
+//
+//      bulknavigate TrnProductsOverview(ProductId);
+//
+//   }
+
+   execute {
+      navigate TrnProductsOverview;
+
+   }
+
+}
+
+command TestMessageCommand {
+   label = "Message Command";
+   mode = Global;
+   enabled = [true];
+   icon = "notification";
+   emphasis On = [true];
+
+   bulkexecute {
+      success("Success Message");
+      error("Error message");
+      warning("Warning Message");
+      info("Info Message");
+
+   }
+
+}
+
+command MoveProductCommand for TrnInventoryProduct {
+   label = "Move Product";
+
+   mode = SingleRecord;
+
+   execute {
+      dialog MoveProductDialog(CompanyId, BranchId, InventoryId, ProductId, Quantity);
+   }
+}
+
+
+
+
+--------------------------------- SELECTORS ---------------------------------
+
+
+
+---------------------------------- GROUPS -----------------------------------
+
+group MoveProductSourceGroup for MoveProductDataStructure {
+   label = "Source Branch Information";
+
+   static CompanyId {
+      label = "Company ID";
+
+   }
+   static SourceBranchId {
+      label = "Branch ID";
+
+   }
+
+   static SourceInventoryId {
+      label = "Inventory ID";
+
+   }
+
+   static ProductId {
+      label = "Product ID";
+
+   }
+
+   static SourceQuantity {
+      label = "Quantity";
+
+   }
+}
+
+group MoveProductDestinationGroup for MoveProductDataStructure {
+   label = "Destination Branch Information";
+
+   field TrnBranchtoInventoryRef {
+      label = "Branch ID";
+
+   }
+   field TrnInventoryRef {
+      label = "Inventory ID";
+
+      validate command {
+         execute {
+            call GetCurrentQuantity(CompanyId, DestBranchId, DestInventoryId, ProductId) into QuantityAlreadyAvailable;
+         }
+
+      }
+
+
+   }
+   static QuantityAlreadyAvailable {
+      label = "Quantity currenty available";
+
+
+   }
+   field QuantityToMove {
+      label = "Quantity to move";
+
+      editable = [TrnBranchtoInventoryRef != NULL and TrnInventoryRef != NULL];
+
+      validate command {
+
+         execute {
+
+            if [QuantityToMove > SourceQuantity] {
+
+               info("Quantity to move cannot be larger than the quantity available at source");
+
+            }
+
+         }
+
+      }
+
+
+   }
+
+
+}
+
+
+
+----------------------------------- LISTS -----------------------------------
+@Override
+list TrnInventoryProductList for TrnInventoryProduct {
+   initialview = CardView;
+//   field Quantity {
+//      columnvisible = [false];
+   //   }
+
+
+
+   badge Quantity {
+      emphasis Ok = [Quantity > 15];
+      emphasis Alert = [Quantity <= 15];
+      icon = "infinite";
+
+   }
+
+   summary = Quantity, ReservedQuantity;
+//   fieldorder = ReorderLevel, ReservedQuantity;
+
+   fieldranking ReorderLevel, ReservedQuantity;
+
+//   command TestNavigateCommand;
+
+   command MoveProductCommand;
+
+}
+
+---------------------------------- DIALOGS ----------------------------------
+
+dialog MoveProductDialog for MoveProductDataStructure {
+   label = "Move Inventory Products";
+
+   input(CompanyId, SourceBranchId, SourceInventoryId, ProductId, SourceQuantity);
+
+   group MoveProductSourceGroup;
+   group MoveProductDestinationGroup;
+
+   command Ok {
+      label = "Move Product";
+      enabled = [DestBranchId != null and DestInventoryId != null and QuantityToMove <= SourceQuantity and QuantityToMove != null];
+      execute {
+
+         call MoveProduct(CompanyId, SourceBranchId, SourceInventoryId, ProductId, DestBranchId, DestInventoryId, QuantityToMove);
+
+      }
+
+   }
+
+   command Cancel;
+
+}
+
+
+
+-------------------------------- SINGLETONS ---------------------------------
+
+
+---------------------------------- CHARTS -----------------------------------
+
+
+--------------------------------- CALENDERS ---------------------------------
+
+
+---------------------------------- SHEETS -----------------------------------
+
+
+----------------------------- STATE INDICATORS ------------------------------
+
+
+----------------------------------- TREES -----------------------------------
+
+
+---------------------------------- PLUGINS ----------------------------------
+
+
+------------------------------- IMAGE VIEWERS -------------------------------

@@ -1,0 +1,38 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnInventory
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- TABLE DEFINITIONS --------------------------------------
+
+TABLE trn_inventory_tab IS (
+   company_id                     VARCHAR2(20)   NOT NULL,
+   branch_id                      VARCHAR2(20)   NOT NULL,
+   inventory_id                   NUMBER         NOT NULL,
+   name                           VARCHAR2(200)  NOT NULL,
+   picking_lead_time              NUMBER         NOT NULL,
+   rowversion                     DATE           NOT NULL,
+   rowkey                         VARCHAR2(50)   DEFAULT sys_guid() NOT NULL);
+
+
+PRIMARY KEY trn_inventory_pk IS trn_inventory_tab (
+   company_id,
+   branch_id,
+   inventory_id);
+
+
+UNIQUE CONSTRAINT trn_inventory_rk IS trn_inventory_tab (
+   rowkey);
+
+-------------------- OTHER DEFINITIONS --------------------------------------
+

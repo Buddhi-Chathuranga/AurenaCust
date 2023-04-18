@@ -1,0 +1,75 @@
+projection EnterpriseOverviewS1;
+component TRNENT;
+layer Core;
+description "Put some useful description here ...";
+category Users;
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+include fragment TrnBranchCardFragment;
+
+
+
+----------------------------- MAIN ENTRY POINTS -----------------------------
+entityset TrnCountrySet for TrnCountry;
+
+entityset TrnAreaSet for TrnArea;
+
+entityset TrnCompanySet for TrnCompany;
+
+entityset TrnBranchSet for TrnBranch;
+
+@Override
+entity TrnCountry {
+
+   array TrnAreaArray(CountryId) to TrnArea(CountryId);
+
+}
+
+@Override
+entity TrnCompany {
+
+   array TrnBranchArray(CompanyId) to TrnBranch(CompanyId);
+}
+
+//@Override
+//entity TrnBranch {
+//
+//   reference TrnAreaRef(AreaId, CountryId) to TrnArea(AreaId, CountryId);
+//   reference TrnCompanyRef(CompanyId) to TrnCompany(CompanyId);
+//   reference TrnCountryRef(CountryId) to TrnCountry(CountryId);
+//
+//}
+
+
+
+
+
+------------------------------ ENTITY DETAILS -------------------------------
+
+
+
+
+
+------------------------------- ENUMERATIONS --------------------------------
+
+
+---------------------------------- QUERIES ----------------------------------
+
+
+---------------------------------- ACTIONS ----------------------------------
+
+
+--------------------------------- FUNCTIONS ---------------------------------
+
+
+-------------------------------- STRUCTURES ---------------------------------
+
+
+--------------------------------- VIRTUALS ----------------------------------
+
+
+--------------------------------- SUMMARIES ---------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------

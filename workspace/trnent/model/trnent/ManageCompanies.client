@@ -1,0 +1,255 @@
+client ManageCompanies;
+component TRNENT;
+layer Core;
+projection EnterpriseOverviewS1;
+
+description "Put some useful description here ...";
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+include fragment TrnBranchCardFragment;
+
+
+----------------------------- NAVIGATOR ENTRIES -----------------------------
+
+navigator {
+
+   entry CompanyOverviewNavDetails parent TrnentNavigatorRoot.CompanyDetailsNavEntry at index 0 {
+
+      label = "Company Overview";
+
+      page TrnCompanyOverview;
+
+   }
+
+   entry CompanyDetailsNavDetails parent TrnentNavigatorRoot.CompanyDetailsNavEntry at index 1 {
+
+      label = "Company Details";
+
+      page TrnCompanyDetails;
+
+   }
+
+   entry BranchOverviewNavDetails parent TrnentNavigatorRoot.CompanyDetailsNavEntry at index 2 {
+
+      label = "Branch Overview";
+
+      page TrnBranchOverview;
+
+   }
+
+   entry BranchDetailsNavDetails parent TrnentNavigatorRoot.CompanyDetailsNavEntry at index 3 {
+
+      label = "Branch Details";
+
+      page TrnBranchDetails;
+
+   }
+}
+
+
+
+-------------------------------- MAIN PAGES ---------------------------------
+
+
+page TrnCompanyOverview using TrnCompanySet {
+   label = "Company Overview";
+   list TrnCompanyList;
+
+}
+
+page TrnCompanyDetails using TrnCompanySet {
+   label = "Company Details";
+
+   selector TrnCompanySelector;
+   group TrnCompanyGroup bind TrnCompanySelector;
+   list TrnBranchList(TrnBranchArray);
+}
+
+page TrnBranchOverview using TrnBranchSet {
+   label = "Branch Overview";
+   list TrnBranchCardList;
+
+}
+
+page TrnBranchDetails using TrnBranchSet {
+
+   selector TrnBranchS1Selector;
+   group TrnBranchGroup bind TrnBranchS1Selector;
+}
+
+
+--------------------------------- COMMANDS ----------------------------------
+
+
+--------------------------------- SELECTORS ---------------------------------
+selector TrnAreaS1Selector for TrnArea {
+
+   field Area;
+
+}
+
+selector TrnCountryS1Selector for TrnCountry {
+
+   field Country;
+}
+
+selector TrnBranchS1Selector for TrnBranch {
+   label = "${BranchId}";
+   static BranchId;
+   static Name;
+   static CompanyId;
+   static TrnCompanyRef.Name;
+   static TimeOffset;
+   static CountryId;
+   static TrnCountryRef.Country;
+   static AreaId;
+   static TrnAreaRef.Area;
+
+}
+
+---------------------------------- GROUPS -----------------------------------
+group TrnBranchGroup for TrnBranch {
+
+
+   field BranchId;
+   field Name;
+//   field CompanyId;
+   field TrnCompanyRef {
+      label = "Company Id";
+   }
+   field TrnCompanyRef.Name;
+
+   field TimeOffset;
+   field TrnCountryRef {
+      label = "Country Id";
+
+   }
+//   field CountryId;
+   field TrnCountryRef.Country;
+//   field TrnAreaRef {
+//      label = "Area Id";
+//
+//   }
+   field AreaId;
+   field TrnAreaRef.Area {
+      label = "Area Name";
+   }
+}
+
+group TrnCompanyGroup for TrnCompany {
+   field CompanyId;
+   field Name;
+   field Comments;
+   field CreationDate;
+}
+
+
+----------------------------------- LISTS -----------------------------------
+
+
+list TrnCompanyList for TrnCompany {
+
+   label = "Companies";
+   field CompanyId;
+   field Name;
+   field Comments;
+   field CreationDate;
+
+}
+
+list TrnBranchList for TrnBranch {
+
+
+   field BranchId;
+   field Name;
+   field CompanyId;
+   field TrnCompanyRef.Name;
+   field TimeOffset;
+   field CountryId;
+   field TrnCountryRef.Country;
+   field AreaId;
+   field TrnAreaRef.Area;
+
+}
+
+list TrnBranchCardList for TrnBranch {
+   card TrnBranchCard;
+
+   field BranchId;
+   field Name;
+//   field CompanyId;
+   field TrnCompanyRef {
+      label = "Company Id";
+   }
+   field TrnCompanyRef.Name;
+
+   field TimeOffset;
+   field TrnCountryRef {
+      label = "Country Id";
+
+   }
+//   field CountryId;
+   field TrnCountryRef.Country;
+//   field TrnAreaRef {
+//      label = "Area Id";
+//
+//   }
+   field AreaId;
+   field TrnAreaRef.Area {
+      label = "Area Name";
+   }
+}
+----------------------------------- CARDS -----------------------------------
+//card TrnBranchCard for TrnBranch {
+//   label = "${BranchId}";
+//   field BranchId;
+//   field Name;
+////   field CompanyId;
+//   field TrnCompanyRef {
+//      label = "Company Id";
+//   }
+//   field TrnCompanyRef.Name;
+//
+//   field TimeOffset;
+//   field TrnCountryRef {
+//      label = "Country Id";
+//
+//   }
+////   field CountryId;
+//   field TrnCountryRef.Country;
+////   field TrnAreaRef {
+////      label = "Area Id";
+////
+////   }
+//   field AreaId;
+//   field TrnAreaRef.Area {
+//      label = "Area Name";
+//   }
+//}
+
+
+---------------------------------- DIALOGS ----------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------
+
+
+---------------------------------- CHARTS -----------------------------------
+
+--------------------------------- CALENDERS ---------------------------------
+
+
+---------------------------------- SHEETS -----------------------------------
+
+
+----------------------------- STATE INDICATORS ------------------------------
+
+
+----------------------------------- TREES -----------------------------------
+
+
+---------------------------------- PLUGINS ----------------------------------
+
+
+------------------------------- IMAGE VIEWERS -------------------------------

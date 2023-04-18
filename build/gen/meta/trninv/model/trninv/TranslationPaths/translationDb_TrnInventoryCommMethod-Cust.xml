@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TranslatableResources type="LU" module="TRNINV" version="1.0" layer="Cust" xmlns="types.scan.translation.fnd.ifsworld.com">
+   <TranslatableResource type="Logical Unit" ID="TrnInventoryCommMethod" name="TrnInventoryCommMethod">
+      <Text><![CDATA[Trn Inventory Comm Method]]></Text>
+      <Resource subtype="View" ID="TrnInventoryCommMethod.TRN_INVENTORY_COMM_METHOD" control="TRN_INVENTORY_COMM_METHOD">
+         <Text><![CDATA[Trn Inventory Comm Method]]></Text>
+         <Resource subtype="Column" ID="TrnInventoryCommMethod.TRN_INVENTORY_COMM_METHOD.COMPANY_ID" control="COMPANY_ID">
+            <Text><![CDATA[Company Id]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnInventoryCommMethod.TRN_INVENTORY_COMM_METHOD.BRANCH_ID" control="BRANCH_ID">
+            <Text><![CDATA[Branch Id]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnInventoryCommMethod.TRN_INVENTORY_COMM_METHOD.INVENTORY_ID" control="INVENTORY_ID">
+            <Text><![CDATA[Inventory Id]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnInventoryCommMethod.TRN_INVENTORY_COMM_METHOD.INVENTORY_COMM_ID" control="INVENTORY_COMM_ID">
+            <Text><![CDATA[Inventory Comm Id]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnInventoryCommMethod.TRN_INVENTORY_COMM_METHOD.ADDRESS" control="ADDRESS">
+            <Text><![CDATA[Address]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnInventoryCommMethod.TRN_INVENTORY_COMM_METHOD.COMMUNICATION_TYPE" control="COMMUNICATION_TYPE">
+            <Text><![CDATA[Communication Type]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnInventoryCommMethod.TRN_INVENTORY_COMM_METHOD.COMMUNICATION_TYPE_DB" control="COMMUNICATION_TYPE_DB">
+            <Text><![CDATA[Communication Type]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnInventoryCommMethod.TRN_INVENTORY_COMM_METHOD.DEFAULT_ADDRESS" control="DEFAULT_ADDRESS">
+            <Text><![CDATA[Default Address]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnInventoryCommMethod.TRN_INVENTORY_COMM_METHOD.DEFAULT_ADDRESS_DB" control="DEFAULT_ADDRESS_DB">
+            <Text><![CDATA[Default Address]]></Text>
+         </Resource>
+      </Resource>
+   </TranslatableResource>
+</TranslatableResources>

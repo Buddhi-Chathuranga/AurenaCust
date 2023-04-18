@@ -1,0 +1,41 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnUnit
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Unit IS
+   Flags      = 'KMI-L'
+   Datatype   = 'STRING(10)'
+   Prompt     = 'Unit';
+COLUMN Description IS
+   Flags      = 'A-IU-'
+   Datatype   = 'STRING(1000)'
+   Prompt     = 'Description';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Trn_Unit IS
+   Prompt     = 'Trn Unit'
+   Table      = 'TRN_UNIT_TAB'
+SELECT
+       unit                           unit,
+       description                    description,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   trn_unit_tab;

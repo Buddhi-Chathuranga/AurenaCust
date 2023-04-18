@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TranslatableResources type="LU" module="TRNINV" version="1.0" layer="Cust" xmlns="types.scan.translation.fnd.ifsworld.com">
+   <TranslatableResource type="Logical Unit" ID="TrnProdCategory" name="TrnProdCategory">
+      <Text><![CDATA[Trn Prod Category]]></Text>
+      <Resource subtype="View" ID="TrnProdCategory.TRN_PROD_CATEGORY" control="TRN_PROD_CATEGORY">
+         <Text><![CDATA[Trn Prod Category]]></Text>
+         <Resource subtype="Column" ID="TrnProdCategory.TRN_PROD_CATEGORY.CATEGORY_ID" control="CATEGORY_ID">
+            <Text><![CDATA[Category ID]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnProdCategory.TRN_PROD_CATEGORY.NAME" control="NAME">
+            <Text><![CDATA[Name]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnProdCategory.TRN_PROD_CATEGORY.COMMENTS" control="COMMENTS">
+            <Text><![CDATA[Comments]]></Text>
+         </Resource>
+      </Resource>
+   </TranslatableResource>
+</TranslatableResources>

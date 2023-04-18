@@ -1,0 +1,21 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: InventoryHandling
+--  Component:    TRNINV
+--
+--  IFS Developer Studio Template Version 3.0
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+-----------------------------------------------------------------------------
+
+layer Cust;
+
+FUNCTION Get_Full_Name___ (
+   first_name_ IN VARCHAR2,
+   last_name_ IN VARCHAR2) RETURN VARCHAR2
+IS
+   
+BEGIN
+	RETURN first_name_ || ' ' || last_name_;
+END Get_Full_Name___;

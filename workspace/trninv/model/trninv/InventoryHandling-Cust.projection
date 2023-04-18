@@ -1,0 +1,83 @@
+projection InventoryHandling;
+component TRNINV;
+layer Cust;
+description "Put some useful description here ...";
+category Users;
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+include fragment TrnBranchCardFragment;
+
+----------------------------- MAIN ENTRY POINTS -----------------------------
+entityset TrnInventorySet for TrnInventory;
+
+
+------------------------------ ENTITY DETAILS -------------------------------
+
+@Override
+
+entity TrnInventory {
+
+   crud = Read, Create, Update;
+
+
+   attribute CountryName Text {
+      editable = [false];
+
+      fetch = "Trn_Country_API.Get_country(Trn_Branch_API.Get_Country_Id(company_id, branch_id))";
+
+   }
+
+   attribute AreaName Text {
+      editable = [false];
+      fetch = "Trn_Area_API.Get_Area(Trn_Branch_API.Get_Country_Id(company_id, branch_id), Trn_Branch_API.Get_Area_Id(company_id, branch_id))";
+
+   }
+
+
+   reference TrnCompanyRef(CompanyId) to TrnCompany(CompanyId);
+   reference TrnBranchRef(CompanyId, BranchId) to TrnBranch(CompanyId, BranchId);
+
+   array TrnInventoryCommMethodArray(CompanyId, BranchId, InventoryId) to TrnInventoryCommMethod(CompanyId, BranchId, InventoryId);
+
+}
+
+//@Override
+//entity TrnBranch {
+//
+//   reference TrnAreaRef(AreaId, CountryId) to TrnArea(AreaId, CountryId);
+//   reference TrnCompanyRef(CompanyId) to TrnCompany(CompanyId);
+//   reference TrnCountryRef(CountryId) to TrnCountry(CountryId);
+//
+//}
+
+
+------------------------------- ENUMERATIONS --------------------------------
+
+
+---------------------------------- QUERIES ----------------------------------
+
+
+---------------------------------- ACTIONS ----------------------------------
+
+
+--------------------------------- FUNCTIONS ---------------------------------
+
+function GetFullName Text {
+   parameter FirstName Text;
+   parameter LastName Text;
+
+}
+
+
+
+-------------------------------- STRUCTURES ---------------------------------
+
+
+--------------------------------- VIRTUALS ----------------------------------
+
+
+--------------------------------- SUMMARIES ---------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------

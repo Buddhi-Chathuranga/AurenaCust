@@ -1,0 +1,56 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnProdCategory
+--  Type:         Entity
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- BASE VIEW DEFINITION -----------------------------------
+-----------------------------------------------------------------------------
+
+PROMPT Creating TRN_PROD_CATEGORY view
+
+-- [IFS COMPLETE BLOCK VIEW TRN_PROD_CATEGORY]
+CREATE OR REPLACE VIEW TRN_PROD_CATEGORY AS
+SELECT
+       category_id                    category_id,
+       name                           name,
+       comments                       comments,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   trn_prod_category_tab
+WITH   READ ONLY;
+-- [END IFS COMPLETE BLOCK]
+
+COMMENT ON TABLE TRN_PROD_CATEGORY
+   IS 'LU=TrnProdCategory^PROMPT=Trn Prod Category^MODULE=TRNINV^TABLE=TRN_PROD_CATEGORY_TAB^';
+
+-- [IFS COMPLETE BLOCK DECLAREEND]
+DECLARE
+   PROCEDURE Alter_Column_Comment (
+      view_name_   IN VARCHAR2,
+      column_name_ IN VARCHAR2,
+      comment_     IN VARCHAR2)
+   IS
+      stmt_ VARCHAR2(32767) := 'COMMENT ON COLUMN ' || view_name_ || '.' || column_name_ || ' IS ''' || REPLACE(comment_, '''', '''''') || '''';
+   BEGIN
+      EXECUTE IMMEDIATE stmt_;
+   END Alter_Column_Comment;
+BEGIN
+   Alter_Column_Comment('TRN_PROD_CATEGORY', 'category_id', 'FLAGS=KMI-L^DATATYPE=STRING(10)^PROMPT=Category ID^');
+   Alter_Column_Comment('TRN_PROD_CATEGORY', 'name', 'FLAGS=AMIUL^DATATYPE=STRING(1000)^PROMPT=Name^');
+   Alter_Column_Comment('TRN_PROD_CATEGORY', 'comments', 'FLAGS=A-IU-^DATATYPE=STRING(2000)^PROMPT=Comments^');
+   EXECUTE IMMEDIATE 'GRANT SELECT ON TRN_PROD_CATEGORY TO IFSSYS';
+END;
+-- [END IFS COMPLETE BLOCK]
+/
+

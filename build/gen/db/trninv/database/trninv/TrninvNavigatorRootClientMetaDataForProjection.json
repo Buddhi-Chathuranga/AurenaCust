@@ -1,0 +1,33 @@
+{
+    "name": "TrninvNavigatorRoot",
+    "service": "TrninvNavigatorRoot.svc",
+    "version": "488536526",
+    "contains": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entityset_Metadata:{
+    "Projection": "TrninvNavigatorRoot",
+    "Lu": [
+    ]
+}]#]
+    },
+    "enumerations": {[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Enumeration_Metadata:{
+    "Projection": "TrninvNavigatorRoot",
+    "Lu": [
+    ]
+}]#]
+    },
+    "entities": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Type_Metadata:{
+    "Projection": "TrninvNavigatorRoot",
+    "Lu": [
+    ]
+}]#]
+    },
+    "structures": {
+    },
+    "actions": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Action_Metadata:{
+    "Projection": "TrninvNavigatorRoot"
+}]#]
+    },
+    "functions": {
+    },
+    "attachmentservices": {[#[callback:Object_Connection_Metadata_SYS.Enum_Entity_Services_:]#]
+}
+}

@@ -1,0 +1,1125 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnModel
+--  Type:         Entity
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- API PACKAGE IMPLEMENTATION -----------------------------
+-----------------------------------------------------------------------------
+
+PROMPT Creating Trn_Model_API implementation
+
+-- [IFS COMPLETE BLOCK PACKAGEBODY Trn_Model_API]
+CREATE OR REPLACE PACKAGE BODY Trn_Model_API IS
+
+-----------------------------------------------------------------------------
+-------------------- PRIVATE DECLARATIONS -----------------------------------
+-----------------------------------------------------------------------------
+
+TYPE Indicator_Rec IS RECORD
+  (brand_id                       BOOLEAN := FALSE,
+   category_id                    BOOLEAN := FALSE,
+   model_id                       BOOLEAN := FALSE,
+   description                    BOOLEAN := FALSE);
+
+
+-----------------------------------------------------------------------------
+-------------------- IMPLEMENTATION METHOD DECLARATIONS ---------------------
+-----------------------------------------------------------------------------
+
+FUNCTION Key_Message___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+FUNCTION Formatted_Key___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+PROCEDURE Raise_Too_Many_Rows___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2,
+   methodname_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Not_Exist___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Exist___ (
+   rec_ IN trn_model_tab%ROWTYPE );
+
+PROCEDURE Raise_Constraint_Violated___ (
+   rec_ IN trn_model_tab%ROWTYPE,
+   constraint_ IN VARCHAR2 );
+
+PROCEDURE Raise_Item_Format___ (
+   name_ IN VARCHAR2,
+   value_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Modified___ (
+   rec_ IN trn_model_tab%ROWTYPE );
+
+PROCEDURE Raise_Record_Locked___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Removed___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 );
+
+FUNCTION Lock_By_Id___ (
+   objid_      IN VARCHAR2,
+   objversion_ IN VARCHAR2 ) RETURN trn_model_tab%ROWTYPE;
+
+FUNCTION Lock_By_Keys___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2) RETURN trn_model_tab%ROWTYPE;
+
+FUNCTION Lock_By_Keys_Nowait___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2) RETURN trn_model_tab%ROWTYPE;
+
+FUNCTION Get_Object_By_Id___ (
+   objid_ IN VARCHAR2 ) RETURN trn_model_tab%ROWTYPE;
+
+FUNCTION Get_Object_By_Keys___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 ) RETURN trn_model_tab%ROWTYPE;
+
+FUNCTION Check_Exist___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 ) RETURN BOOLEAN;
+
+PROCEDURE Get_Version_By_Id___ (
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Get_Id_Version_By_Keys___ (
+   objid_      IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 );
+
+PROCEDURE Unpack___ (
+   newrec_   IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   indrec_   IN OUT NOCOPY Indicator_Rec,
+   attr_     IN OUT NOCOPY VARCHAR2 );
+
+FUNCTION Pack___ (
+   rec_ IN trn_model_tab%ROWTYPE ) RETURN VARCHAR2;
+
+FUNCTION Pack___ (
+   rec_ IN trn_model_tab%ROWTYPE,
+   indrec_ IN Indicator_Rec ) RETURN VARCHAR2;
+
+FUNCTION Pack_Table___ (
+   rec_ IN trn_model_tab%ROWTYPE ) RETURN VARCHAR2;
+
+PROCEDURE Reset_Indicator_Rec___ (
+   indrec_ IN OUT NOCOPY Indicator_Rec );
+
+FUNCTION Get_Indicator_Rec___ (
+   rec_ IN trn_model_tab%ROWTYPE ) RETURN Indicator_Rec;
+
+FUNCTION Get_Indicator_Rec___ (
+   oldrec_ IN trn_model_tab%ROWTYPE,
+   newrec_ IN trn_model_tab%ROWTYPE ) RETURN Indicator_Rec;
+
+PROCEDURE Check_Common___ (
+   oldrec_ IN     trn_model_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Prepare_Insert___ (
+   attr_ IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Check_Insert___ (
+   newrec_ IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Insert___ (
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   newrec_     IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Prepare_New___ (
+   newrec_ IN OUT NOCOPY trn_model_tab%ROWTYPE );
+
+PROCEDURE New___ (
+   newrec_ IN OUT NOCOPY trn_model_tab%ROWTYPE );
+
+PROCEDURE Check_Update___ (
+   oldrec_ IN     trn_model_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Update___ (
+   objid_      IN     VARCHAR2,
+   oldrec_     IN     trn_model_tab%ROWTYPE,
+   newrec_     IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   by_keys_    IN     BOOLEAN DEFAULT FALSE );
+
+PROCEDURE Modify___ (
+   newrec_         IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE );
+
+PROCEDURE Check_Delete___ (
+   remrec_ IN trn_model_tab%ROWTYPE );
+
+PROCEDURE Delete___ (
+   objid_  IN VARCHAR2,
+   remrec_ IN trn_model_tab%ROWTYPE );
+
+PROCEDURE Delete___ (
+   remrec_ IN trn_model_tab%ROWTYPE );
+
+PROCEDURE Remove___ (
+   remrec_         IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE );
+
+-----------------------------------------------------------------------------
+-------------------- BASE METHODS -------------------------------------------
+-----------------------------------------------------------------------------
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Key_By_Rowkey (
+   rowkey_ IN VARCHAR2 ) RETURN trn_model_tab%ROWTYPE
+IS
+   rec_ trn_model_tab%ROWTYPE;
+BEGIN
+   IF (rowkey_ IS NULL) THEN
+      RETURN NULL;
+   END IF;
+   SELECT brand_id, category_id, model_id
+      INTO  rec_.brand_id, rec_.category_id, rec_.model_id
+      FROM  trn_model_tab
+      WHERE rowkey = rowkey_;
+   RETURN rec_;
+EXCEPTION
+   WHEN no_data_found THEN
+      RETURN rec_;
+   WHEN too_many_rows THEN
+      Raise_Too_Many_Rows___(rec_.brand_id, rec_.category_id, rec_.model_id, 'Get_Key_By_Rowkey');
+END Get_Key_By_Rowkey;
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Exist (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 )
+IS
+BEGIN
+   IF (NOT Check_Exist___(brand_id_, category_id_, model_id_)) THEN
+      Raise_Record_Not_Exist___(brand_id_, category_id_, model_id_);
+   END IF;
+END Exist;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Exists (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 ) RETURN BOOLEAN
+IS
+BEGIN
+   RETURN Check_Exist___(brand_id_, category_id_, model_id_);
+END Exists;
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Rowkey_Exist (
+   rowkey_ IN VARCHAR2 )
+IS
+   brand_id_ trn_model_tab.brand_id%TYPE;
+   category_id_ trn_model_tab.category_id%TYPE;
+   model_id_ trn_model_tab.model_id%TYPE;
+BEGIN
+   IF (rowkey_ IS NULL) THEN
+      RAISE no_data_found;
+   END IF;
+   SELECT brand_id, category_id, model_id
+   INTO  brand_id_, category_id_, model_id_
+   FROM  trn_model_tab
+   WHERE rowkey = rowkey_;
+EXCEPTION
+   WHEN no_data_found THEN
+      Raise_Record_Not_Exist___(brand_id_, category_id_, model_id_);
+   WHEN too_many_rows THEN
+      Raise_Too_Many_Rows___(brand_id_, category_id_, model_id_, 'Rowkey_Exist___');
+END Rowkey_Exist;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_By_Rowkey (
+   rowkey_ IN VARCHAR2 ) RETURN Public_Rec
+IS
+   rowrec_ trn_model_tab%ROWTYPE;
+BEGIN
+   rowrec_ := Get_Key_By_Rowkey(rowkey_);
+   RETURN Get(rowrec_.brand_id, rowrec_.category_id, rowrec_.model_id);
+END Get_By_Rowkey;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 ) RETURN Public_Rec
+IS
+   temp_ Public_Rec;
+BEGIN
+   IF (brand_id_ IS NULL OR category_id_ IS NULL OR model_id_ IS NULL) THEN
+      RETURN NULL;
+   END IF;
+   SELECT brand_id, category_id, model_id, rowid, rowversion, rowkey
+      INTO  temp_
+      FROM  trn_model_tab
+      WHERE brand_id = brand_id_
+      AND   category_id = category_id_
+      AND   model_id = model_id_;
+   RETURN temp_;
+EXCEPTION
+   WHEN no_data_found THEN
+      RETURN NULL;
+   WHEN too_many_rows THEN
+      Raise_Too_Many_Rows___(brand_id_, category_id_, model_id_, 'Get');
+END Get;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Objkey (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   rowkey_ trn_model_tab.rowkey%TYPE;
+BEGIN
+   IF (brand_id_ IS NULL OR category_id_ IS NULL OR model_id_ IS NULL) THEN
+      RETURN NULL;
+   END IF;
+   SELECT rowkey
+      INTO  rowkey_
+      FROM  trn_model_tab
+      WHERE brand_id = brand_id_
+      AND   category_id = category_id_
+      AND   model_id = model_id_;
+   RETURN rowkey_;
+EXCEPTION
+   WHEN no_data_found THEN
+      RETURN NULL;
+   WHEN too_many_rows THEN
+      Raise_Too_Many_Rows___(brand_id_, category_id_, model_id_, 'Get_Objkey');
+END Get_Objkey;
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Lock__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2 )
+IS
+   dummy_ trn_model_tab%ROWTYPE;
+BEGIN
+   dummy_ := Lock_By_Id___(objid_, objversion_);
+   info_ := Client_SYS.Get_All_Info;
+END Lock__;
+
+
+PROCEDURE New__ (
+   info_       OUT    VARCHAR2,
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 )
+IS
+   newrec_   trn_model_tab%ROWTYPE;
+   indrec_   Indicator_Rec;
+BEGIN
+   General_SYS.Init_Method(Trn_Model_API.lu_name_, 'Trn_Model_API', 'New__');
+   IF (action_ = 'PREPARE') THEN
+      Prepare_Insert___(attr_);
+   ELSIF (action_ = 'CHECK') THEN
+      Unpack___(newrec_, indrec_, attr_);
+      Check_Insert___(newrec_, indrec_, attr_);
+   ELSIF (action_ = 'DO') THEN
+      Unpack___(newrec_, indrec_, attr_);
+      Check_Insert___(newrec_, indrec_, attr_);
+      Insert___(objid_, objversion_, newrec_, attr_);
+   END IF;
+   info_ := Client_SYS.Get_All_Info;
+END New__;
+
+
+PROCEDURE Modify__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 )
+IS
+   oldrec_   trn_model_tab%ROWTYPE;
+   newrec_   trn_model_tab%ROWTYPE;
+   indrec_   Indicator_Rec;
+BEGIN
+   General_SYS.Init_Method(Trn_Model_API.lu_name_, 'Trn_Model_API', 'Modify__');
+   IF (action_ = 'CHECK') THEN
+      oldrec_ := Get_Object_By_Id___(objid_);
+      newrec_ := oldrec_;
+      Unpack___(newrec_, indrec_, attr_);
+      Check_Update___(oldrec_, newrec_, indrec_, attr_);
+   ELSIF (action_ = 'DO') THEN
+      oldrec_ := Lock_By_Id___(objid_, objversion_);
+      newrec_ := oldrec_;
+      Unpack___(newrec_, indrec_, attr_);
+      Check_Update___(oldrec_, newrec_, indrec_, attr_);
+      Update___(objid_, oldrec_, newrec_, attr_, objversion_);
+   END IF;
+   info_ := Client_SYS.Get_All_Info;
+END Modify__;
+
+
+PROCEDURE Remove__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2,
+   action_     IN  VARCHAR2 )
+IS
+   remrec_ trn_model_tab%ROWTYPE;
+BEGIN
+   General_SYS.Init_Method(Trn_Model_API.lu_name_, 'Trn_Model_API', 'Remove__');
+   IF (action_ = 'CHECK') THEN
+      remrec_ := Get_Object_By_Id___(objid_);
+      Check_Delete___(remrec_);
+   ELSIF (action_ = 'DO') THEN
+      remrec_ := Lock_By_Id___(objid_, objversion_);
+      Check_Delete___(remrec_);
+      Delete___(objid_, remrec_);
+   END IF;
+   info_ := Client_SYS.Get_All_Info;
+END Remove__;
+
+
+FUNCTION Key_Message___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   msg_ VARCHAR2(4000) := Message_SYS.Construct('ERROR_KEY');
+BEGIN
+   Message_SYS.Add_Attribute(msg_, 'BRAND_ID', brand_id_);
+   Message_SYS.Add_Attribute(msg_, 'CATEGORY_ID', category_id_);
+   Message_SYS.Add_Attribute(msg_, 'MODEL_ID', model_id_);
+   RETURN msg_;
+END Key_Message___;
+
+
+FUNCTION Formatted_Key___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   formatted_key_ VARCHAR2(4000) := Language_SYS.Translate_Item_Prompt_(lu_name_, 'BRAND_ID', Fnd_Session_API.Get_Language) || ': ' || brand_id_ || ', ' ||
+                                    Language_SYS.Translate_Item_Prompt_(lu_name_, 'CATEGORY_ID', Fnd_Session_API.Get_Language) || ': ' || category_id_ || ', ' ||
+                                    Language_SYS.Translate_Item_Prompt_(lu_name_, 'MODEL_ID', Fnd_Session_API.Get_Language) || ': ' || model_id_;
+BEGIN
+   RETURN formatted_key_;
+END Formatted_Key___;
+
+
+PROCEDURE Raise_Too_Many_Rows___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2,
+   methodname_ IN VARCHAR2 )
+IS
+BEGIN
+   Error_SYS.Set_Key_Values(Key_Message___(brand_id_, category_id_, model_id_),
+                            Formatted_Key___(brand_id_, category_id_, model_id_));
+   Error_SYS.Fnd_Too_Many_Rows(Trn_Model_API.lu_name_, NULL, methodname_);
+END Raise_Too_Many_Rows___;
+
+
+PROCEDURE Raise_Record_Not_Exist___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 )
+IS
+BEGIN
+   Error_SYS.Set_Key_Values(Key_Message___(brand_id_, category_id_, model_id_),
+                            Formatted_Key___(brand_id_, category_id_, model_id_));
+   Error_SYS.Fnd_Record_Not_Exist(Trn_Model_API.lu_name_);
+END Raise_Record_Not_Exist___;
+
+
+PROCEDURE Raise_Record_Exist___ (
+   rec_ IN trn_model_tab%ROWTYPE )
+IS
+BEGIN
+   Error_SYS.Set_Key_Values(Key_Message___(rec_.brand_id, rec_.category_id, rec_.model_id),
+                            Formatted_Key___(rec_.brand_id, rec_.category_id, rec_.model_id));
+   Error_SYS.Fnd_Record_Exist(Trn_Model_API.lu_name_);
+END Raise_Record_Exist___;
+
+
+PROCEDURE Raise_Constraint_Violated___ (
+   rec_ IN trn_model_tab%ROWTYPE,
+   constraint_ IN VARCHAR2 )
+IS
+BEGIN
+   Error_SYS.Fnd_Record_Exist(Trn_Model_API.lu_name_);
+END Raise_Constraint_Violated___;
+
+
+PROCEDURE Raise_Item_Format___ (
+   name_ IN VARCHAR2,
+   value_ IN VARCHAR2 )
+IS
+BEGIN
+   Error_SYS.Fnd_Item_Format(Trn_Model_API.lu_name_, name_, value_);
+END Raise_Item_Format___;
+
+
+PROCEDURE Raise_Record_Modified___ (
+   rec_ IN trn_model_tab%ROWTYPE )
+IS
+BEGIN
+   Error_SYS.Set_Key_Values(Key_Message___(rec_.brand_id, rec_.category_id, rec_.model_id),
+                            Formatted_Key___(rec_.brand_id, rec_.category_id, rec_.model_id));
+   Error_SYS.Fnd_Record_Modified(Trn_Model_API.lu_name_);
+END Raise_Record_Modified___;
+
+
+PROCEDURE Raise_Record_Locked___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 )
+IS
+BEGIN
+   Error_SYS.Set_Key_Values(Key_Message___(brand_id_, category_id_, model_id_),
+                            Formatted_Key___(brand_id_, category_id_, model_id_));
+   Error_SYS.Fnd_Record_Locked(Trn_Model_API.lu_name_);
+END Raise_Record_Locked___;
+
+
+PROCEDURE Raise_Record_Removed___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 )
+IS
+BEGIN
+   Error_SYS.Set_Key_Values(Key_Message___(brand_id_, category_id_, model_id_),
+                            Formatted_Key___(brand_id_, category_id_, model_id_));
+   Error_SYS.Fnd_Record_Removed(Trn_Model_API.lu_name_);
+END Raise_Record_Removed___;
+
+
+FUNCTION Lock_By_Id___ (
+   objid_      IN VARCHAR2,
+   objversion_ IN VARCHAR2 ) RETURN trn_model_tab%ROWTYPE
+IS
+   row_locked  EXCEPTION;
+   PRAGMA      EXCEPTION_INIT(row_locked, -0054);
+   rec_        trn_model_tab%ROWTYPE;
+BEGIN
+   SELECT *
+      INTO  rec_
+      FROM  trn_model_tab
+      WHERE rowid = objid_
+      AND    to_char(rowversion,'YYYYMMDDHH24MISS') = objversion_
+      FOR UPDATE NOWAIT;
+   RETURN rec_;
+EXCEPTION
+   WHEN row_locked THEN
+      Error_SYS.Fnd_Record_Locked(lu_name_);
+   WHEN too_many_rows THEN
+      Raise_Too_Many_Rows___(NULL, NULL, NULL, 'Lock_By_Id___');
+   WHEN no_data_found THEN
+      BEGIN
+         SELECT *
+            INTO  rec_
+            FROM  trn_model_tab
+            WHERE rowid = objid_;
+         Raise_Record_Modified___(rec_);
+      EXCEPTION
+         WHEN no_data_found THEN
+            Error_SYS.Fnd_Record_Removed(lu_name_);
+         WHEN too_many_rows THEN
+            Raise_Too_Many_Rows___(NULL, NULL, NULL, 'Lock_By_Id___');
+      END;
+END Lock_By_Id___;
+
+
+FUNCTION Lock_By_Keys___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2) RETURN trn_model_tab%ROWTYPE
+IS
+   rec_        trn_model_tab%ROWTYPE;
+BEGIN
+   BEGIN
+      SELECT *
+         INTO  rec_
+         FROM  trn_model_tab
+         WHERE brand_id = brand_id_
+         AND   category_id = category_id_
+         AND   model_id = model_id_
+         FOR UPDATE;
+      RETURN rec_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         Raise_Record_Removed___(brand_id_, category_id_, model_id_);
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(brand_id_, category_id_, model_id_, 'Lock_By_Keys___');
+   END;
+END Lock_By_Keys___;
+
+
+FUNCTION Lock_By_Keys_Nowait___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2) RETURN trn_model_tab%ROWTYPE
+IS
+   row_locked  EXCEPTION;
+   PRAGMA      EXCEPTION_INIT(row_locked, -0054);
+   rec_        trn_model_tab%ROWTYPE;
+BEGIN
+   BEGIN
+      SELECT *
+         INTO  rec_
+         FROM  trn_model_tab
+         WHERE brand_id = brand_id_
+         AND   category_id = category_id_
+         AND   model_id = model_id_
+         FOR UPDATE NOWAIT;
+      RETURN rec_;
+   EXCEPTION
+      WHEN row_locked THEN
+         Raise_Record_Locked___(brand_id_, category_id_, model_id_);
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(brand_id_, category_id_, model_id_, 'Lock_By_Keys___');
+      WHEN no_data_found THEN
+         Raise_Record_Removed___(brand_id_, category_id_, model_id_);
+   END;
+END Lock_By_Keys_Nowait___;
+
+
+FUNCTION Get_Object_By_Id___ (
+   objid_ IN VARCHAR2 ) RETURN trn_model_tab%ROWTYPE
+IS
+   lu_rec_ trn_model_tab%ROWTYPE;
+BEGIN
+   SELECT *
+      INTO  lu_rec_
+      FROM  trn_model_tab
+      WHERE rowid = objid_;
+   RETURN lu_rec_;
+EXCEPTION
+   WHEN no_data_found THEN
+      Error_SYS.Fnd_Record_Removed(lu_name_);
+   WHEN too_many_rows THEN
+      Raise_Too_Many_Rows___(NULL, NULL, NULL, 'Get_Object_By_Id___');
+END Get_Object_By_Id___;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Object_By_Keys___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 ) RETURN trn_model_tab%ROWTYPE
+IS
+   lu_rec_ trn_model_tab%ROWTYPE;
+BEGIN
+   SELECT *
+      INTO  lu_rec_
+      FROM  trn_model_tab
+      WHERE brand_id = brand_id_
+      AND   category_id = category_id_
+      AND   model_id = model_id_;
+   RETURN lu_rec_;
+EXCEPTION
+   WHEN no_data_found THEN
+      RETURN lu_rec_;
+   WHEN too_many_rows THEN
+      Raise_Too_Many_Rows___(brand_id_, category_id_, model_id_, 'Get_Object_By_Keys___');
+END Get_Object_By_Keys___;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Check_Exist___ (
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 ) RETURN BOOLEAN
+IS
+   dummy_ NUMBER;
+BEGIN
+   IF (brand_id_ IS NULL OR category_id_ IS NULL OR model_id_ IS NULL) THEN
+      RETURN FALSE;
+   END IF;
+   SELECT 1
+      INTO  dummy_
+      FROM  trn_model_tab
+      WHERE brand_id = brand_id_
+      AND   category_id = category_id_
+      AND   model_id = model_id_;
+   RETURN TRUE;
+EXCEPTION
+   WHEN no_data_found THEN
+      RETURN FALSE;
+   WHEN too_many_rows THEN
+      Raise_Too_Many_Rows___(brand_id_, category_id_, model_id_, 'Check_Exist___');
+END Check_Exist___;
+
+
+PROCEDURE Get_Version_By_Id___ (
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2 )
+IS
+BEGIN
+   SELECT to_char(rowversion,'YYYYMMDDHH24MISS')
+      INTO  objversion_
+      FROM  trn_model_tab
+      WHERE rowid = objid_;
+EXCEPTION
+   WHEN no_data_found THEN
+      objversion_ := NULL;
+   WHEN too_many_rows THEN
+      Raise_Too_Many_Rows___(NULL, NULL, NULL, 'Get_Version_By_Id___');
+END Get_Version_By_Id___;
+
+
+PROCEDURE Get_Id_Version_By_Keys___ (
+   objid_      IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   brand_id_ IN VARCHAR2,
+   category_id_ IN VARCHAR2,
+   model_id_ IN VARCHAR2 )
+IS
+BEGIN
+   SELECT rowid, to_char(rowversion,'YYYYMMDDHH24MISS')
+      INTO  objid_, objversion_
+      FROM  trn_model_tab
+      WHERE brand_id = brand_id_
+      AND   category_id = category_id_
+      AND   model_id = model_id_;
+EXCEPTION
+   WHEN no_data_found THEN
+      objid_      := NULL;
+      objversion_ := NULL;
+   WHEN too_many_rows THEN
+      Raise_Too_Many_Rows___(brand_id_, category_id_, model_id_, 'Get_Id_Version_By_Keys___');
+END Get_Id_Version_By_Keys___;
+
+
+PROCEDURE Unpack___ (
+   newrec_   IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   indrec_   IN OUT NOCOPY Indicator_Rec,
+   attr_     IN OUT NOCOPY VARCHAR2 )
+IS
+   ptr_   NUMBER;
+   name_  VARCHAR2(30);
+   value_ VARCHAR2(32000);
+   msg_   VARCHAR2(32000);
+BEGIN
+   Reset_Indicator_Rec___(indrec_);
+   Client_SYS.Clear_Attr(msg_);
+   ptr_ := NULL;
+   WHILE (Client_SYS.Get_Next_From_Attr(attr_, ptr_, name_, value_)) LOOP
+      CASE name_
+      WHEN ('BRAND_ID') THEN
+         newrec_.brand_id := value_;
+         indrec_.brand_id := TRUE;
+      WHEN ('CATEGORY_ID') THEN
+         newrec_.category_id := value_;
+         indrec_.category_id := TRUE;
+      WHEN ('MODEL_ID') THEN
+         newrec_.model_id := value_;
+         indrec_.model_id := TRUE;
+      WHEN ('DESCRIPTION') THEN
+         newrec_.description := value_;
+         indrec_.description := TRUE;
+      ELSE
+         Client_SYS.Add_To_Attr(name_, value_, msg_);
+      END CASE;
+   END LOOP;
+   attr_ := msg_;
+EXCEPTION
+   WHEN value_error THEN
+      Raise_Item_Format___(name_, value_);
+END Unpack___;
+
+
+FUNCTION Pack___ (
+   rec_ IN trn_model_tab%ROWTYPE ) RETURN VARCHAR2
+IS
+   attr_ VARCHAR2(32000);
+BEGIN
+   Client_SYS.Clear_Attr(attr_);
+   IF (rec_.brand_id IS NOT NULL) THEN
+      Client_SYS.Add_To_Attr('BRAND_ID', rec_.brand_id, attr_);
+   END IF;
+   IF (rec_.category_id IS NOT NULL) THEN
+      Client_SYS.Add_To_Attr('CATEGORY_ID', rec_.category_id, attr_);
+   END IF;
+   IF (rec_.model_id IS NOT NULL) THEN
+      Client_SYS.Add_To_Attr('MODEL_ID', rec_.model_id, attr_);
+   END IF;
+   IF (rec_.description IS NOT NULL) THEN
+      Client_SYS.Add_To_Attr('DESCRIPTION', rec_.description, attr_);
+   END IF;
+   RETURN attr_;
+END Pack___;
+
+
+FUNCTION Pack___ (
+   rec_ IN trn_model_tab%ROWTYPE,
+   indrec_ IN Indicator_Rec ) RETURN VARCHAR2
+IS
+   attr_ VARCHAR2(32000);
+BEGIN
+   Client_SYS.Clear_Attr(attr_);
+   IF (indrec_.brand_id) THEN
+      Client_SYS.Add_To_Attr('BRAND_ID', rec_.brand_id, attr_);
+   END IF;
+   IF (indrec_.category_id) THEN
+      Client_SYS.Add_To_Attr('CATEGORY_ID', rec_.category_id, attr_);
+   END IF;
+   IF (indrec_.model_id) THEN
+      Client_SYS.Add_To_Attr('MODEL_ID', rec_.model_id, attr_);
+   END IF;
+   IF (indrec_.description) THEN
+      Client_SYS.Add_To_Attr('DESCRIPTION', rec_.description, attr_);
+   END IF;
+   RETURN attr_;
+END Pack___;
+
+
+FUNCTION Pack_Table___ (
+   rec_ IN trn_model_tab%ROWTYPE ) RETURN VARCHAR2
+IS
+   attr_ VARCHAR2(32000);
+BEGIN
+   Client_SYS.Clear_Attr(attr_);
+   Client_SYS.Add_To_Attr('BRAND_ID', rec_.brand_id, attr_);
+   Client_SYS.Add_To_Attr('CATEGORY_ID', rec_.category_id, attr_);
+   Client_SYS.Add_To_Attr('MODEL_ID', rec_.model_id, attr_);
+   Client_SYS.Add_To_Attr('DESCRIPTION', rec_.description, attr_);
+   Client_SYS.Add_To_Attr('ROWKEY', rec_.rowkey, attr_);
+   RETURN attr_;
+END Pack_Table___;
+
+
+PROCEDURE Reset_Indicator_Rec___ (
+   indrec_ IN OUT NOCOPY Indicator_Rec )
+IS
+   empty_indrec_ Indicator_Rec;
+BEGIN
+   indrec_ := empty_indrec_;
+END Reset_Indicator_Rec___;
+
+
+FUNCTION Get_Indicator_Rec___ (
+   rec_ IN trn_model_tab%ROWTYPE ) RETURN Indicator_Rec
+IS
+   indrec_ Indicator_Rec;
+BEGIN
+   indrec_.brand_id := rec_.brand_id IS NOT NULL;
+   indrec_.category_id := rec_.category_id IS NOT NULL;
+   indrec_.model_id := rec_.model_id IS NOT NULL;
+   indrec_.description := rec_.description IS NOT NULL;
+   RETURN indrec_;
+END Get_Indicator_Rec___;
+
+
+FUNCTION Get_Indicator_Rec___ (
+   oldrec_ IN trn_model_tab%ROWTYPE,
+   newrec_ IN trn_model_tab%ROWTYPE ) RETURN Indicator_Rec
+IS
+   indrec_ Indicator_Rec;
+BEGIN
+   indrec_.brand_id := Validate_SYS.Is_Changed(oldrec_.brand_id, newrec_.brand_id);
+   indrec_.category_id := Validate_SYS.Is_Changed(oldrec_.category_id, newrec_.category_id);
+   indrec_.model_id := Validate_SYS.Is_Changed(oldrec_.model_id, newrec_.model_id);
+   indrec_.description := Validate_SYS.Is_Changed(oldrec_.description, newrec_.description);
+   RETURN indrec_;
+END Get_Indicator_Rec___;
+
+
+PROCEDURE Check_Common___ (
+   oldrec_ IN     trn_model_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+BEGIN
+   IF (newrec_.brand_id IS NOT NULL AND newrec_.category_id IS NOT NULL)
+   AND (indrec_.brand_id OR indrec_.category_id)
+   AND (Validate_SYS.Is_Changed(oldrec_.brand_id, newrec_.brand_id)
+     OR Validate_SYS.Is_Changed(oldrec_.category_id, newrec_.category_id)) THEN
+      Trn_Prod_Category_Brand_API.Exist(newrec_.brand_id, newrec_.category_id);
+   END IF;
+   Error_SYS.Check_Not_Null(lu_name_, 'BRAND_ID', newrec_.brand_id);
+   Error_SYS.Check_Not_Null(lu_name_, 'CATEGORY_ID', newrec_.category_id);
+   Error_SYS.Check_Not_Null(lu_name_, 'MODEL_ID', newrec_.model_id);
+   Error_SYS.Check_Not_Null(lu_name_, 'DESCRIPTION', newrec_.description);
+END Check_Common___;
+
+
+PROCEDURE Prepare_Insert___ (
+   attr_ IN OUT NOCOPY VARCHAR2 )
+IS
+BEGIN
+   Client_SYS.Clear_Attr(attr_);
+END Prepare_Insert___;
+
+
+PROCEDURE Check_Insert___ (
+   newrec_ IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+   oldrec_ trn_model_tab%ROWTYPE;
+BEGIN
+   Check_Common___(oldrec_, newrec_, indrec_, attr_);
+END Check_Insert___;
+
+
+PROCEDURE Insert___ (
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   newrec_     IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2 )
+IS
+   value_too_large  EXCEPTION;
+   PRAGMA           EXCEPTION_INIT(value_too_large, -12899);
+BEGIN
+   newrec_.rowversion := sysdate;
+   newrec_.rowkey := sys_guid();
+   Client_SYS.Add_To_Attr('OBJKEY', newrec_.rowkey, attr_);
+   INSERT
+      INTO trn_model_tab
+      VALUES newrec_
+      RETURNING rowid INTO objid_;
+   objversion_ := to_char(newrec_.rowversion,'YYYYMMDDHH24MISS');
+EXCEPTION
+   WHEN dup_val_on_index THEN
+      DECLARE
+         constraint_ VARCHAR2(4000) := Utility_SYS.Get_Constraint_From_Error_Msg(sqlerrm);
+      BEGIN
+         IF (constraint_ = 'TRN_MODEL_RK') THEN
+            Error_SYS.Fnd_Rowkey_Exist(lu_name_, newrec_.rowkey);
+         ELSIF (constraint_ = 'TRN_MODEL_PK') THEN
+            Raise_Record_Exist___(newrec_);
+         ELSE
+            Raise_Constraint_Violated___(newrec_, constraint_);
+         END IF;
+      END;
+   WHEN value_too_large THEN
+      Error_SYS.Fnd_Item_Length(lu_name_, sqlerrm);
+END Insert___;
+
+
+PROCEDURE Prepare_New___ (
+   newrec_ IN OUT NOCOPY trn_model_tab%ROWTYPE )
+IS
+   attr_    VARCHAR2(32000);
+   indrec_  Indicator_Rec;
+BEGIN
+   attr_ := Pack___(newrec_);
+   Prepare_Insert___(attr_);
+   Unpack___(newrec_, indrec_, attr_);
+END Prepare_New___;
+
+
+PROCEDURE New___ (
+   newrec_ IN OUT NOCOPY trn_model_tab%ROWTYPE )
+IS
+   objid_         VARCHAR2(20);
+   objversion_    VARCHAR2(100);
+   attr_          VARCHAR2(32000);
+   indrec_        Indicator_Rec;
+BEGIN
+   indrec_ := Get_Indicator_Rec___(newrec_);
+   Check_Insert___(newrec_, indrec_, attr_);
+   Insert___(objid_, objversion_, newrec_, attr_);
+END New___;
+
+
+PROCEDURE Check_Update___ (
+   oldrec_ IN     trn_model_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+BEGIN
+   Validate_SYS.Item_Update(lu_name_, 'BRAND_ID', indrec_.brand_id);
+   Validate_SYS.Item_Update(lu_name_, 'CATEGORY_ID', indrec_.category_id);
+   Validate_SYS.Item_Update(lu_name_, 'MODEL_ID', indrec_.model_id);
+   Check_Common___(oldrec_, newrec_, indrec_, attr_);
+END Check_Update___;
+
+
+PROCEDURE Update___ (
+   objid_      IN     VARCHAR2,
+   oldrec_     IN     trn_model_tab%ROWTYPE,
+   newrec_     IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   by_keys_    IN     BOOLEAN DEFAULT FALSE )
+IS
+   value_too_large  EXCEPTION;
+   PRAGMA           EXCEPTION_INIT(value_too_large, -12899);
+BEGIN
+   newrec_.rowversion := sysdate;
+   IF by_keys_ THEN
+      UPDATE trn_model_tab
+         SET ROW = newrec_
+         WHERE brand_id = newrec_.brand_id
+         AND   category_id = newrec_.category_id
+         AND   model_id = newrec_.model_id;
+   ELSE
+      UPDATE trn_model_tab
+         SET ROW = newrec_
+         WHERE rowid = objid_;
+   END IF;
+   objversion_ := to_char(newrec_.rowversion,'YYYYMMDDHH24MISS');
+EXCEPTION
+   WHEN dup_val_on_index THEN
+      DECLARE
+         constraint_ VARCHAR2(4000) := Utility_SYS.Get_Constraint_From_Error_Msg(sqlerrm);
+      BEGIN
+         IF (constraint_ = 'TRN_MODEL_RK') THEN
+            Error_SYS.Fnd_Rowkey_Exist(Trn_Model_API.lu_name_, newrec_.rowkey);
+         ELSIF (constraint_ = 'TRN_MODEL_PK') THEN
+            Raise_Record_Exist___(newrec_);
+         ELSE
+            Raise_Constraint_Violated___(newrec_, constraint_);
+         END IF;
+      END;
+   WHEN value_too_large THEN
+      Error_SYS.Fnd_Item_Length(lu_name_, sqlerrm);
+END Update___;
+
+
+PROCEDURE Modify___ (
+   newrec_         IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+IS
+   objid_      VARCHAR2(20);
+   objversion_ VARCHAR2(100);
+   attr_       VARCHAR2(32000);
+   indrec_     Indicator_rec;
+   oldrec_     trn_model_tab%ROWTYPE;
+BEGIN
+   IF (lock_mode_wait_) THEN
+      oldrec_ := Lock_By_Keys___(newrec_.brand_id, newrec_.category_id, newrec_.model_id);
+   ELSE
+      oldrec_ := Lock_By_Keys_Nowait___(newrec_.brand_id, newrec_.category_id, newrec_.model_id);
+   END IF;
+   indrec_ := Get_Indicator_Rec___(oldrec_, newrec_);
+   Check_Update___(oldrec_, newrec_, indrec_, attr_);
+   Update___(objid_, oldrec_, newrec_, attr_, objversion_, TRUE);
+END Modify___;
+
+
+PROCEDURE Check_Delete___ (
+   remrec_ IN trn_model_tab%ROWTYPE )
+IS
+   key_ VARCHAR2(2000);
+BEGIN
+   key_ := remrec_.brand_id||'^'||remrec_.category_id||'^'||remrec_.model_id||'^';
+   Reference_SYS.Check_Restricted_Delete(lu_name_, key_);
+END Check_Delete___;
+
+
+PROCEDURE Delete___ (
+   objid_  IN VARCHAR2,
+   remrec_ IN trn_model_tab%ROWTYPE )
+IS
+   key_ VARCHAR2(2000);
+BEGIN
+   key_ := remrec_.brand_id||'^'||remrec_.category_id||'^'||remrec_.model_id||'^';
+   Reference_SYS.Do_Cascade_Delete(lu_name_, key_);
+   IF (objid_ IS NOT NULL) THEN
+      DELETE
+         FROM  trn_model_tab
+         WHERE rowid = objid_;
+   ELSE
+      DELETE
+         FROM  trn_model_tab
+         WHERE brand_id = remrec_.brand_id
+         AND   category_id = remrec_.category_id
+         AND   model_id = remrec_.model_id;
+   END IF;
+END Delete___;
+
+
+PROCEDURE Delete___ (
+   remrec_ IN trn_model_tab%ROWTYPE )
+IS
+BEGIN
+   Delete___(NULL, remrec_);
+END Delete___;
+
+
+PROCEDURE Remove___ (
+   remrec_         IN OUT NOCOPY trn_model_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+IS
+   oldrec_     trn_model_tab%ROWTYPE;
+BEGIN
+   IF (lock_mode_wait_) THEN
+      oldrec_ := Lock_By_Keys___(remrec_.brand_id, remrec_.category_id, remrec_.model_id);
+   ELSE
+      oldrec_ := Lock_By_Keys_Nowait___(remrec_.brand_id, remrec_.category_id, remrec_.model_id);
+   END IF;
+   Check_Delete___(oldrec_);
+   Delete___(NULL, oldrec_);
+END Remove___;
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Init
+IS
+BEGIN
+   NULL;
+END Init;
+
+BEGIN
+   Init;
+END Trn_Model_API;
+-- [END IFS COMPLETE BLOCK]
+/
+SHOW ERROR
+
+GRANT EXECUTE ON Trn_Model_API TO IFSSYS
+/

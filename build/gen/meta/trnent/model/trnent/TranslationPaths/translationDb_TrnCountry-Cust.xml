@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TranslatableResources type="LU" module="TRNENT" version="1.0" layer="Cust" xmlns="types.scan.translation.fnd.ifsworld.com">
+   <TranslatableResource type="Logical Unit" ID="TrnCountry" name="TrnCountry">
+      <Text><![CDATA[Trn Country]]></Text>
+      <Resource subtype="View" ID="TrnCountry.TRN_COUNTRY" control="TRN_COUNTRY">
+         <Text><![CDATA[Trn Country]]></Text>
+         <Resource subtype="Column" ID="TrnCountry.TRN_COUNTRY.COUNTRY_ID" control="COUNTRY_ID">
+            <Text><![CDATA[Country Id]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnCountry.TRN_COUNTRY.COUNTRY" control="COUNTRY">
+            <Text><![CDATA[Country]]></Text>
+         </Resource>
+      </Resource>
+   </TranslatableResource>
+</TranslatableResources>

@@ -1,0 +1,79 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnInventoryCommMethod
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Company_Id IS
+   Flags      = 'PMI-L'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'Company Id';
+COLUMN Branch_Id IS
+   Flags      = 'PMI-L'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'Branch Id';
+COLUMN Inventory_Id IS
+   Flags      = 'PMI-L'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Inventory Id'
+   Ref        = 'TrnInventory(company_id,branch_id)';
+COLUMN Inventory_Comm_Id IS
+   Flags      = 'K-I-L'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Inventory Comm Id';
+COLUMN Address IS
+   Flags      = 'AMIUL'
+   Datatype   = 'STRING(1000)'
+   Prompt     = 'Address';
+COLUMN Communication_Type IS
+   Flags      = 'AMIUL'
+   Datatype   = 'STRING(200)'
+   Enumeration= 'TrnCommunicationType'
+   Prompt     = 'Communication Type';
+COLUMN Communication_Type_Db IS
+   Flags      = 'A----'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'Communication Type';
+COLUMN Default_Address IS
+   Flags      = 'AMIUL'
+   Datatype   = 'STRING(200)'
+   Enumeration= 'FndBoolean'
+   Prompt     = 'Default Address';
+COLUMN Default_Address_Db IS
+   Flags      = 'A----'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'Default Address';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Trn_Inventory_Comm_Method IS
+   Prompt     = 'Trn Inventory Comm Method'
+   Table      = 'TRN_INVENTORY_COMM_METHOD_TAB'
+SELECT
+       company_id                     company_id,
+       branch_id                      branch_id,
+       inventory_id                   inventory_id,
+       inventory_comm_id              inventory_comm_id,
+       address                        address,
+       Trn_Communication_Type_API.Decode(communication_type) communication_type,
+       communication_type             communication_type_db,
+       Fnd_Boolean_API.Decode(default_address) default_address,
+       default_address                default_address_db,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   trn_inventory_comm_method_tab;

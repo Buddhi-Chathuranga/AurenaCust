@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TranslatableResources type="LU" module="TRNINV" version="1.0" layer="Cust" xmlns="types.scan.translation.fnd.ifsworld.com">
+   <TranslatableResource type="Logical Unit" ID="TrnProduct" name="TrnProduct">
+      <Text><![CDATA[Trn Product]]></Text>
+      <Resource subtype="View" ID="TrnProduct.TRN_PRODUCT" control="TRN_PRODUCT">
+         <Text><![CDATA[Trn Product]]></Text>
+         <Resource subtype="Column" ID="TrnProduct.TRN_PRODUCT.COMPANY_ID" control="COMPANY_ID">
+            <Text><![CDATA[Company ID]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnProduct.TRN_PRODUCT.PRODUCT_ID" control="PRODUCT_ID">
+            <Text><![CDATA[Product ID]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnProduct.TRN_PRODUCT.DESCRIPTION" control="DESCRIPTION">
+            <Text><![CDATA[Description]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnProduct.TRN_PRODUCT.PRICE" control="PRICE">
+            <Text><![CDATA[Price]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnProduct.TRN_PRODUCT.COMMENTS" control="COMMENTS">
+            <Text><![CDATA[Comments]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnProduct.TRN_PRODUCT.UNIT" control="UNIT">
+            <Text><![CDATA[Unit]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnProduct.TRN_PRODUCT.BRAND_ID" control="BRAND_ID">
+            <Text><![CDATA[Brand ID]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnProduct.TRN_PRODUCT.CATEGORY_ID" control="CATEGORY_ID">
+            <Text><![CDATA[Category ID]]></Text>
+         </Resource>
+         <Resource subtype="Column" ID="TrnProduct.TRN_PRODUCT.MODEL_ID" control="MODEL_ID">
+            <Text><![CDATA[Model ID]]></Text>
+         </Resource>
+      </Resource>
+   </TranslatableResource>
+</TranslatableResources>

@@ -1,0 +1,41 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnInventoryCommMethod
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- TABLE DEFINITIONS --------------------------------------
+
+TABLE trn_inventory_comm_method_tab IS (
+   company_id                     VARCHAR2(20)   NOT NULL,
+   branch_id                      VARCHAR2(20)   NOT NULL,
+   inventory_id                   NUMBER         NOT NULL,
+   inventory_comm_id              NUMBER         NOT NULL,
+   address                        VARCHAR2(1000) NOT NULL,
+   communication_type             VARCHAR2(20)   NOT NULL,
+   default_address                VARCHAR2(20)   NOT NULL,
+   rowversion                     DATE           NOT NULL,
+   rowkey                         VARCHAR2(50)   DEFAULT sys_guid() NOT NULL);
+
+
+PRIMARY KEY trn_inventory_comm_method_pk IS trn_inventory_comm_method_tab (
+   company_id,
+   branch_id,
+   inventory_id,
+   inventory_comm_id);
+
+
+UNIQUE CONSTRAINT trn_inventory_comm_method_rk IS trn_inventory_comm_method_tab (
+   rowkey);
+
+-------------------- OTHER DEFINITIONS --------------------------------------
+

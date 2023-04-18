@@ -1,0 +1,3099 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: ProductHandling
+--  Type:         Entity
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  Purpose:      Projection facing PL/SQL Base document
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+layer Base;
+
+-------------------- PUBLIC DECLARATIONS ------------------------------------
+
+TYPE Entity_Dec IS RECORD (
+   etag                           VARCHAR2(100),
+   info                           VARCHAR2(4000),
+   attr                           VARCHAR2(32000));
+
+TYPE Entity_Small_Dec IS RECORD (
+   etag                           VARCHAR2(100),
+   info                           VARCHAR2(4000),
+   attr                           VARCHAR2(4000));
+
+TYPE Entity_Small_Drr      IS TABLE OF Entity_Small_Dec;
+TYPE Entity_Drr      IS TABLE OF Entity_Dec;
+TYPE Objid_Arr       IS TABLE OF VARCHAR2(100);
+TYPE Empty_Art       IS TABLE OF VARCHAR2(1);
+
+TYPE Boolean_Arr     IS TABLE OF BOOLEAN;
+TYPE Boolean_Art     IS TABLE OF VARCHAR2(5);
+TYPE Number_Arr      IS TABLE OF NUMBER;
+TYPE Text_Arr        IS TABLE OF VARCHAR2(4000);
+
+TYPE Stream_Data_Rec IS RECORD (
+   file_name                           VARCHAR2(100),
+   mime_type                           VARCHAR2(100),
+   stream_data                         BLOB);
+
+TYPE Stream_Data_Arr IS TABLE OF Stream_Data_Rec;
+
+TYPE Stream_Info_Rec IS RECORD (
+   file_name                           VARCHAR2(100),
+   mime_type                           VARCHAR2(100));
+
+TYPE Stream_Text_Data_Rec IS RECORD (
+   file_name                           VARCHAR2(100),
+   mime_type                           VARCHAR2(100),
+   stream_data                         CLOB);
+
+
+TYPE Move_Product_Data_Structure_Rec IS RECORD (
+   company_id                     VARCHAR2(4000),
+   product_id                     NUMBER,
+   source_branch_id               VARCHAR2(4000),
+   source_inventory_id            NUMBER,
+   source_quantity                NUMBER,
+   dest_branch_id                 VARCHAR2(4000),
+   dest_inventory_id              NUMBER,
+   quantity_already_available     NUMBER,
+   quantity_to_move               NUMBER);
+
+TYPE Move_Product_Data_Structure_Arr IS TABLE OF Move_Product_Data_Structure_Rec;
+
+
+TYPE Copy_Values_Rec IS RECORD (
+   modified_source                VARCHAR2(32000));
+
+-------------------- PRIVATE DECLARATIONS -----------------------------------
+
+TYPE Trn_Unit_Rec IS RECORD (
+   objid                          VARCHAR2(4000),
+   objversion                     VARCHAR2(4000),
+   objinfo                        VARCHAR2(4000),
+   objgrants                      VARCHAR2(2000),
+   unit                           VARCHAR2(10),
+   description                    VARCHAR2(1000));
+
+TYPE Trn_Unit_Default_Copy_Rec IS RECORD (
+   objgrants                      VARCHAR2(2000),
+   unit                           VARCHAR2(10),
+   description                    VARCHAR2(1000));
+
+TYPE Trn_Unit_Key IS RECORD (
+   unit                           VARCHAR2(10));
+
+TYPE Trn_Product_Rec IS RECORD (
+   objid                          VARCHAR2(4000),
+   objversion                     VARCHAR2(4000),
+   objinfo                        VARCHAR2(4000),
+   objgrants                      VARCHAR2(2000),
+   company_id                     VARCHAR2(20),
+   product_id                     NUMBER,
+   description                    VARCHAR2(1000),
+   price                          NUMBER,
+   comments                       VARCHAR2(2000),
+   unit                           VARCHAR2(10),
+   brand_id                       VARCHAR2(10),
+   category_id                    VARCHAR2(10),
+   model_id                       VARCHAR2(100));
+
+TYPE Trn_Product_Default_Copy_Rec IS RECORD (
+   objgrants                      VARCHAR2(2000),
+   company_id                     VARCHAR2(20),
+   product_id                     NUMBER,
+   description                    VARCHAR2(1000),
+   price                          NUMBER,
+   comments                       VARCHAR2(2000),
+   unit                           VARCHAR2(10),
+   brand_id                       VARCHAR2(10),
+   category_id                    VARCHAR2(10),
+   model_id                       VARCHAR2(100));
+
+TYPE Trn_Product_Key IS RECORD (
+   company_id                     VARCHAR2(20),
+   product_id                     NUMBER);
+
+TYPE Trn_Brand_Rec IS RECORD (
+   objid                          VARCHAR2(4000),
+   objversion                     VARCHAR2(4000),
+   objinfo                        VARCHAR2(4000),
+   objgrants                      VARCHAR2(2000),
+   brand_id                       VARCHAR2(10),
+   name                           VARCHAR2(1000),
+   comments                       VARCHAR2(2000));
+
+TYPE Trn_Brand_Default_Copy_Rec IS RECORD (
+   objgrants                      VARCHAR2(2000),
+   brand_id                       VARCHAR2(10),
+   name                           VARCHAR2(1000),
+   comments                       VARCHAR2(2000));
+
+TYPE Trn_Brand_Key IS RECORD (
+   brand_id                       VARCHAR2(10));
+
+TYPE Trn_Prod_Category_Rec IS RECORD (
+   objid                          VARCHAR2(4000),
+   objversion                     VARCHAR2(4000),
+   objinfo                        VARCHAR2(4000),
+   objgrants                      VARCHAR2(2000),
+   category_id                    VARCHAR2(10),
+   name                           VARCHAR2(1000),
+   comments                       VARCHAR2(2000));
+
+TYPE Trn_Prod_Category_Default_Copy_Rec IS RECORD (
+   objgrants                      VARCHAR2(2000),
+   category_id                    VARCHAR2(10),
+   name                           VARCHAR2(1000),
+   comments                       VARCHAR2(2000));
+
+TYPE Trn_Prod_Category_Key IS RECORD (
+   category_id                    VARCHAR2(10));
+
+TYPE Trn_Prod_Category_Brand_Rec IS RECORD (
+   objid                          VARCHAR2(4000),
+   objversion                     VARCHAR2(4000),
+   objinfo                        VARCHAR2(4000),
+   objgrants                      VARCHAR2(2000),
+   brand_id                       VARCHAR2(10),
+   category_id                    VARCHAR2(10),
+   brand                          VARCHAR2(4000),
+   category                       VARCHAR2(4000));
+
+TYPE Trn_Prod_Category_Brand_Default_Copy_Rec IS RECORD (
+   objgrants                      VARCHAR2(2000),
+   brand_id                       VARCHAR2(10),
+   category_id                    VARCHAR2(10),
+   brand                          VARCHAR2(4000),
+   category                       VARCHAR2(4000));
+
+TYPE Trn_Prod_Category_Brand_Key IS RECORD (
+   brand_id                       VARCHAR2(10),
+   category_id                    VARCHAR2(10));
+
+TYPE Trn_Model_Rec IS RECORD (
+   objid                          VARCHAR2(4000),
+   objversion                     VARCHAR2(4000),
+   objinfo                        VARCHAR2(4000),
+   objgrants                      VARCHAR2(2000),
+   brand_id                       VARCHAR2(10),
+   category_id                    VARCHAR2(10),
+   model_id                       VARCHAR2(100),
+   description                    VARCHAR2(2000));
+
+TYPE Trn_Model_Default_Copy_Rec IS RECORD (
+   objgrants                      VARCHAR2(2000),
+   brand_id                       VARCHAR2(10),
+   category_id                    VARCHAR2(10),
+   model_id                       VARCHAR2(100),
+   description                    VARCHAR2(2000));
+
+TYPE Trn_Model_Key IS RECORD (
+   brand_id                       VARCHAR2(10),
+   category_id                    VARCHAR2(10),
+   model_id                       VARCHAR2(100));
+
+TYPE Trn_Inventory_Product_Rec IS RECORD (
+   objid                          VARCHAR2(4000),
+   objversion                     VARCHAR2(4000),
+   objinfo                        VARCHAR2(4000),
+   objgrants                      VARCHAR2(2000),
+   company_id                     VARCHAR2(20),
+   branch_id                      VARCHAR2(20),
+   inventory_id                   NUMBER,
+   product_id                     NUMBER,
+   quantity                       NUMBER,
+   reorder_level                  NUMBER,
+   reserved_quantity              NUMBER);
+
+TYPE Trn_Inventory_Product_Default_Copy_Rec IS RECORD (
+   objgrants                      VARCHAR2(2000),
+   company_id                     VARCHAR2(20),
+   branch_id                      VARCHAR2(20),
+   inventory_id                   NUMBER,
+   product_id                     NUMBER,
+   quantity                       NUMBER,
+   reorder_level                  NUMBER,
+   reserved_quantity              NUMBER);
+
+TYPE Trn_Inventory_Product_Key IS RECORD (
+   company_id                     VARCHAR2(20),
+   branch_id                      VARCHAR2(20),
+   inventory_id                   NUMBER,
+   product_id                     NUMBER);
+
+TYPE Trn_Inventory_Rec IS RECORD (
+   objid                          VARCHAR2(4000),
+   objversion                     VARCHAR2(4000),
+   objinfo                        VARCHAR2(4000),
+   objgrants                      VARCHAR2(2000),
+   company_id                     VARCHAR2(20),
+   branch_id                      VARCHAR2(20),
+   inventory_id                   NUMBER,
+   name                           VARCHAR2(200),
+   picking_lead_time              NUMBER);
+
+TYPE Trn_Inventory_Default_Copy_Rec IS RECORD (
+   objgrants                      VARCHAR2(2000),
+   company_id                     VARCHAR2(20),
+   branch_id                      VARCHAR2(20),
+   inventory_id                   NUMBER,
+   name                           VARCHAR2(200),
+   picking_lead_time              NUMBER);
+
+TYPE Trn_Inventory_Key IS RECORD (
+   company_id                     VARCHAR2(20),
+   branch_id                      VARCHAR2(20),
+   inventory_id                   NUMBER);
+
+TYPE Trn_Branch_Rec IS RECORD (
+   objid                          VARCHAR2(4000),
+   objversion                     VARCHAR2(4000),
+   objinfo                        VARCHAR2(4000),
+   objgrants                      VARCHAR2(2000),
+   company_id                     VARCHAR2(20),
+   branch_id                      VARCHAR2(20),
+   name                           VARCHAR2(1000),
+   time_offset                    NUMBER,
+   country_id                     VARCHAR2(10),
+   area_id                        VARCHAR2(10));
+
+TYPE Trn_Branch_Default_Copy_Rec IS RECORD (
+   objgrants                      VARCHAR2(2000),
+   company_id                     VARCHAR2(20),
+   branch_id                      VARCHAR2(20),
+   name                           VARCHAR2(1000),
+   time_offset                    NUMBER,
+   country_id                     VARCHAR2(10),
+   area_id                        VARCHAR2(10));
+
+TYPE Trn_Branch_Key IS RECORD (
+   company_id                     VARCHAR2(20),
+   branch_id                      VARCHAR2(20));
+
+
+
+-------------------- HELPER METHODS -----------------------------------------
+
+@Final
+FUNCTION Get_Objid_From_Etag___ (
+   etag_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   delim_pos_ INTEGER := instr(etag_, ':');
+BEGIN
+   RETURN substr(etag_, 4, delim_pos_-4);
+END Get_Objid_From_Etag___;
+
+
+@Final
+FUNCTION Get_Objversion_From_Etag___ (
+   etag_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   delim_pos_ INTEGER := instr(etag_, ':');
+BEGIN
+   RETURN substr(etag_, delim_pos_+1, length(etag_)-delim_pos_-1);
+END Get_Objversion_From_Etag___;
+
+
+@Final
+FUNCTION Get_Etag___ (
+   objid_      IN VARCHAR2,
+   objversion_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+BEGIN
+   RETURN 'W/"'||objid_||':'||objversion_||'"';
+END Get_Etag___;
+
+
+@Final
+FUNCTION Combine_Value_Unit___ (
+   value_ IN VARCHAR2,
+   unit_  IN VARCHAR2 ) RETURN VARCHAR2
+IS
+BEGIN
+   IF (value_ IS NULL) THEN
+      RETURN NULL;
+   ELSE
+      RETURN value_||'|'||unit_;
+   END IF;
+END Combine_Value_Unit___;
+
+
+-------------------- CONVERSION METHODS -------------------------------------
+@Final
+FUNCTION To_Boolean_Arr____ (
+   arr_ IN Text_Arr ) RETURN Boolean_Arr
+IS
+   ret_ Boolean_Arr := Boolean_Arr();
+BEGIN
+   IF (arr_.count > 0) THEN
+      FOR i IN arr_.first .. arr_.last LOOP
+      ret_.extend;
+      ret_(ret_.last) := Fndcg_Projection_Svc_Util_API.To_Boolean(arr_(i));
+      END LOOP;
+   END IF;
+   RETURN ret_;
+END To_Boolean_Arr____;
+
+
+-------------------- GLOBAL METHODS -----------------------------------------
+@Final
+PROCEDURE Do_Move_Product(company_id_ IN VARCHAR2, source_branch_id_ IN VARCHAR2, source_inventory_id_ IN NUMBER, product_id_ IN NUMBER, dest_branch_id_ IN VARCHAR2, dest_inventory_id_ IN NUMBER, quantityto_move_ IN NUMBER, unbound## IN VARCHAR2)
+IS
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'Do_Move_Product');
+   Move_Product___(company_id_, source_branch_id_, source_inventory_id_, product_id_, dest_branch_id_, dest_inventory_id_, quantityto_move_);
+END Do_Move_Product;
+
+@ProjectionGenerated
+PROCEDURE Move_Product___ (
+   company_id_          IN VARCHAR2,
+   source_branch_id_    IN VARCHAR2,
+   source_inventory_id_ IN NUMBER,
+   product_id_          IN NUMBER,
+   dest_branch_id_      IN VARCHAR2,
+   dest_inventory_id_   IN NUMBER,
+   quantityto_move_     IN NUMBER ) ;
+
+@Final
+@UncheckedAccess
+FUNCTION Rd_Get_Current_Quantity(para_company_id_ IN VARCHAR2, para_branch_id_ IN VARCHAR2, para_inventory_id_ IN NUMBER, para_product_id_ IN NUMBER, unbound## IN VARCHAR2) RETURN Number_Arr PIPELINED
+IS
+   rec_ NUMBER;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'Rd_Get_Current_Quantity');
+   rec_ := Get_Current_Quantity___(para_company_id_, para_branch_id_, para_inventory_id_, para_product_id_);
+   PIPE ROW (rec_);
+END Rd_Get_Current_Quantity;
+
+@ProjectionGenerated
+FUNCTION Get_Current_Quantity___ (
+   para_company_id_   IN VARCHAR2,
+   para_branch_id_    IN VARCHAR2,
+   para_inventory_id_ IN NUMBER,
+   para_product_id_   IN NUMBER )  RETURN NUMBER;
+
+
+-------------------- PRIVATE METHODS FOR TRN UNIT ---------------------------
+
+PROCEDURE Add_To_Attr_From_Rec___ (
+   rec_  IN     Trn_Unit_Rec,
+   attr_ IN OUT VARCHAR2 )
+IS
+BEGIN
+   IF (rec_.objgrants IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('OBJGRANTS', rec_.objgrants, attr_);
+   END IF;
+   IF (rec_.unit IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('UNIT', rec_.unit, attr_);
+   END IF;
+   IF (rec_.description IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('DESCRIPTION', rec_.description, attr_);
+   END IF;
+END Add_To_Attr_From_Rec___;
+
+PROCEDURE Add_To_Rec_From_Attr___ (
+   attr_ IN     VARCHAR2,
+   rec_  IN OUT Trn_Unit_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('OBJGRANTS', attr_)) THEN
+      rec_.objgrants := Client_SYS.Get_Item_Value('OBJGRANTS', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('UNIT', attr_)) THEN
+      rec_.unit := Client_SYS.Get_Item_Value('UNIT', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('DESCRIPTION', attr_)) THEN
+      rec_.description := Client_SYS.Get_Item_Value('DESCRIPTION', attr_);
+   END IF;
+END Add_To_Rec_From_Attr___;
+
+@Final
+PROCEDURE Add_Keys_To_Rec_From_Attr___ (
+   attr_ IN  VARCHAR2,
+   rec_ IN OUT Trn_Unit_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('UNIT', attr_)) THEN
+      rec_.unit := Client_SYS.Get_Item_Value('UNIT', attr_);
+   END IF;
+END Add_Keys_To_Rec_From_Attr___;
+
+@Final
+FUNCTION Add_To_Rec_From_Default_Copy_Rec___(
+   default_copy_rec_ IN     Trn_Unit_Default_Copy_Rec) RETURN Trn_Unit_Rec
+IS
+   rec_ Trn_Unit_Rec;
+BEGIN
+   rec_.objgrants := default_copy_rec_.objgrants;
+   rec_.unit := default_copy_rec_.unit;
+   rec_.description := default_copy_rec_.description;
+   RETURN rec_;
+END Add_To_Rec_From_Default_Copy_Rec___;
+
+
+@Final
+FUNCTION Get_Record_By_Objid___ (
+   objid_ IN VARCHAR2,
+   trn_unit## IN VARCHAR2 ) RETURN Trn_Unit_Rec
+IS
+   default_copy_rec_ Trn_Unit_Default_Copy_Rec;
+   rec_ Trn_Unit_Rec;
+BEGIN
+   SELECT
+      NULL objgrants,
+      unit unit,
+      description description   INTO default_copy_rec_
+   FROM TRN_UNIT
+   WHERE
+    objid = objid_;
+
+   rec_ := Add_To_Rec_From_Default_Copy_Rec___(default_copy_rec_);
+   RETURN rec_;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Record_Not_Exist(lu_name_);
+END Get_Record_By_Objid___;
+
+PROCEDURE Get_Objid_Objversion___ (
+   objid_         OUT VARCHAR2,
+   objversion_    OUT VARCHAR2,
+   key_        IN     Trn_Unit_Key )
+IS
+BEGIN
+   SELECT objid, objversion
+      INTO  objid_, objversion_
+      FROM  TRN_UNIT
+      WHERE unit = key_.unit;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Odp_Record_Not_Exist(Trn_Unit_API.lu_name_);
+END Get_Objid_Objversion___;
+
+
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default(attr_ IN VARCHAR2 DEFAULT NULL, trn_unit## IN VARCHAR2 ) RETURN Entity_Small_Drr PIPELINED
+IS
+   ret_ Entity_Small_Dec;
+   key_ Trn_Unit_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default');
+   ret_.attr := attr_;
+   CRUD_Default___(key_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000) := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(4000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Unit_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', 'PREPARE', 'P');
+         ret_.attr := ret_.attr || attr_cf_;
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   PIPE ROW (ret_);
+END CRUD_Default;
+
+
+PROCEDURE CRUD_Default___ (
+   key_  IN     Trn_Unit_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2 )
+IS
+   rec_        Trn_Unit_Rec;
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Unit_API.New__(info_, objid_, objversion_, attr_, 'PREPARE');
+   Add_To_Rec_From_Attr___(attr_, rec_);
+   CRUD_Default___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+END CRUD_Default___;
+
+
+PROCEDURE CRUD_Default___ (
+   rec_  IN OUT Trn_Unit_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default___;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(values_ IN Copy_Values_Rec, trn_unit## IN VARCHAR2 ) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Unit_Key;
+   objid_  VARCHAR2(10) := NULL;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(etag_ IN VARCHAR2, unit_ IN VARCHAR2, values_ IN Copy_Values_Rec, trn_unit## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Unit_Key;
+   objid_  VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   key_.unit := unit_;
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Unit_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, ret_.attr, '', 'COPY', 'D');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@UncheckedAccess
+PROCEDURE CRUD_Default_Copy___ (
+   objid_  IN     VARCHAR2,
+   key_    IN     Trn_Unit_Key,
+   values_ IN     Copy_Values_Rec,
+   attr_      OUT VARCHAR2,
+   info_      OUT VARCHAR2 )
+IS
+   rec_            Trn_Unit_Rec;
+   default_dec_    Entity_Small_Dec;
+BEGIN
+   IF objid_ IS NOT NULL THEN
+      rec_ := Get_Record_By_Objid___(objid_, trn_unit## => '');
+   END IF;
+   Add_To_Rec_From_Attr___(values_.modified_source, rec_);
+   SELECT * INTO default_dec_ FROM TABLE(Product_Handling_SVC.CRUD_Default('', trn_unit## => ''));
+   Client_SYS.Merge_Info(default_dec_.info);
+   Add_Keys_To_Rec_From_Attr___(default_dec_.attr, rec_);
+   attr_ := default_dec_.attr;
+   CRUD_Default_Copy___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+   info_ := Client_SYS.Get_All_Info();
+END CRUD_Default_Copy___;
+
+PROCEDURE CRUD_Default_Copy___ (
+   rec_  IN OUT Trn_Unit_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default_Copy___;
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Create(attr_ IN VARCHAR2, action_ IN VARCHAR2, trn_unit## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Unit_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Create');
+   ret_.attr := attr_;
+   CRUD_Create___(ret_.etag, key_, ret_.attr, ret_.info, action_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Unit_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action_, 'C');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('UNIT', key_.unit, ret_.attr);
+   return ret_;
+END CRUD_Create;
+
+
+PROCEDURE CRUD_Create___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Unit_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Unit_API.New__(info_, objid_, objversion_, attr_, action_);
+   IF (action_ = 'DO') THEN
+   etag_ := Get_Etag___(objid_, objversion_);
+   SELECT unit
+      INTO key_.unit
+      FROM TRN_UNIT
+      WHERE objid = objid_;
+   END IF;
+END CRUD_Create___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Update(etag_ IN VARCHAR2, unit_ IN VARCHAR2, attr_ IN VARCHAR2, action$_ IN VARCHAR2, trn_unit## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Unit_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Update');
+   ret_.etag := etag_;
+   ret_.attr := attr_;
+   key_.unit := unit_;
+   CRUD_Update___(ret_.etag, key_, ret_.attr, ret_.info, action$_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Unit_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action$_, 'U');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('UNIT', key_.unit, ret_.attr);
+   return ret_;
+END CRUD_Update;
+
+
+PROCEDURE CRUD_Update___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Unit_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Unit_API.Modify__(info_, objid_, objversion_, attr_, action_);
+   etag_ := Get_Etag___(objid_, objversion_);
+END CRUD_Update___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Delete(etag_ IN VARCHAR2, unit_ IN VARCHAR2, action$_ IN VARCHAR2, trn_unit## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Unit_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Delete');
+   ret_.etag := etag_;
+   key_.unit := unit_;
+   CRUD_Delete___(ret_.etag, key_, ret_.info, action$_);
+   return ret_;
+END CRUD_Delete;
+
+
+PROCEDURE CRUD_Delete___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN     Trn_Unit_Key,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Unit_API.Remove__(info_, objid_, objversion_, action_);
+   etag_ := NULL;
+END CRUD_Delete___;
+
+
+-------------------- PRIVATE METHODS FOR TRN PRODUCT ------------------------
+
+PROCEDURE Add_To_Attr_From_Rec___ (
+   rec_  IN     Trn_Product_Rec,
+   attr_ IN OUT VARCHAR2 )
+IS
+BEGIN
+   IF (rec_.objgrants IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('OBJGRANTS', rec_.objgrants, attr_);
+   END IF;
+   IF (rec_.company_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('COMPANY_ID', rec_.company_id, attr_);
+   END IF;
+   IF (rec_.product_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('PRODUCT_ID', rec_.product_id, attr_);
+   END IF;
+   IF (rec_.description IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('DESCRIPTION', rec_.description, attr_);
+   END IF;
+   IF (rec_.price IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('PRICE', rec_.price, attr_);
+   END IF;
+   IF (rec_.comments IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('COMMENTS', rec_.comments, attr_);
+   END IF;
+   IF (rec_.unit IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('UNIT', rec_.unit, attr_);
+   END IF;
+   IF (rec_.brand_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('BRAND_ID', rec_.brand_id, attr_);
+   END IF;
+   IF (rec_.category_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('CATEGORY_ID', rec_.category_id, attr_);
+   END IF;
+   IF (rec_.model_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('MODEL_ID', rec_.model_id, attr_);
+   END IF;
+END Add_To_Attr_From_Rec___;
+
+PROCEDURE Add_To_Rec_From_Attr___ (
+   attr_ IN     VARCHAR2,
+   rec_  IN OUT Trn_Product_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('OBJGRANTS', attr_)) THEN
+      rec_.objgrants := Client_SYS.Get_Item_Value('OBJGRANTS', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('COMPANY_ID', attr_)) THEN
+      rec_.company_id := Client_SYS.Get_Item_Value('COMPANY_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('PRODUCT_ID', attr_)) THEN
+      rec_.product_id := Client_SYS.Get_Item_Value('PRODUCT_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('DESCRIPTION', attr_)) THEN
+      rec_.description := Client_SYS.Get_Item_Value('DESCRIPTION', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('PRICE', attr_)) THEN
+      rec_.price := Client_SYS.Get_Item_Value('PRICE', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('COMMENTS', attr_)) THEN
+      rec_.comments := Client_SYS.Get_Item_Value('COMMENTS', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('UNIT', attr_)) THEN
+      rec_.unit := Client_SYS.Get_Item_Value('UNIT', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('BRAND_ID', attr_)) THEN
+      rec_.brand_id := Client_SYS.Get_Item_Value('BRAND_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('CATEGORY_ID', attr_)) THEN
+      rec_.category_id := Client_SYS.Get_Item_Value('CATEGORY_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('MODEL_ID', attr_)) THEN
+      rec_.model_id := Client_SYS.Get_Item_Value('MODEL_ID', attr_);
+   END IF;
+END Add_To_Rec_From_Attr___;
+
+@Final
+PROCEDURE Add_Keys_To_Rec_From_Attr___ (
+   attr_ IN  VARCHAR2,
+   rec_ IN OUT Trn_Product_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('COMPANY_ID', attr_)) THEN
+      rec_.company_id := Client_SYS.Get_Item_Value('COMPANY_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('PRODUCT_ID', attr_)) THEN
+      rec_.product_id := Client_SYS.Get_Item_Value('PRODUCT_ID', attr_);
+   END IF;
+END Add_Keys_To_Rec_From_Attr___;
+
+@Final
+FUNCTION Add_To_Rec_From_Default_Copy_Rec___(
+   default_copy_rec_ IN     Trn_Product_Default_Copy_Rec) RETURN Trn_Product_Rec
+IS
+   rec_ Trn_Product_Rec;
+BEGIN
+   rec_.objgrants := default_copy_rec_.objgrants;
+   rec_.company_id := default_copy_rec_.company_id;
+   rec_.product_id := default_copy_rec_.product_id;
+   rec_.description := default_copy_rec_.description;
+   rec_.price := default_copy_rec_.price;
+   rec_.comments := default_copy_rec_.comments;
+   rec_.unit := default_copy_rec_.unit;
+   rec_.brand_id := default_copy_rec_.brand_id;
+   rec_.category_id := default_copy_rec_.category_id;
+   rec_.model_id := default_copy_rec_.model_id;
+   RETURN rec_;
+END Add_To_Rec_From_Default_Copy_Rec___;
+
+
+@Final
+FUNCTION Get_Record_By_Objid___ (
+   objid_ IN VARCHAR2,
+   trn_product## IN VARCHAR2 ) RETURN Trn_Product_Rec
+IS
+   default_copy_rec_ Trn_Product_Default_Copy_Rec;
+   rec_ Trn_Product_Rec;
+BEGIN
+   SELECT
+      NULL objgrants,
+      company_id company_id,
+      product_id product_id,
+      description description,
+      price price,
+      comments comments,
+      unit unit,
+      brand_id brand_id,
+      category_id category_id,
+      model_id model_id   INTO default_copy_rec_
+   FROM TRN_PRODUCT
+   WHERE
+    objid = objid_;
+
+   rec_ := Add_To_Rec_From_Default_Copy_Rec___(default_copy_rec_);
+   RETURN rec_;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Record_Not_Exist(lu_name_);
+END Get_Record_By_Objid___;
+
+PROCEDURE Get_Objid_Objversion___ (
+   objid_         OUT VARCHAR2,
+   objversion_    OUT VARCHAR2,
+   key_        IN     Trn_Product_Key )
+IS
+BEGIN
+   SELECT objid, objversion
+      INTO  objid_, objversion_
+      FROM  TRN_PRODUCT
+      WHERE company_id = key_.company_id
+      AND   product_id = key_.product_id;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Odp_Record_Not_Exist(Trn_Product_API.lu_name_);
+END Get_Objid_Objversion___;
+
+
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default(attr_ IN VARCHAR2 DEFAULT NULL, trn_product## IN VARCHAR2 ) RETURN Entity_Small_Drr PIPELINED
+IS
+   ret_ Entity_Small_Dec;
+   key_ Trn_Product_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default');
+   ret_.attr := attr_;
+   CRUD_Default___(key_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000) := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(4000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Product_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', 'PREPARE', 'P');
+         ret_.attr := ret_.attr || attr_cf_;
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   PIPE ROW (ret_);
+END CRUD_Default;
+
+
+PROCEDURE CRUD_Default___ (
+   key_  IN     Trn_Product_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2 )
+IS
+   rec_        Trn_Product_Rec;
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Product_API.New__(info_, objid_, objversion_, attr_, 'PREPARE');
+   Add_To_Rec_From_Attr___(attr_, rec_);
+   CRUD_Default___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+END CRUD_Default___;
+
+
+PROCEDURE CRUD_Default___ (
+   rec_  IN OUT Trn_Product_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default___;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(values_ IN Copy_Values_Rec, trn_product## IN VARCHAR2 ) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Product_Key;
+   objid_  VARCHAR2(10) := NULL;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(etag_ IN VARCHAR2, company_id_ IN VARCHAR2, product_id_ IN NUMBER, values_ IN Copy_Values_Rec, trn_product## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Product_Key;
+   objid_  VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   key_.company_id := company_id_;
+   key_.product_id := product_id_;
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Product_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, ret_.attr, '', 'COPY', 'D');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@UncheckedAccess
+PROCEDURE CRUD_Default_Copy___ (
+   objid_  IN     VARCHAR2,
+   key_    IN     Trn_Product_Key,
+   values_ IN     Copy_Values_Rec,
+   attr_      OUT VARCHAR2,
+   info_      OUT VARCHAR2 )
+IS
+   rec_            Trn_Product_Rec;
+   default_dec_    Entity_Small_Dec;
+BEGIN
+   IF objid_ IS NOT NULL THEN
+      rec_ := Get_Record_By_Objid___(objid_, trn_product## => '');
+   END IF;
+   Add_To_Rec_From_Attr___(values_.modified_source, rec_);
+   SELECT * INTO default_dec_ FROM TABLE(Product_Handling_SVC.CRUD_Default('', trn_product## => ''));
+   Client_SYS.Merge_Info(default_dec_.info);
+   Add_Keys_To_Rec_From_Attr___(default_dec_.attr, rec_);
+   attr_ := default_dec_.attr;
+   CRUD_Default_Copy___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+   info_ := Client_SYS.Get_All_Info();
+END CRUD_Default_Copy___;
+
+PROCEDURE CRUD_Default_Copy___ (
+   rec_  IN OUT Trn_Product_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default_Copy___;
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Create(attr_ IN VARCHAR2, action_ IN VARCHAR2, trn_product## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Product_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Create');
+   ret_.attr := attr_;
+   CRUD_Create___(ret_.etag, key_, ret_.attr, ret_.info, action_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Product_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action_, 'C');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('COMPANY_ID', key_.company_id, ret_.attr);
+   Client_SYS.Set_Item_Value('PRODUCT_ID', key_.product_id, ret_.attr);
+   return ret_;
+END CRUD_Create;
+
+
+PROCEDURE CRUD_Create___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Product_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Product_API.New__(info_, objid_, objversion_, attr_, action_);
+   IF (action_ = 'DO') THEN
+   etag_ := Get_Etag___(objid_, objversion_);
+   SELECT company_id, product_id
+      INTO key_.company_id, key_.product_id
+      FROM TRN_PRODUCT
+      WHERE objid = objid_;
+   END IF;
+END CRUD_Create___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Update(etag_ IN VARCHAR2, company_id_ IN VARCHAR2, product_id_ IN NUMBER, attr_ IN VARCHAR2, action$_ IN VARCHAR2, trn_product## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Product_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Update');
+   ret_.etag := etag_;
+   ret_.attr := attr_;
+   key_.company_id := company_id_;
+   key_.product_id := product_id_;
+   CRUD_Update___(ret_.etag, key_, ret_.attr, ret_.info, action$_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Product_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action$_, 'U');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('COMPANY_ID', key_.company_id, ret_.attr);
+   Client_SYS.Set_Item_Value('PRODUCT_ID', key_.product_id, ret_.attr);
+   return ret_;
+END CRUD_Update;
+
+
+PROCEDURE CRUD_Update___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Product_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Product_API.Modify__(info_, objid_, objversion_, attr_, action_);
+   etag_ := Get_Etag___(objid_, objversion_);
+END CRUD_Update___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Delete(etag_ IN VARCHAR2, company_id_ IN VARCHAR2, product_id_ IN NUMBER, action$_ IN VARCHAR2, trn_product## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Product_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Delete');
+   ret_.etag := etag_;
+   key_.company_id := company_id_;
+   key_.product_id := product_id_;
+   CRUD_Delete___(ret_.etag, key_, ret_.info, action$_);
+   return ret_;
+END CRUD_Delete;
+
+
+PROCEDURE CRUD_Delete___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN     Trn_Product_Key,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Product_API.Remove__(info_, objid_, objversion_, action_);
+   etag_ := NULL;
+END CRUD_Delete___;
+
+
+-------------------- PRIVATE METHODS FOR TRN BRAND --------------------------
+
+PROCEDURE Add_To_Attr_From_Rec___ (
+   rec_  IN     Trn_Brand_Rec,
+   attr_ IN OUT VARCHAR2 )
+IS
+BEGIN
+   IF (rec_.objgrants IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('OBJGRANTS', rec_.objgrants, attr_);
+   END IF;
+   IF (rec_.brand_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('BRAND_ID', rec_.brand_id, attr_);
+   END IF;
+   IF (rec_.name IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('NAME', rec_.name, attr_);
+   END IF;
+   IF (rec_.comments IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('COMMENTS', rec_.comments, attr_);
+   END IF;
+END Add_To_Attr_From_Rec___;
+
+PROCEDURE Add_To_Rec_From_Attr___ (
+   attr_ IN     VARCHAR2,
+   rec_  IN OUT Trn_Brand_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('OBJGRANTS', attr_)) THEN
+      rec_.objgrants := Client_SYS.Get_Item_Value('OBJGRANTS', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('BRAND_ID', attr_)) THEN
+      rec_.brand_id := Client_SYS.Get_Item_Value('BRAND_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('NAME', attr_)) THEN
+      rec_.name := Client_SYS.Get_Item_Value('NAME', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('COMMENTS', attr_)) THEN
+      rec_.comments := Client_SYS.Get_Item_Value('COMMENTS', attr_);
+   END IF;
+END Add_To_Rec_From_Attr___;
+
+@Final
+PROCEDURE Add_Keys_To_Rec_From_Attr___ (
+   attr_ IN  VARCHAR2,
+   rec_ IN OUT Trn_Brand_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('BRAND_ID', attr_)) THEN
+      rec_.brand_id := Client_SYS.Get_Item_Value('BRAND_ID', attr_);
+   END IF;
+END Add_Keys_To_Rec_From_Attr___;
+
+@Final
+FUNCTION Add_To_Rec_From_Default_Copy_Rec___(
+   default_copy_rec_ IN     Trn_Brand_Default_Copy_Rec) RETURN Trn_Brand_Rec
+IS
+   rec_ Trn_Brand_Rec;
+BEGIN
+   rec_.objgrants := default_copy_rec_.objgrants;
+   rec_.brand_id := default_copy_rec_.brand_id;
+   rec_.name := default_copy_rec_.name;
+   rec_.comments := default_copy_rec_.comments;
+   RETURN rec_;
+END Add_To_Rec_From_Default_Copy_Rec___;
+
+
+@Final
+FUNCTION Get_Record_By_Objid___ (
+   objid_ IN VARCHAR2,
+   trn_brand## IN VARCHAR2 ) RETURN Trn_Brand_Rec
+IS
+   default_copy_rec_ Trn_Brand_Default_Copy_Rec;
+   rec_ Trn_Brand_Rec;
+BEGIN
+   SELECT
+      NULL objgrants,
+      brand_id brand_id,
+      name name,
+      comments comments   INTO default_copy_rec_
+   FROM TRN_BRAND
+   WHERE
+    objid = objid_;
+
+   rec_ := Add_To_Rec_From_Default_Copy_Rec___(default_copy_rec_);
+   RETURN rec_;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Record_Not_Exist(lu_name_);
+END Get_Record_By_Objid___;
+
+PROCEDURE Get_Objid_Objversion___ (
+   objid_         OUT VARCHAR2,
+   objversion_    OUT VARCHAR2,
+   key_        IN     Trn_Brand_Key )
+IS
+BEGIN
+   SELECT objid, objversion
+      INTO  objid_, objversion_
+      FROM  TRN_BRAND
+      WHERE brand_id = key_.brand_id;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Odp_Record_Not_Exist(Trn_Brand_API.lu_name_);
+END Get_Objid_Objversion___;
+
+
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default(attr_ IN VARCHAR2 DEFAULT NULL, trn_brand## IN VARCHAR2 ) RETURN Entity_Small_Drr PIPELINED
+IS
+   ret_ Entity_Small_Dec;
+   key_ Trn_Brand_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default');
+   ret_.attr := attr_;
+   CRUD_Default___(key_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000) := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(4000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Brand_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', 'PREPARE', 'P');
+         ret_.attr := ret_.attr || attr_cf_;
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   PIPE ROW (ret_);
+END CRUD_Default;
+
+
+PROCEDURE CRUD_Default___ (
+   key_  IN     Trn_Brand_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2 )
+IS
+   rec_        Trn_Brand_Rec;
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Brand_API.New__(info_, objid_, objversion_, attr_, 'PREPARE');
+   Add_To_Rec_From_Attr___(attr_, rec_);
+   CRUD_Default___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+END CRUD_Default___;
+
+
+PROCEDURE CRUD_Default___ (
+   rec_  IN OUT Trn_Brand_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default___;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(values_ IN Copy_Values_Rec, trn_brand## IN VARCHAR2 ) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Brand_Key;
+   objid_  VARCHAR2(10) := NULL;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(etag_ IN VARCHAR2, brand_id_ IN VARCHAR2, values_ IN Copy_Values_Rec, trn_brand## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Brand_Key;
+   objid_  VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   key_.brand_id := brand_id_;
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Brand_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, ret_.attr, '', 'COPY', 'D');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@UncheckedAccess
+PROCEDURE CRUD_Default_Copy___ (
+   objid_  IN     VARCHAR2,
+   key_    IN     Trn_Brand_Key,
+   values_ IN     Copy_Values_Rec,
+   attr_      OUT VARCHAR2,
+   info_      OUT VARCHAR2 )
+IS
+   rec_            Trn_Brand_Rec;
+   default_dec_    Entity_Small_Dec;
+BEGIN
+   IF objid_ IS NOT NULL THEN
+      rec_ := Get_Record_By_Objid___(objid_, trn_brand## => '');
+   END IF;
+   Add_To_Rec_From_Attr___(values_.modified_source, rec_);
+   SELECT * INTO default_dec_ FROM TABLE(Product_Handling_SVC.CRUD_Default('', trn_brand## => ''));
+   Client_SYS.Merge_Info(default_dec_.info);
+   Add_Keys_To_Rec_From_Attr___(default_dec_.attr, rec_);
+   attr_ := default_dec_.attr;
+   CRUD_Default_Copy___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+   info_ := Client_SYS.Get_All_Info();
+END CRUD_Default_Copy___;
+
+PROCEDURE CRUD_Default_Copy___ (
+   rec_  IN OUT Trn_Brand_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default_Copy___;
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Create(attr_ IN VARCHAR2, action_ IN VARCHAR2, trn_brand## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Brand_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Create');
+   ret_.attr := attr_;
+   CRUD_Create___(ret_.etag, key_, ret_.attr, ret_.info, action_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Brand_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action_, 'C');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('BRAND_ID', key_.brand_id, ret_.attr);
+   return ret_;
+END CRUD_Create;
+
+
+PROCEDURE CRUD_Create___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Brand_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Brand_API.New__(info_, objid_, objversion_, attr_, action_);
+   IF (action_ = 'DO') THEN
+   etag_ := Get_Etag___(objid_, objversion_);
+   SELECT brand_id
+      INTO key_.brand_id
+      FROM TRN_BRAND
+      WHERE objid = objid_;
+   END IF;
+END CRUD_Create___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Update(etag_ IN VARCHAR2, brand_id_ IN VARCHAR2, attr_ IN VARCHAR2, action$_ IN VARCHAR2, trn_brand## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Brand_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Update');
+   ret_.etag := etag_;
+   ret_.attr := attr_;
+   key_.brand_id := brand_id_;
+   CRUD_Update___(ret_.etag, key_, ret_.attr, ret_.info, action$_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Brand_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action$_, 'U');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('BRAND_ID', key_.brand_id, ret_.attr);
+   return ret_;
+END CRUD_Update;
+
+
+PROCEDURE CRUD_Update___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Brand_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Brand_API.Modify__(info_, objid_, objversion_, attr_, action_);
+   etag_ := Get_Etag___(objid_, objversion_);
+END CRUD_Update___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Delete(etag_ IN VARCHAR2, brand_id_ IN VARCHAR2, action$_ IN VARCHAR2, trn_brand## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Brand_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Delete');
+   ret_.etag := etag_;
+   key_.brand_id := brand_id_;
+   CRUD_Delete___(ret_.etag, key_, ret_.info, action$_);
+   return ret_;
+END CRUD_Delete;
+
+
+PROCEDURE CRUD_Delete___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN     Trn_Brand_Key,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Brand_API.Remove__(info_, objid_, objversion_, action_);
+   etag_ := NULL;
+END CRUD_Delete___;
+
+
+-------------------- PRIVATE METHODS FOR TRN PROD CATEGORY ------------------
+
+PROCEDURE Add_To_Attr_From_Rec___ (
+   rec_  IN     Trn_Prod_Category_Rec,
+   attr_ IN OUT VARCHAR2 )
+IS
+BEGIN
+   IF (rec_.objgrants IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('OBJGRANTS', rec_.objgrants, attr_);
+   END IF;
+   IF (rec_.category_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('CATEGORY_ID', rec_.category_id, attr_);
+   END IF;
+   IF (rec_.name IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('NAME', rec_.name, attr_);
+   END IF;
+   IF (rec_.comments IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('COMMENTS', rec_.comments, attr_);
+   END IF;
+END Add_To_Attr_From_Rec___;
+
+PROCEDURE Add_To_Rec_From_Attr___ (
+   attr_ IN     VARCHAR2,
+   rec_  IN OUT Trn_Prod_Category_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('OBJGRANTS', attr_)) THEN
+      rec_.objgrants := Client_SYS.Get_Item_Value('OBJGRANTS', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('CATEGORY_ID', attr_)) THEN
+      rec_.category_id := Client_SYS.Get_Item_Value('CATEGORY_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('NAME', attr_)) THEN
+      rec_.name := Client_SYS.Get_Item_Value('NAME', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('COMMENTS', attr_)) THEN
+      rec_.comments := Client_SYS.Get_Item_Value('COMMENTS', attr_);
+   END IF;
+END Add_To_Rec_From_Attr___;
+
+@Final
+PROCEDURE Add_Keys_To_Rec_From_Attr___ (
+   attr_ IN  VARCHAR2,
+   rec_ IN OUT Trn_Prod_Category_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('CATEGORY_ID', attr_)) THEN
+      rec_.category_id := Client_SYS.Get_Item_Value('CATEGORY_ID', attr_);
+   END IF;
+END Add_Keys_To_Rec_From_Attr___;
+
+@Final
+FUNCTION Add_To_Rec_From_Default_Copy_Rec___(
+   default_copy_rec_ IN     Trn_Prod_Category_Default_Copy_Rec) RETURN Trn_Prod_Category_Rec
+IS
+   rec_ Trn_Prod_Category_Rec;
+BEGIN
+   rec_.objgrants := default_copy_rec_.objgrants;
+   rec_.category_id := default_copy_rec_.category_id;
+   rec_.name := default_copy_rec_.name;
+   rec_.comments := default_copy_rec_.comments;
+   RETURN rec_;
+END Add_To_Rec_From_Default_Copy_Rec___;
+
+
+@Final
+FUNCTION Get_Record_By_Objid___ (
+   objid_ IN VARCHAR2,
+   trn_prod_category## IN VARCHAR2 ) RETURN Trn_Prod_Category_Rec
+IS
+   default_copy_rec_ Trn_Prod_Category_Default_Copy_Rec;
+   rec_ Trn_Prod_Category_Rec;
+BEGIN
+   SELECT
+      NULL objgrants,
+      category_id category_id,
+      name name,
+      comments comments   INTO default_copy_rec_
+   FROM TRN_PROD_CATEGORY
+   WHERE
+    objid = objid_;
+
+   rec_ := Add_To_Rec_From_Default_Copy_Rec___(default_copy_rec_);
+   RETURN rec_;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Record_Not_Exist(lu_name_);
+END Get_Record_By_Objid___;
+
+PROCEDURE Get_Objid_Objversion___ (
+   objid_         OUT VARCHAR2,
+   objversion_    OUT VARCHAR2,
+   key_        IN     Trn_Prod_Category_Key )
+IS
+BEGIN
+   SELECT objid, objversion
+      INTO  objid_, objversion_
+      FROM  TRN_PROD_CATEGORY
+      WHERE category_id = key_.category_id;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Odp_Record_Not_Exist(Trn_Prod_Category_API.lu_name_);
+END Get_Objid_Objversion___;
+
+
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default(attr_ IN VARCHAR2 DEFAULT NULL, trn_prod_category## IN VARCHAR2 ) RETURN Entity_Small_Drr PIPELINED
+IS
+   ret_ Entity_Small_Dec;
+   key_ Trn_Prod_Category_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default');
+   ret_.attr := attr_;
+   CRUD_Default___(key_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000) := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(4000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Prod_Category_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', 'PREPARE', 'P');
+         ret_.attr := ret_.attr || attr_cf_;
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   PIPE ROW (ret_);
+END CRUD_Default;
+
+
+PROCEDURE CRUD_Default___ (
+   key_  IN     Trn_Prod_Category_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2 )
+IS
+   rec_        Trn_Prod_Category_Rec;
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Prod_Category_API.New__(info_, objid_, objversion_, attr_, 'PREPARE');
+   Add_To_Rec_From_Attr___(attr_, rec_);
+   CRUD_Default___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+END CRUD_Default___;
+
+
+PROCEDURE CRUD_Default___ (
+   rec_  IN OUT Trn_Prod_Category_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default___;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(values_ IN Copy_Values_Rec, trn_prod_category## IN VARCHAR2 ) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Prod_Category_Key;
+   objid_  VARCHAR2(10) := NULL;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(etag_ IN VARCHAR2, category_id_ IN VARCHAR2, values_ IN Copy_Values_Rec, trn_prod_category## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Prod_Category_Key;
+   objid_  VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   key_.category_id := category_id_;
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Prod_Category_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, ret_.attr, '', 'COPY', 'D');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@UncheckedAccess
+PROCEDURE CRUD_Default_Copy___ (
+   objid_  IN     VARCHAR2,
+   key_    IN     Trn_Prod_Category_Key,
+   values_ IN     Copy_Values_Rec,
+   attr_      OUT VARCHAR2,
+   info_      OUT VARCHAR2 )
+IS
+   rec_            Trn_Prod_Category_Rec;
+   default_dec_    Entity_Small_Dec;
+BEGIN
+   IF objid_ IS NOT NULL THEN
+      rec_ := Get_Record_By_Objid___(objid_, trn_prod_category## => '');
+   END IF;
+   Add_To_Rec_From_Attr___(values_.modified_source, rec_);
+   SELECT * INTO default_dec_ FROM TABLE(Product_Handling_SVC.CRUD_Default('', trn_prod_category## => ''));
+   Client_SYS.Merge_Info(default_dec_.info);
+   Add_Keys_To_Rec_From_Attr___(default_dec_.attr, rec_);
+   attr_ := default_dec_.attr;
+   CRUD_Default_Copy___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+   info_ := Client_SYS.Get_All_Info();
+END CRUD_Default_Copy___;
+
+PROCEDURE CRUD_Default_Copy___ (
+   rec_  IN OUT Trn_Prod_Category_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default_Copy___;
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Create(attr_ IN VARCHAR2, action_ IN VARCHAR2, trn_prod_category## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Prod_Category_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Create');
+   ret_.attr := attr_;
+   CRUD_Create___(ret_.etag, key_, ret_.attr, ret_.info, action_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Prod_Category_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action_, 'C');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('CATEGORY_ID', key_.category_id, ret_.attr);
+   return ret_;
+END CRUD_Create;
+
+
+PROCEDURE CRUD_Create___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Prod_Category_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Prod_Category_API.New__(info_, objid_, objversion_, attr_, action_);
+   IF (action_ = 'DO') THEN
+   etag_ := Get_Etag___(objid_, objversion_);
+   SELECT category_id
+      INTO key_.category_id
+      FROM TRN_PROD_CATEGORY
+      WHERE objid = objid_;
+   END IF;
+END CRUD_Create___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Update(etag_ IN VARCHAR2, category_id_ IN VARCHAR2, attr_ IN VARCHAR2, action$_ IN VARCHAR2, trn_prod_category## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Prod_Category_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Update');
+   ret_.etag := etag_;
+   ret_.attr := attr_;
+   key_.category_id := category_id_;
+   CRUD_Update___(ret_.etag, key_, ret_.attr, ret_.info, action$_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Prod_Category_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action$_, 'U');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('CATEGORY_ID', key_.category_id, ret_.attr);
+   return ret_;
+END CRUD_Update;
+
+
+PROCEDURE CRUD_Update___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Prod_Category_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Prod_Category_API.Modify__(info_, objid_, objversion_, attr_, action_);
+   etag_ := Get_Etag___(objid_, objversion_);
+END CRUD_Update___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Delete(etag_ IN VARCHAR2, category_id_ IN VARCHAR2, action$_ IN VARCHAR2, trn_prod_category## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Prod_Category_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Delete');
+   ret_.etag := etag_;
+   key_.category_id := category_id_;
+   CRUD_Delete___(ret_.etag, key_, ret_.info, action$_);
+   return ret_;
+END CRUD_Delete;
+
+
+PROCEDURE CRUD_Delete___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN     Trn_Prod_Category_Key,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Prod_Category_API.Remove__(info_, objid_, objversion_, action_);
+   etag_ := NULL;
+END CRUD_Delete___;
+
+
+-------------------- PRIVATE METHODS FOR TRN PROD CATEGORY BRAND ------------
+
+PROCEDURE Add_To_Attr_From_Rec___ (
+   rec_  IN     Trn_Prod_Category_Brand_Rec,
+   attr_ IN OUT VARCHAR2 )
+IS
+BEGIN
+   IF (rec_.objgrants IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('OBJGRANTS', rec_.objgrants, attr_);
+   END IF;
+   IF (rec_.brand_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('BRAND_ID', rec_.brand_id, attr_);
+   END IF;
+   IF (rec_.category_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('CATEGORY_ID', rec_.category_id, attr_);
+   END IF;
+   IF (rec_.brand IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('BRAND', rec_.brand, attr_);
+   END IF;
+   IF (rec_.category IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('CATEGORY', rec_.category, attr_);
+   END IF;
+END Add_To_Attr_From_Rec___;
+
+PROCEDURE Add_To_Rec_From_Attr___ (
+   attr_ IN     VARCHAR2,
+   rec_  IN OUT Trn_Prod_Category_Brand_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('OBJGRANTS', attr_)) THEN
+      rec_.objgrants := Client_SYS.Get_Item_Value('OBJGRANTS', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('BRAND_ID', attr_)) THEN
+      rec_.brand_id := Client_SYS.Get_Item_Value('BRAND_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('CATEGORY_ID', attr_)) THEN
+      rec_.category_id := Client_SYS.Get_Item_Value('CATEGORY_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('BRAND', attr_)) THEN
+      rec_.brand := Client_SYS.Get_Item_Value('BRAND', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('CATEGORY', attr_)) THEN
+      rec_.category := Client_SYS.Get_Item_Value('CATEGORY', attr_);
+   END IF;
+END Add_To_Rec_From_Attr___;
+
+@Final
+PROCEDURE Add_Keys_To_Rec_From_Attr___ (
+   attr_ IN  VARCHAR2,
+   rec_ IN OUT Trn_Prod_Category_Brand_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('BRAND_ID', attr_)) THEN
+      rec_.brand_id := Client_SYS.Get_Item_Value('BRAND_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('CATEGORY_ID', attr_)) THEN
+      rec_.category_id := Client_SYS.Get_Item_Value('CATEGORY_ID', attr_);
+   END IF;
+END Add_Keys_To_Rec_From_Attr___;
+
+@Final
+FUNCTION Add_To_Rec_From_Default_Copy_Rec___(
+   default_copy_rec_ IN     Trn_Prod_Category_Brand_Default_Copy_Rec) RETURN Trn_Prod_Category_Brand_Rec
+IS
+   rec_ Trn_Prod_Category_Brand_Rec;
+BEGIN
+   rec_.objgrants := default_copy_rec_.objgrants;
+   rec_.brand_id := default_copy_rec_.brand_id;
+   rec_.category_id := default_copy_rec_.category_id;
+   rec_.brand := default_copy_rec_.brand;
+   rec_.category := default_copy_rec_.category;
+   RETURN rec_;
+END Add_To_Rec_From_Default_Copy_Rec___;
+
+
+@Final
+FUNCTION Get_Record_By_Objid___ (
+   objid_ IN VARCHAR2,
+   trn_prod_category_brand## IN VARCHAR2 ) RETURN Trn_Prod_Category_Brand_Rec
+IS
+   default_copy_rec_ Trn_Prod_Category_Brand_Default_Copy_Rec;
+   rec_ Trn_Prod_Category_Brand_Rec;
+BEGIN
+   SELECT
+      NULL objgrants,
+      brand_id brand_id,
+      category_id category_id,
+      Trn_Brand_API.Get_Name(brand_id) brand,
+      Trn_Prod_Category_API.Get_Name(category_id) category   INTO default_copy_rec_
+   FROM TRN_PROD_CATEGORY_BRAND
+   WHERE
+    objid = objid_;
+
+   rec_ := Add_To_Rec_From_Default_Copy_Rec___(default_copy_rec_);
+   RETURN rec_;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Record_Not_Exist(lu_name_);
+END Get_Record_By_Objid___;
+
+PROCEDURE Get_Objid_Objversion___ (
+   objid_         OUT VARCHAR2,
+   objversion_    OUT VARCHAR2,
+   key_        IN     Trn_Prod_Category_Brand_Key )
+IS
+BEGIN
+   SELECT objid, objversion
+      INTO  objid_, objversion_
+      FROM  TRN_PROD_CATEGORY_BRAND
+      WHERE brand_id = key_.brand_id
+      AND   category_id = key_.category_id;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Odp_Record_Not_Exist(Trn_Prod_Category_Brand_API.lu_name_);
+END Get_Objid_Objversion___;
+
+
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default(attr_ IN VARCHAR2 DEFAULT NULL, trn_prod_category_brand## IN VARCHAR2 ) RETURN Entity_Small_Drr PIPELINED
+IS
+   ret_ Entity_Small_Dec;
+   key_ Trn_Prod_Category_Brand_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default');
+   ret_.attr := attr_;
+   CRUD_Default___(key_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000) := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(4000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Prod_Category_Brand_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', 'PREPARE', 'P');
+         ret_.attr := ret_.attr || attr_cf_;
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   PIPE ROW (ret_);
+END CRUD_Default;
+
+
+PROCEDURE CRUD_Default___ (
+   key_  IN     Trn_Prod_Category_Brand_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2 )
+IS
+   rec_        Trn_Prod_Category_Brand_Rec;
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Prod_Category_Brand_API.New__(info_, objid_, objversion_, attr_, 'PREPARE');
+   Add_To_Rec_From_Attr___(attr_, rec_);
+   CRUD_Default___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+END CRUD_Default___;
+
+
+PROCEDURE CRUD_Default___ (
+   rec_  IN OUT Trn_Prod_Category_Brand_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default___;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(values_ IN Copy_Values_Rec, trn_prod_category_brand## IN VARCHAR2 ) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Prod_Category_Brand_Key;
+   objid_  VARCHAR2(10) := NULL;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(etag_ IN VARCHAR2, brand_id_ IN VARCHAR2, category_id_ IN VARCHAR2, values_ IN Copy_Values_Rec, trn_prod_category_brand## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Prod_Category_Brand_Key;
+   objid_  VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   key_.brand_id := brand_id_;
+   key_.category_id := category_id_;
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Prod_Category_Brand_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, ret_.attr, '', 'COPY', 'D');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@UncheckedAccess
+PROCEDURE CRUD_Default_Copy___ (
+   objid_  IN     VARCHAR2,
+   key_    IN     Trn_Prod_Category_Brand_Key,
+   values_ IN     Copy_Values_Rec,
+   attr_      OUT VARCHAR2,
+   info_      OUT VARCHAR2 )
+IS
+   rec_            Trn_Prod_Category_Brand_Rec;
+   default_dec_    Entity_Small_Dec;
+BEGIN
+   IF objid_ IS NOT NULL THEN
+      rec_ := Get_Record_By_Objid___(objid_, trn_prod_category_brand## => '');
+   END IF;
+   Add_To_Rec_From_Attr___(values_.modified_source, rec_);
+   SELECT * INTO default_dec_ FROM TABLE(Product_Handling_SVC.CRUD_Default('', trn_prod_category_brand## => ''));
+   Client_SYS.Merge_Info(default_dec_.info);
+   Add_Keys_To_Rec_From_Attr___(default_dec_.attr, rec_);
+   attr_ := default_dec_.attr;
+   CRUD_Default_Copy___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+   info_ := Client_SYS.Get_All_Info();
+END CRUD_Default_Copy___;
+
+PROCEDURE CRUD_Default_Copy___ (
+   rec_  IN OUT Trn_Prod_Category_Brand_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default_Copy___;
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Create(attr_ IN VARCHAR2, action_ IN VARCHAR2, trn_prod_category_brand## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Prod_Category_Brand_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Create');
+   ret_.attr := attr_;
+   CRUD_Create___(ret_.etag, key_, ret_.attr, ret_.info, action_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Prod_Category_Brand_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action_, 'C');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('BRAND_ID', key_.brand_id, ret_.attr);
+   Client_SYS.Set_Item_Value('CATEGORY_ID', key_.category_id, ret_.attr);
+   return ret_;
+END CRUD_Create;
+
+
+PROCEDURE CRUD_Create___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Prod_Category_Brand_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Prod_Category_Brand_API.New__(info_, objid_, objversion_, attr_, action_);
+   IF (action_ = 'DO') THEN
+   etag_ := Get_Etag___(objid_, objversion_);
+   SELECT brand_id, category_id
+      INTO key_.brand_id, key_.category_id
+      FROM TRN_PROD_CATEGORY_BRAND
+      WHERE objid = objid_;
+   END IF;
+END CRUD_Create___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Update(etag_ IN VARCHAR2, brand_id_ IN VARCHAR2, category_id_ IN VARCHAR2, attr_ IN VARCHAR2, action$_ IN VARCHAR2, trn_prod_category_brand## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Prod_Category_Brand_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Update');
+   ret_.etag := etag_;
+   ret_.attr := attr_;
+   key_.brand_id := brand_id_;
+   key_.category_id := category_id_;
+   CRUD_Update___(ret_.etag, key_, ret_.attr, ret_.info, action$_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Prod_Category_Brand_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action$_, 'U');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('BRAND_ID', key_.brand_id, ret_.attr);
+   Client_SYS.Set_Item_Value('CATEGORY_ID', key_.category_id, ret_.attr);
+   return ret_;
+END CRUD_Update;
+
+
+PROCEDURE CRUD_Update___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Prod_Category_Brand_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Prod_Category_Brand_API.Modify__(info_, objid_, objversion_, attr_, action_);
+   etag_ := Get_Etag___(objid_, objversion_);
+END CRUD_Update___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Delete(etag_ IN VARCHAR2, brand_id_ IN VARCHAR2, category_id_ IN VARCHAR2, action$_ IN VARCHAR2, trn_prod_category_brand## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Prod_Category_Brand_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Delete');
+   ret_.etag := etag_;
+   key_.brand_id := brand_id_;
+   key_.category_id := category_id_;
+   CRUD_Delete___(ret_.etag, key_, ret_.info, action$_);
+   return ret_;
+END CRUD_Delete;
+
+
+PROCEDURE CRUD_Delete___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN     Trn_Prod_Category_Brand_Key,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Prod_Category_Brand_API.Remove__(info_, objid_, objversion_, action_);
+   etag_ := NULL;
+END CRUD_Delete___;
+
+
+-------------------- PRIVATE METHODS FOR TRN MODEL --------------------------
+
+PROCEDURE Add_To_Attr_From_Rec___ (
+   rec_  IN     Trn_Model_Rec,
+   attr_ IN OUT VARCHAR2 )
+IS
+BEGIN
+   IF (rec_.objgrants IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('OBJGRANTS', rec_.objgrants, attr_);
+   END IF;
+   IF (rec_.brand_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('BRAND_ID', rec_.brand_id, attr_);
+   END IF;
+   IF (rec_.category_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('CATEGORY_ID', rec_.category_id, attr_);
+   END IF;
+   IF (rec_.model_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('MODEL_ID', rec_.model_id, attr_);
+   END IF;
+   IF (rec_.description IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('DESCRIPTION', rec_.description, attr_);
+   END IF;
+END Add_To_Attr_From_Rec___;
+
+PROCEDURE Add_To_Rec_From_Attr___ (
+   attr_ IN     VARCHAR2,
+   rec_  IN OUT Trn_Model_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('OBJGRANTS', attr_)) THEN
+      rec_.objgrants := Client_SYS.Get_Item_Value('OBJGRANTS', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('BRAND_ID', attr_)) THEN
+      rec_.brand_id := Client_SYS.Get_Item_Value('BRAND_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('CATEGORY_ID', attr_)) THEN
+      rec_.category_id := Client_SYS.Get_Item_Value('CATEGORY_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('MODEL_ID', attr_)) THEN
+      rec_.model_id := Client_SYS.Get_Item_Value('MODEL_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('DESCRIPTION', attr_)) THEN
+      rec_.description := Client_SYS.Get_Item_Value('DESCRIPTION', attr_);
+   END IF;
+END Add_To_Rec_From_Attr___;
+
+@Final
+PROCEDURE Add_Keys_To_Rec_From_Attr___ (
+   attr_ IN  VARCHAR2,
+   rec_ IN OUT Trn_Model_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('BRAND_ID', attr_)) THEN
+      rec_.brand_id := Client_SYS.Get_Item_Value('BRAND_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('CATEGORY_ID', attr_)) THEN
+      rec_.category_id := Client_SYS.Get_Item_Value('CATEGORY_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('MODEL_ID', attr_)) THEN
+      rec_.model_id := Client_SYS.Get_Item_Value('MODEL_ID', attr_);
+   END IF;
+END Add_Keys_To_Rec_From_Attr___;
+
+@Final
+FUNCTION Add_To_Rec_From_Default_Copy_Rec___(
+   default_copy_rec_ IN     Trn_Model_Default_Copy_Rec) RETURN Trn_Model_Rec
+IS
+   rec_ Trn_Model_Rec;
+BEGIN
+   rec_.objgrants := default_copy_rec_.objgrants;
+   rec_.brand_id := default_copy_rec_.brand_id;
+   rec_.category_id := default_copy_rec_.category_id;
+   rec_.model_id := default_copy_rec_.model_id;
+   rec_.description := default_copy_rec_.description;
+   RETURN rec_;
+END Add_To_Rec_From_Default_Copy_Rec___;
+
+
+@Final
+FUNCTION Get_Record_By_Objid___ (
+   objid_ IN VARCHAR2,
+   trn_model## IN VARCHAR2 ) RETURN Trn_Model_Rec
+IS
+   default_copy_rec_ Trn_Model_Default_Copy_Rec;
+   rec_ Trn_Model_Rec;
+BEGIN
+   SELECT
+      NULL objgrants,
+      brand_id brand_id,
+      category_id category_id,
+      model_id model_id,
+      description description   INTO default_copy_rec_
+   FROM TRN_MODEL
+   WHERE
+    objid = objid_;
+
+   rec_ := Add_To_Rec_From_Default_Copy_Rec___(default_copy_rec_);
+   RETURN rec_;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Record_Not_Exist(lu_name_);
+END Get_Record_By_Objid___;
+
+PROCEDURE Get_Objid_Objversion___ (
+   objid_         OUT VARCHAR2,
+   objversion_    OUT VARCHAR2,
+   key_        IN     Trn_Model_Key )
+IS
+BEGIN
+   SELECT objid, objversion
+      INTO  objid_, objversion_
+      FROM  TRN_MODEL
+      WHERE brand_id = key_.brand_id
+      AND   category_id = key_.category_id
+      AND   model_id = key_.model_id;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Odp_Record_Not_Exist(Trn_Model_API.lu_name_);
+END Get_Objid_Objversion___;
+
+
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default(attr_ IN VARCHAR2 DEFAULT NULL, trn_model## IN VARCHAR2 ) RETURN Entity_Small_Drr PIPELINED
+IS
+   ret_ Entity_Small_Dec;
+   key_ Trn_Model_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default');
+   ret_.attr := attr_;
+   CRUD_Default___(key_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000) := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(4000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Model_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', 'PREPARE', 'P');
+         ret_.attr := ret_.attr || attr_cf_;
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   PIPE ROW (ret_);
+END CRUD_Default;
+
+
+PROCEDURE CRUD_Default___ (
+   key_  IN     Trn_Model_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2 )
+IS
+   rec_        Trn_Model_Rec;
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Model_API.New__(info_, objid_, objversion_, attr_, 'PREPARE');
+   Add_To_Rec_From_Attr___(attr_, rec_);
+   CRUD_Default___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+END CRUD_Default___;
+
+
+PROCEDURE CRUD_Default___ (
+   rec_  IN OUT Trn_Model_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default___;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(values_ IN Copy_Values_Rec, trn_model## IN VARCHAR2 ) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Model_Key;
+   objid_  VARCHAR2(10) := NULL;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(etag_ IN VARCHAR2, brand_id_ IN VARCHAR2, category_id_ IN VARCHAR2, model_id_ IN VARCHAR2, values_ IN Copy_Values_Rec, trn_model## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Model_Key;
+   objid_  VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   key_.brand_id := brand_id_;
+   key_.category_id := category_id_;
+   key_.model_id := model_id_;
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Model_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, ret_.attr, '', 'COPY', 'D');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@UncheckedAccess
+PROCEDURE CRUD_Default_Copy___ (
+   objid_  IN     VARCHAR2,
+   key_    IN     Trn_Model_Key,
+   values_ IN     Copy_Values_Rec,
+   attr_      OUT VARCHAR2,
+   info_      OUT VARCHAR2 )
+IS
+   rec_            Trn_Model_Rec;
+   default_dec_    Entity_Small_Dec;
+BEGIN
+   IF objid_ IS NOT NULL THEN
+      rec_ := Get_Record_By_Objid___(objid_, trn_model## => '');
+   END IF;
+   Add_To_Rec_From_Attr___(values_.modified_source, rec_);
+   SELECT * INTO default_dec_ FROM TABLE(Product_Handling_SVC.CRUD_Default('', trn_model## => ''));
+   Client_SYS.Merge_Info(default_dec_.info);
+   Add_Keys_To_Rec_From_Attr___(default_dec_.attr, rec_);
+   attr_ := default_dec_.attr;
+   CRUD_Default_Copy___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+   info_ := Client_SYS.Get_All_Info();
+END CRUD_Default_Copy___;
+
+PROCEDURE CRUD_Default_Copy___ (
+   rec_  IN OUT Trn_Model_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default_Copy___;
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Create(attr_ IN VARCHAR2, action_ IN VARCHAR2, trn_model## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Model_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Create');
+   ret_.attr := attr_;
+   CRUD_Create___(ret_.etag, key_, ret_.attr, ret_.info, action_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Model_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action_, 'C');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('BRAND_ID', key_.brand_id, ret_.attr);
+   Client_SYS.Set_Item_Value('CATEGORY_ID', key_.category_id, ret_.attr);
+   Client_SYS.Set_Item_Value('MODEL_ID', key_.model_id, ret_.attr);
+   return ret_;
+END CRUD_Create;
+
+
+PROCEDURE CRUD_Create___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Model_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Model_API.New__(info_, objid_, objversion_, attr_, action_);
+   IF (action_ = 'DO') THEN
+   etag_ := Get_Etag___(objid_, objversion_);
+   SELECT brand_id, category_id, model_id
+      INTO key_.brand_id, key_.category_id, key_.model_id
+      FROM TRN_MODEL
+      WHERE objid = objid_;
+   END IF;
+END CRUD_Create___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Update(etag_ IN VARCHAR2, brand_id_ IN VARCHAR2, category_id_ IN VARCHAR2, model_id_ IN VARCHAR2, attr_ IN VARCHAR2, action$_ IN VARCHAR2, trn_model## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Model_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Update');
+   ret_.etag := etag_;
+   ret_.attr := attr_;
+   key_.brand_id := brand_id_;
+   key_.category_id := category_id_;
+   key_.model_id := model_id_;
+   CRUD_Update___(ret_.etag, key_, ret_.attr, ret_.info, action$_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Model_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action$_, 'U');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('BRAND_ID', key_.brand_id, ret_.attr);
+   Client_SYS.Set_Item_Value('CATEGORY_ID', key_.category_id, ret_.attr);
+   Client_SYS.Set_Item_Value('MODEL_ID', key_.model_id, ret_.attr);
+   return ret_;
+END CRUD_Update;
+
+
+PROCEDURE CRUD_Update___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Model_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Model_API.Modify__(info_, objid_, objversion_, attr_, action_);
+   etag_ := Get_Etag___(objid_, objversion_);
+END CRUD_Update___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Delete(etag_ IN VARCHAR2, brand_id_ IN VARCHAR2, category_id_ IN VARCHAR2, model_id_ IN VARCHAR2, action$_ IN VARCHAR2, trn_model## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Model_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Delete');
+   ret_.etag := etag_;
+   key_.brand_id := brand_id_;
+   key_.category_id := category_id_;
+   key_.model_id := model_id_;
+   CRUD_Delete___(ret_.etag, key_, ret_.info, action$_);
+   return ret_;
+END CRUD_Delete;
+
+
+PROCEDURE CRUD_Delete___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN     Trn_Model_Key,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Model_API.Remove__(info_, objid_, objversion_, action_);
+   etag_ := NULL;
+END CRUD_Delete___;
+
+
+-------------------- PRIVATE METHODS FOR TRN INVENTORY PRODUCT --------------
+
+PROCEDURE Add_To_Attr_From_Rec___ (
+   rec_  IN     Trn_Inventory_Product_Rec,
+   attr_ IN OUT VARCHAR2 )
+IS
+BEGIN
+   IF (rec_.objgrants IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('OBJGRANTS', rec_.objgrants, attr_);
+   END IF;
+   IF (rec_.company_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('COMPANY_ID', rec_.company_id, attr_);
+   END IF;
+   IF (rec_.branch_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('BRANCH_ID', rec_.branch_id, attr_);
+   END IF;
+   IF (rec_.inventory_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('INVENTORY_ID', rec_.inventory_id, attr_);
+   END IF;
+   IF (rec_.product_id IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('PRODUCT_ID', rec_.product_id, attr_);
+   END IF;
+   IF (rec_.quantity IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('QUANTITY', rec_.quantity, attr_);
+   END IF;
+   IF (rec_.reorder_level IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('REORDER_LEVEL', rec_.reorder_level, attr_);
+   END IF;
+   IF (rec_.reserved_quantity IS NOT NULL) THEN
+      Client_SYS.Set_Item_Value('RESERVED_QUANTITY', rec_.reserved_quantity, attr_);
+   END IF;
+END Add_To_Attr_From_Rec___;
+
+PROCEDURE Add_To_Rec_From_Attr___ (
+   attr_ IN     VARCHAR2,
+   rec_  IN OUT Trn_Inventory_Product_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('OBJGRANTS', attr_)) THEN
+      rec_.objgrants := Client_SYS.Get_Item_Value('OBJGRANTS', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('COMPANY_ID', attr_)) THEN
+      rec_.company_id := Client_SYS.Get_Item_Value('COMPANY_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('BRANCH_ID', attr_)) THEN
+      rec_.branch_id := Client_SYS.Get_Item_Value('BRANCH_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('INVENTORY_ID', attr_)) THEN
+      rec_.inventory_id := Client_SYS.Get_Item_Value('INVENTORY_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('PRODUCT_ID', attr_)) THEN
+      rec_.product_id := Client_SYS.Get_Item_Value('PRODUCT_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('QUANTITY', attr_)) THEN
+      rec_.quantity := Client_SYS.Get_Item_Value('QUANTITY', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('REORDER_LEVEL', attr_)) THEN
+      rec_.reorder_level := Client_SYS.Get_Item_Value('REORDER_LEVEL', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('RESERVED_QUANTITY', attr_)) THEN
+      rec_.reserved_quantity := Client_SYS.Get_Item_Value('RESERVED_QUANTITY', attr_);
+   END IF;
+END Add_To_Rec_From_Attr___;
+
+@Final
+PROCEDURE Add_Keys_To_Rec_From_Attr___ (
+   attr_ IN  VARCHAR2,
+   rec_ IN OUT Trn_Inventory_Product_Rec )
+IS
+BEGIN
+   IF (Client_SYS.Item_Exist('COMPANY_ID', attr_)) THEN
+      rec_.company_id := Client_SYS.Get_Item_Value('COMPANY_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('BRANCH_ID', attr_)) THEN
+      rec_.branch_id := Client_SYS.Get_Item_Value('BRANCH_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('INVENTORY_ID', attr_)) THEN
+      rec_.inventory_id := Client_SYS.Get_Item_Value('INVENTORY_ID', attr_);
+   END IF;
+   IF (Client_SYS.Item_Exist('PRODUCT_ID', attr_)) THEN
+      rec_.product_id := Client_SYS.Get_Item_Value('PRODUCT_ID', attr_);
+   END IF;
+END Add_Keys_To_Rec_From_Attr___;
+
+@Final
+FUNCTION Add_To_Rec_From_Default_Copy_Rec___(
+   default_copy_rec_ IN     Trn_Inventory_Product_Default_Copy_Rec) RETURN Trn_Inventory_Product_Rec
+IS
+   rec_ Trn_Inventory_Product_Rec;
+BEGIN
+   rec_.objgrants := default_copy_rec_.objgrants;
+   rec_.company_id := default_copy_rec_.company_id;
+   rec_.branch_id := default_copy_rec_.branch_id;
+   rec_.inventory_id := default_copy_rec_.inventory_id;
+   rec_.product_id := default_copy_rec_.product_id;
+   rec_.quantity := default_copy_rec_.quantity;
+   rec_.reorder_level := default_copy_rec_.reorder_level;
+   rec_.reserved_quantity := default_copy_rec_.reserved_quantity;
+   RETURN rec_;
+END Add_To_Rec_From_Default_Copy_Rec___;
+
+
+@Final
+FUNCTION Get_Record_By_Objid___ (
+   objid_ IN VARCHAR2,
+   trn_inventory_product## IN VARCHAR2 ) RETURN Trn_Inventory_Product_Rec
+IS
+   default_copy_rec_ Trn_Inventory_Product_Default_Copy_Rec;
+   rec_ Trn_Inventory_Product_Rec;
+BEGIN
+   SELECT
+      NULL objgrants,
+      company_id company_id,
+      branch_id branch_id,
+      inventory_id inventory_id,
+      product_id product_id,
+      quantity quantity,
+      reorder_level reorder_level,
+      reserved_quantity reserved_quantity   INTO default_copy_rec_
+   FROM TRN_INVENTORY_PRODUCT
+   WHERE
+    objid = objid_;
+
+   rec_ := Add_To_Rec_From_Default_Copy_Rec___(default_copy_rec_);
+   RETURN rec_;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Record_Not_Exist(lu_name_);
+END Get_Record_By_Objid___;
+
+PROCEDURE Get_Objid_Objversion___ (
+   objid_         OUT VARCHAR2,
+   objversion_    OUT VARCHAR2,
+   key_        IN     Trn_Inventory_Product_Key )
+IS
+BEGIN
+   SELECT objid, objversion
+      INTO  objid_, objversion_
+      FROM  TRN_INVENTORY_PRODUCT
+      WHERE company_id = key_.company_id
+      AND   branch_id = key_.branch_id
+      AND   inventory_id = key_.inventory_id
+      AND   product_id = key_.product_id;
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      Error_SYS.Odp_Record_Not_Exist(Trn_Inventory_Product_API.lu_name_);
+END Get_Objid_Objversion___;
+
+
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default(attr_ IN VARCHAR2 DEFAULT NULL, trn_inventory_product## IN VARCHAR2 ) RETURN Entity_Small_Drr PIPELINED
+IS
+   ret_ Entity_Small_Dec;
+   key_ Trn_Inventory_Product_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default');
+   ret_.attr := attr_;
+   CRUD_Default___(key_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000) := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(4000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Inventory_Product_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', 'PREPARE', 'P');
+         ret_.attr := ret_.attr || attr_cf_;
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   PIPE ROW (ret_);
+END CRUD_Default;
+
+
+PROCEDURE CRUD_Default___ (
+   key_  IN     Trn_Inventory_Product_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2 )
+IS
+   rec_        Trn_Inventory_Product_Rec;
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Inventory_Product_API.New__(info_, objid_, objversion_, attr_, 'PREPARE');
+   Add_To_Rec_From_Attr___(attr_, rec_);
+   CRUD_Default___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+END CRUD_Default___;
+
+
+PROCEDURE CRUD_Default___ (
+   rec_  IN OUT Trn_Inventory_Product_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default___;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(values_ IN Copy_Values_Rec, trn_inventory_product## IN VARCHAR2 ) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Inventory_Product_Key;
+   objid_  VARCHAR2(10) := NULL;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@Final
+@UncheckedAccess
+FUNCTION CRUD_Default_Copy(etag_ IN VARCHAR2, company_id_ IN VARCHAR2, branch_id_ IN VARCHAR2, inventory_id_ IN NUMBER, product_id_ IN NUMBER, values_ IN Copy_Values_Rec, trn_inventory_product## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Inventory_Product_Key;
+   objid_  VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Default_Copy');
+   key_.company_id := company_id_;
+   key_.branch_id := branch_id_;
+   key_.inventory_id := inventory_id_;
+   key_.product_id := product_id_;
+   CRUD_Default_Copy___(objid_, key_, values_, ret_.attr, ret_.info);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000) := Client_SYS.Get_All_Info;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Inventory_Product_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, ret_.attr, '', 'COPY', 'D');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   RETURN ret_;
+END CRUD_Default_Copy;
+
+@UncheckedAccess
+PROCEDURE CRUD_Default_Copy___ (
+   objid_  IN     VARCHAR2,
+   key_    IN     Trn_Inventory_Product_Key,
+   values_ IN     Copy_Values_Rec,
+   attr_      OUT VARCHAR2,
+   info_      OUT VARCHAR2 )
+IS
+   rec_            Trn_Inventory_Product_Rec;
+   default_dec_    Entity_Small_Dec;
+BEGIN
+   IF objid_ IS NOT NULL THEN
+      rec_ := Get_Record_By_Objid___(objid_, trn_inventory_product## => '');
+   END IF;
+   Add_To_Rec_From_Attr___(values_.modified_source, rec_);
+   SELECT * INTO default_dec_ FROM TABLE(Product_Handling_SVC.CRUD_Default('', trn_inventory_product## => ''));
+   Client_SYS.Merge_Info(default_dec_.info);
+   Add_Keys_To_Rec_From_Attr___(default_dec_.attr, rec_);
+   attr_ := default_dec_.attr;
+   CRUD_Default_Copy___(rec_);
+   Add_To_Attr_From_Rec___(rec_, attr_);
+   info_ := Client_SYS.Get_All_Info();
+END CRUD_Default_Copy___;
+
+PROCEDURE CRUD_Default_Copy___ (
+   rec_  IN OUT Trn_Inventory_Product_Rec )
+IS
+BEGIN
+    NULL;
+END CRUD_Default_Copy___;
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Create(attr_ IN VARCHAR2, action_ IN VARCHAR2, trn_inventory_product## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Inventory_Product_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Create');
+   ret_.attr := attr_;
+   CRUD_Create___(ret_.etag, key_, ret_.attr, ret_.info, action_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Inventory_Product_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action_, 'C');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('COMPANY_ID', key_.company_id, ret_.attr);
+   Client_SYS.Set_Item_Value('BRANCH_ID', key_.branch_id, ret_.attr);
+   Client_SYS.Set_Item_Value('INVENTORY_ID', key_.inventory_id, ret_.attr);
+   Client_SYS.Set_Item_Value('PRODUCT_ID', key_.product_id, ret_.attr);
+   return ret_;
+END CRUD_Create;
+
+
+PROCEDURE CRUD_Create___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Inventory_Product_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_      VARCHAR2(2000);
+   objversion_ VARCHAR2(2000);
+BEGIN
+   Trn_Inventory_Product_API.New__(info_, objid_, objversion_, attr_, action_);
+   IF (action_ = 'DO') THEN
+   etag_ := Get_Etag___(objid_, objversion_);
+   SELECT company_id, branch_id, inventory_id, product_id
+      INTO key_.company_id, key_.branch_id, key_.inventory_id, key_.product_id
+      FROM TRN_INVENTORY_PRODUCT
+      WHERE objid = objid_;
+   END IF;
+END CRUD_Create___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Update(etag_ IN VARCHAR2, company_id_ IN VARCHAR2, branch_id_ IN VARCHAR2, inventory_id_ IN NUMBER, product_id_ IN NUMBER, attr_ IN VARCHAR2, action$_ IN VARCHAR2, trn_inventory_product## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Inventory_Product_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Update');
+   ret_.etag := etag_;
+   ret_.attr := attr_;
+   key_.company_id := company_id_;
+   key_.branch_id := branch_id_;
+   key_.inventory_id := inventory_id_;
+   key_.product_id := product_id_;
+   CRUD_Update___(ret_.etag, key_, ret_.attr, ret_.info, action$_);
+   IF Component_FNDCOB_SYS.INSTALLED THEN
+      DECLARE
+         save_info_ VARCHAR2(4000)  := Client_SYS.Get_All_Info;
+         objid_     VARCHAR2(4000)  := Get_Objid_From_Etag___(ret_.etag);
+         attr_cf_   VARCHAR2(32000) := attr_;
+      BEGIN
+         Custom_Object_Proxy_SYS.Cf_Crud(Trn_Inventory_Product_API.lu_name_, 'CUSTOM_FIELD', save_info_, objid_, attr_cf_, '', action$_, 'U');
+         Client_SYS.Merge_Info(save_info_);
+      END;
+   END IF;
+   Client_SYS.Set_Item_Value('COMPANY_ID', key_.company_id, ret_.attr);
+   Client_SYS.Set_Item_Value('BRANCH_ID', key_.branch_id, ret_.attr);
+   Client_SYS.Set_Item_Value('INVENTORY_ID', key_.inventory_id, ret_.attr);
+   Client_SYS.Set_Item_Value('PRODUCT_ID', key_.product_id, ret_.attr);
+   return ret_;
+END CRUD_Update;
+
+
+PROCEDURE CRUD_Update___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN OUT Trn_Inventory_Product_Key,
+   attr_ IN OUT VARCHAR2,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Inventory_Product_API.Modify__(info_, objid_, objversion_, attr_, action_);
+   etag_ := Get_Etag___(objid_, objversion_);
+END CRUD_Update___;
+
+
+
+
+@Final
+@ProjectionCheckedAccess
+FUNCTION CRUD_Delete(etag_ IN VARCHAR2, company_id_ IN VARCHAR2, branch_id_ IN VARCHAR2, inventory_id_ IN NUMBER, product_id_ IN NUMBER, action$_ IN VARCHAR2, trn_inventory_product## IN VARCHAR2) RETURN Entity_Dec
+IS
+   ret_ Entity_Dec;
+   key_ Trn_Inventory_Product_Key;
+BEGIN
+   Log_SYS.Init_Method('Product_Handling_SVC', 'CRUD_Delete');
+   ret_.etag := etag_;
+   key_.company_id := company_id_;
+   key_.branch_id := branch_id_;
+   key_.inventory_id := inventory_id_;
+   key_.product_id := product_id_;
+   CRUD_Delete___(ret_.etag, key_, ret_.info, action$_);
+   return ret_;
+END CRUD_Delete;
+
+
+PROCEDURE CRUD_Delete___ (
+   etag_ IN OUT VARCHAR2,
+   key_  IN     Trn_Inventory_Product_Key,
+   info_    OUT VARCHAR2,
+   action_ IN VARCHAR2 )
+IS
+   objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   objid_from_key_      VARCHAR2(2000);
+   objversion_from_key_ VARCHAR2(2000);
+BEGIN
+   IF (etag_ IS NULL) THEN
+      Error_SYS.System_General('ODATA_TO_PLSQL_PROTOCOL: ETag must have a value');
+   END IF;
+   Get_Objid_Objversion___(objid_from_key_, objversion_from_key_, key_);
+   IF (etag_ = '*' ) THEN
+      objid_ := objid_from_key_;
+      objversion_ := objversion_from_key_;
+   ELSIF (objid_from_key_ != objid_) THEN
+      Error_SYS.Record_General(lu_name_,'ETAG_INCORRECT: ETag is incorrect');
+   END IF;
+   Trn_Inventory_Product_API.Remove__(info_, objid_, objversion_, action_);
+   etag_ := NULL;
+END CRUD_Delete___;
+
+
+-------------------- PRIVATE METHODS FOR TRN INVENTORY ----------------------
+
+
+
+-------------------- PRIVATE METHODS FOR TRN BRANCH -------------------------
+
+
+
+
+
+-------------------- COMPLEX STRUCTURE METHODS ------------------------------------

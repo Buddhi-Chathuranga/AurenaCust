@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TranslatableResources type="WEB" module="TRNINV" version="1.1" layer="Cust" xmlns="types.scan.translation.fnd.ifsworld.com">
+   <TranslatableResource type="Global Data" ID="ManageProducts" name="ManageProducts">
+      <Resource subtype="Global Data" ID="ManageProducts.menu.TrnUnitNavEntry" control="menu.TrnUnitNavEntry">
+         <Resource subtype="Menu Item" ID="ManageProducts.menu.TrnUnitNavEntry.$this" control="$this">
+            <Text>Units</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.menu.TrnBrandNavEntry" control="menu.TrnBrandNavEntry">
+         <Resource subtype="Menu Item" ID="ManageProducts.menu.TrnBrandNavEntry.$this" control="$this">
+            <Text>Brands</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.menu.TrnProductCategoryNavEntry" control="menu.TrnProductCategoryNavEntry">
+         <Resource subtype="Menu Item" ID="ManageProducts.menu.TrnProductCategoryNavEntry.$this" control="$this">
+            <Text>Product Categories</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.menu.TrnProductCategoryBrandNavEntry" control="menu.TrnProductCategoryBrandNavEntry">
+         <Resource subtype="Menu Item" ID="ManageProducts.menu.TrnProductCategoryBrandNavEntry.$this" control="$this">
+            <Text>Brand Categories</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.menu.TrnModelNavEntry" control="menu.TrnModelNavEntry">
+         <Resource subtype="Menu Item" ID="ManageProducts.menu.TrnModelNavEntry.$this" control="$this">
+            <Text>Models</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.menu.TrnProductNavEntry" control="menu.TrnProductNavEntry">
+         <Resource subtype="Menu Item" ID="ManageProducts.menu.TrnProductNavEntry.$this" control="$this">
+            <Text>Products</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.menu.TrnInventoryProductNavEntry" control="menu.TrnInventoryProductNavEntry">
+         <Resource subtype="Menu Item" ID="ManageProducts.menu.TrnInventoryProductNavEntry.$this" control="$this">
+            <Text>Inventory Products</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.selector.ReferenceTrnInventorySelector" control="selector.ReferenceTrnInventorySelector">
+         <Resource subtype="Data Field" ID="ManageProducts.selector.ReferenceTrnInventorySelector.selectorcontent.static.InventoryId" control="InventoryId">
+            <Text>Inventory ID</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.selector.ReferenceTrnBranchSelector" control="selector.ReferenceTrnBranchSelector">
+         <Resource subtype="Data Field" ID="ManageProducts.selector.ReferenceTrnBranchSelector.selectorcontent.static.BranchId" control="BranchId">
+            <Text>Branch Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.selector.ReferenceTrnBranchSelector.selectorcontent.static.Name" control="Name">
+            <Text>Name</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.list.TrnInventoryLovList" control="list.TrnInventoryLovList">
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnInventoryLovList.listcontent.static.InventoryId" control="InventoryId">
+            <Text>Inventory ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.list.TrnBranchLovList" control="list.TrnBranchLovList">
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnBranchLovList.listcontent.static.CompanyId" control="CompanyId">
+            <Text>Company Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnBranchLovList.listcontent.static.BranchId" control="BranchId">
+            <Text>Branch Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnBranchLovList.listcontent.static.Name" control="Name">
+            <Text>Name</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.list.TrnUnitList" control="list.TrnUnitList">
+         <Resource subtype="Table Window" ID="ManageProducts.list.TrnUnitList.$this" control="$this">
+            <Text>Units</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnUnitList.listcontent.field.Unit" control="Unit">
+            <Text>Unit</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnUnitList.listcontent.field.Description" control="Description">
+            <Text>Description</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.list.TrnBrandList" control="list.TrnBrandList">
+         <Resource subtype="Table Window" ID="ManageProducts.list.TrnBrandList.$this" control="$this">
+            <Text>Brands</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnBrandList.listcontent.field.BrandId" control="BrandId">
+            <Text>Brand ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnBrandList.listcontent.field.Name" control="Name">
+            <Text>Name</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnBrandList.listcontent.field.Comments" control="Comments">
+            <Text>Comments</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.list.TrnModelList" control="list.TrnModelList">
+         <Resource subtype="Table Window" ID="ManageProducts.list.TrnModelList.$this" control="$this">
+            <Text>Models</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnModelList.listcontent.field.BrandId" control="BrandId">
+            <Text>Brand ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnModelList.listcontent.field.CategoryId" control="CategoryId">
+            <Text>Category ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnModelList.listcontent.field.ModelId" control="ModelId">
+            <Text>Model ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnModelList.listcontent.field.Description" control="Description">
+            <Text>Description</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.list.TrnProductCategoryList" control="list.TrnProductCategoryList">
+         <Resource subtype="Table Window" ID="ManageProducts.list.TrnProductCategoryList.$this" control="$this">
+            <Text>Product Categories</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductCategoryList.listcontent.field.CategoryId" control="CategoryId">
+            <Text>Category ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductCategoryList.listcontent.field.Name" control="Name">
+            <Text>Name</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductCategoryList.listcontent.field.Comments" control="Comments">
+            <Text>Comments</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.list.TrnProductCategoryBrandList" control="list.TrnProductCategoryBrandList">
+         <Resource subtype="Table Window" ID="ManageProducts.list.TrnProductCategoryBrandList.$this" control="$this">
+            <Text>Brand Categories</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductCategoryBrandList.listcontent.field.BrandId" control="BrandId">
+            <Text>Brand ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductCategoryBrandList.listcontent.field.Brand" control="Brand">
+            <Text>Brand</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductCategoryBrandList.listcontent.field.CategoryId" control="CategoryId">
+            <Text>Category ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductCategoryBrandList.listcontent.field.Category" control="Category">
+            <Text>Category</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.list.TrnProductList" control="list.TrnProductList">
+         <Resource subtype="Table Window" ID="ManageProducts.list.TrnProductList.$this" control="$this">
+            <Text>Products</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductList.listcontent.field.CompanyId" control="CompanyId">
+            <Text>Company ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductList.listcontent.field.BrandId" control="BrandId">
+            <Text>Brand ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductList.listcontent.field.CategoryId" control="CategoryId">
+            <Text>Category ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductList.listcontent.field.ModelId" control="ModelId">
+            <Text>Model ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductList.listcontent.field.ProductId" control="ProductId">
+            <Text>Product ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductList.listcontent.field.Price" control="Price">
+            <Text>Price</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductList.listcontent.field.Comments" control="Comments">
+            <Text>Comments</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnProductList.listcontent.field.Unit" control="Unit">
+            <Text>Unit</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.list.TrnInventoryProductList" control="list.TrnInventoryProductList">
+         <Resource subtype="Table Window" ID="ManageProducts.list.TrnInventoryProductList.$this" control="$this">
+            <Text>Product Inventories</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnInventoryProductList.listcontent.field.CompanyId" control="CompanyId">
+            <Text>Company ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnInventoryProductList.listcontent.field.BranchId" control="BranchId">
+            <Text>Branch ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnInventoryProductList.listcontent.field.InventoryId" control="InventoryId">
+            <Text>Inventory ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnInventoryProductList.listcontent.field.ProductId" control="ProductId">
+            <Text>Product ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnInventoryProductList.listcontent.field.Quantity" control="Quantity">
+            <Text>Quantity</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnInventoryProductList.listcontent.field.ReorderLevel" control="ReorderLevel">
+            <Text>Reorder Level</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnInventoryProductList.listcontent.field.ReservedQuantity" control="ReservedQuantity">
+            <Text>Reserved Quantity</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.list.TrnInventoryProductList.listcontent.badge.Quantity" control="Quantity">
+            <Text>Quantity</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.page.TrnUnit" control="page.TrnUnit">
+         <Resource subtype="Form Window" ID="ManageProducts.page.TrnUnit.$this" control="$this">
+            <Text>Trn Unit</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.page.TrnBrand" control="page.TrnBrand">
+         <Resource subtype="Form Window" ID="ManageProducts.page.TrnBrand.$this" control="$this">
+            <Text>Trn Brand</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.page.TrnModel" control="page.TrnModel">
+         <Resource subtype="Form Window" ID="ManageProducts.page.TrnModel.$this" control="$this">
+            <Text>Trn Model</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.page.TrnProductCategory" control="page.TrnProductCategory">
+         <Resource subtype="Form Window" ID="ManageProducts.page.TrnProductCategory.$this" control="$this">
+            <Text>Trn Product Category</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.page.TrnProductCategoryBrand" control="page.TrnProductCategoryBrand">
+         <Resource subtype="Form Window" ID="ManageProducts.page.TrnProductCategoryBrand.$this" control="$this">
+            <Text>Trn Product Category Brand</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.page.TrnProductsOverview" control="page.TrnProductsOverview">
+         <Resource subtype="Form Window" ID="ManageProducts.page.TrnProductsOverview.$this" control="$this">
+            <Text>Trn Products Overview</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.page.TrnInventoryProductsOverview" control="page.TrnInventoryProductsOverview">
+         <Resource subtype="Form Window" ID="ManageProducts.page.TrnInventoryProductsOverview.$this" control="$this">
+            <Text>Trn Inventory Products Overview</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.card.TrnInventoryProductCard" control="card.TrnInventoryProductCard">
+         <Resource subtype="Group Box" ID="ManageProducts.card.TrnInventoryProductCard.$this" control="$this">
+            <Text>Product Inventories</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.card.TrnInventoryProductCard.cardcontent.field.CompanyId" control="CompanyId">
+            <Text>Company ID</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.card.TrnInventoryProductCard.cardcontent.field.BranchId" control="BranchId">
+            <Text>Branch ID</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.card.TrnInventoryProductCard.cardcontent.field.InventoryId" control="InventoryId">
+            <Text>Inventory ID</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.card.TrnInventoryProductCard.cardcontent.field.ProductId" control="ProductId">
+            <Text>Product ID</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.card.TrnInventoryProductCard.cardcontent.field.Quantity" control="Quantity">
+            <Text>Quantity</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.card.TrnInventoryProductCard.cardcontent.field.ReorderLevel" control="ReorderLevel">
+            <Text>Reorder Level</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.card.TrnInventoryProductCard.cardcontent.field.ReservedQuantity" control="ReservedQuantity">
+            <Text>Reserved Quantity</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.group.MoveProductSourceGroup" control="group.MoveProductSourceGroup">
+         <Resource subtype="Group Box" ID="ManageProducts.group.MoveProductSourceGroup.$this" control="$this">
+            <Text>Source Branch Information</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.group.MoveProductSourceGroup.groupcontent.static.CompanyId" control="CompanyId">
+            <Text>Company ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.group.MoveProductSourceGroup.groupcontent.static.SourceBranchId" control="SourceBranchId">
+            <Text>Branch ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.group.MoveProductSourceGroup.groupcontent.static.SourceInventoryId" control="SourceInventoryId">
+            <Text>Inventory ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.group.MoveProductSourceGroup.groupcontent.static.ProductId" control="ProductId">
+            <Text>Product ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.group.MoveProductSourceGroup.groupcontent.static.SourceQuantity" control="SourceQuantity">
+            <Text>Quantity</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.group.MoveProductDestinationGroup" control="group.MoveProductDestinationGroup">
+         <Resource subtype="Group Box" ID="ManageProducts.group.MoveProductDestinationGroup.$this" control="$this">
+            <Text>Destination Branch Information</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.group.MoveProductDestinationGroup.groupcontent.field.TrnBranchtoInventoryRef" control="TrnBranchtoInventoryRef">
+            <Text>Branch ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.group.MoveProductDestinationGroup.groupcontent.field.TrnInventoryRef" control="TrnInventoryRef">
+            <Text>Inventory ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.group.MoveProductDestinationGroup.groupcontent.static.QuantityAlreadyAvailable" control="QuantityAlreadyAvailable">
+            <Text>Quantity currenty available</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageProducts.group.MoveProductDestinationGroup.groupcontent.field.QuantityToMove" control="QuantityToMove">
+            <Text>Quantity to move</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Message" ID="ManageProducts.group.MoveProductDestinationGroup.groupcontent.field.QuantityToMove.validatecommand.execute.executeaction.executeevaluateaction.executeaction.executeinfoaction.message" control="executeinfoaction">
+            <Text>Quantity to move cannot be larger than the quantity available at source</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.dialog.MoveProductDialog" control="dialog.MoveProductDialog">
+         <Resource subtype="Dialog Box" ID="ManageProducts.dialog.MoveProductDialog.$this" control="$this">
+            <Text>Move Inventory Products</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Command" ID="ManageProducts.dialog.MoveProductDialog.command.Ok" control="Ok">
+            <Text>Move Product</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.command.MoveProductCommand" control="command.MoveProductCommand">
+         <Resource subtype="Command" ID="ManageProducts.command.MoveProductCommand.$this" control="$this">
+            <Text>Move Product</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.command.TestNavigateCommand" control="command.TestNavigateCommand">
+         <Resource subtype="Command" ID="ManageProducts.command.TestNavigateCommand.$this" control="$this">
+            <Text>Navigate to Product</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.command.TestMessageCommand" control="command.TestMessageCommand">
+         <Resource subtype="Command" ID="ManageProducts.command.TestMessageCommand.$this" control="$this">
+            <Text>Message Command</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Message" ID="ManageProducts.command.TestMessageCommand.executeselected.executeaction.executesuccessaction.message" control="executesuccessaction">
+            <Text>Success Message</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Message" ID="ManageProducts.command.TestMessageCommand.executeselected.executeaction.executeerroraction.message" control="executeerroraction">
+            <Text>Error message</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Message" ID="ManageProducts.command.TestMessageCommand.executeselected.executeaction.executewarningaction.message" control="executewarningaction">
+            <Text>Warning Message</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Message" ID="ManageProducts.command.TestMessageCommand.executeselected.executeaction.executeinfoaction.message" control="executeinfoaction">
+            <Text>Info Message</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageProducts.command.Cancel" control="command.Cancel">
+         <Resource subtype="Command" ID="ManageProducts.command.Cancel.$this" control="$this">
+            <Text>Cancel</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+   </TranslatableResource>
+   </TranslatableResources>

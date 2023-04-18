@@ -1,0 +1,58 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnInventoryProdUtil
+--  Type:         Utility
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+PROMPT Creating Trn_Inventory_Prod_Util_API specification
+
+-- [IFS COMPLETE BLOCK PACKAGE Trn_Inventory_Prod_Util_API]
+CREATE OR REPLACE PACKAGE Trn_Inventory_Prod_Util_API IS
+
+module_                   CONSTANT VARCHAR2(6)      := 'TRNINV';
+lu_name_                  CONSTANT VARCHAR2(30)     := 'TrnInventoryProdUtil';
+lu_type_                  CONSTANT VARCHAR2(30)     := 'Utility';
+
+-----------------------------------------------------------------------------
+-------------------- PUBLIC DECLARATIONS ------------------------------------
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PUBLIC METHODS -----------------------------
+-----------------------------------------------------------------------------
+-- Move_Items
+-----------------------------------------------------------------------------
+
+PROCEDURE Move_Items (
+   company_id_               IN VARCHAR2,
+   source_branch_id_         IN VARCHAR2,
+   source_inventory_id_      IN NUMBER,
+   source_product_id_        IN NUMBER,
+   destination_branch_id_    IN VARCHAR2,
+   destination_inventory_id_ IN NUMBER,
+   quantity_                 IN NUMBER );
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+-- Init
+--   Framework method that initializes this package.
+-----------------------------------------------------------------------------
+
+--@PoReadOnly(Init)
+PROCEDURE Init;
+
+END Trn_Inventory_Prod_Util_API;
+-- [END IFS COMPLETE BLOCK]
+/
+SHOW ERROR
+
+

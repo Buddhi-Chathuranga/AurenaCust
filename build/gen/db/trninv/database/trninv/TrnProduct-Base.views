@@ -1,0 +1,79 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnProduct
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Company_Id IS
+   Flags      = 'PMI-L'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'Company ID'
+   Ref        = 'TrnCompany';
+COLUMN Product_Id IS
+   Flags      = 'KMI-L'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Product ID';
+COLUMN Description IS
+   Flags      = 'A-IUL'
+   Datatype   = 'STRING(1000)'
+   Prompt     = 'Description';
+COLUMN Price IS
+   Flags      = 'AMIUL'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Price';
+COLUMN Comments IS
+   Flags      = 'A-IU-'
+   Datatype   = 'STRING(2000)'
+   Prompt     = 'Comments';
+COLUMN Unit IS
+   Flags      = 'A-IUL'
+   Datatype   = 'STRING(10)'
+   Prompt     = 'Unit'
+   Ref        = 'TrnUnit';
+COLUMN Brand_Id IS
+   Flags      = 'A-IUL'
+   Datatype   = 'STRING(10)'
+   Prompt     = 'Brand ID';
+COLUMN Category_Id IS
+   Flags      = 'A-IUL'
+   Datatype   = 'STRING(10)'
+   Prompt     = 'Category ID';
+COLUMN Model_Id IS
+   Flags      = 'A-IUL'
+   Datatype   = 'STRING(100)'
+   Prompt     = 'Model ID'
+   Ref        = 'TrnModel(brand_id,category_id)';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Trn_Product IS
+   Prompt     = 'Trn Product'
+   Table      = 'TRN_PRODUCT_TAB'
+SELECT
+       company_id                     company_id,
+       product_id                     product_id,
+       description                    description,
+       price                          price,
+       comments                       comments,
+       unit                           unit,
+       brand_id                       brand_id,
+       category_id                    category_id,
+       model_id                       model_id,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   trn_product_tab;

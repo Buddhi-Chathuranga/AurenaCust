@@ -1,0 +1,33 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnUnit
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- TABLE DEFINITIONS --------------------------------------
+
+TABLE trn_unit_tab IS (
+   unit                           VARCHAR2(10)   NOT NULL,
+   description                    VARCHAR2(1000) NULL,
+   rowversion                     DATE           NOT NULL,
+   rowkey                         VARCHAR2(50)   DEFAULT sys_guid() NOT NULL);
+
+
+PRIMARY KEY trn_unit_pk IS trn_unit_tab (
+   unit);
+
+
+UNIQUE CONSTRAINT trn_unit_rk IS trn_unit_tab (
+   rowkey);
+
+-------------------- OTHER DEFINITIONS --------------------------------------
+

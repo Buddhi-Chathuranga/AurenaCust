@@ -1,0 +1,48 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: ProductHandling
+--  Component:    TRNINV
+--
+--  IFS Developer Studio Template Version 3.0
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+-----------------------------------------------------------------------------
+
+layer Cust;
+
+FUNCTION Get_Current_Quantity___ (
+   para_company_id_ IN VARCHAR2,
+   para_branch_id_ IN VARCHAR2,
+   para_inventory_id_ IN NUMBER,
+   para_product_id_ IN NUMBER) RETURN NUMBER
+IS
+--   quantity___ NUMBER;
+--BEGIN
+--   quantity___ := Trn_Inventory_Product_API.Get_Quantity(para_company_id_,para_branch_id_, para_inventory_id_, para_product_id_ );
+--	
+--   IF (quantity___ IS NULL) THEN
+--      RETURN 0;
+--      
+--   ELSE
+--      RETURN quantity___;
+--      
+--   END IF;   
+
+BEGIN
+   RETURN NVL (Trn_Inventory_Product_API.Get_Quantity(para_company_id_,para_branch_id_, para_inventory_id_, para_product_id_ ),0);
+END Get_Current_Quantity___;
+
+
+PROCEDURE Move_Product___ (
+   company_id_ IN VARCHAR2,
+   source_branch_id_ IN VARCHAR2,
+   source_inventory_id_ IN NUMBER,
+   product_id_ IN NUMBER,
+   dest_branch_id_ IN VARCHAR2,
+   dest_inventory_id_ IN NUMBER,
+   quantityto_move_ IN NUMBER)
+IS
+BEGIN
+	Trn_Inventory_Prod_Util_API.Move_Items(company_id_, source_branch_id_,source_inventory_id_,product_id_, dest_branch_id_, dest_inventory_id_, quantityto_move_);
+END Move_Product___;

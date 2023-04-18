@@ -1,0 +1,889 @@
+{
+    "name": "InventoryHandling",
+    "service": "InventoryHandling.svc",
+    "version": "361726802",
+    "contains": {
+        "Reference_TrnBranch": {
+            "name": "Reference_TrnBranch",
+            "entity": "TrnBranch",
+            "array": true,
+            "defaultfilter": false
+        },
+        "Reference_TrnArea": {
+            "name": "Reference_TrnArea",
+            "entity": "TrnArea",
+            "array": true,
+            "defaultfilter": false
+        },
+        "Reference_TrnCompany": {
+            "name": "Reference_TrnCompany",
+            "entity": "TrnCompany",
+            "array": true,
+            "defaultfilter": false
+        },
+        "Reference_TrnCountry": {
+            "name": "Reference_TrnCountry",
+            "entity": "TrnCountry",
+            "array": true,
+            "defaultfilter": false
+        },
+        "Reference_TrnInventoryCommMethod": {
+            "name": "Reference_TrnInventoryCommMethod",
+            "entity": "TrnInventoryCommMethod",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnInventorySet": {
+            "name": "TrnInventorySet",
+            "entity": "TrnInventory",
+            "array": true,
+            "defaultfilter": false
+        }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entityset_Metadata:{
+    "Projection": "InventoryHandling",
+    "Lu": [
+        "TrnInventoryCommMethod",
+        "TrnCountry",
+        "TrnBranch",
+        "TrnArea",
+        "TrnInventory",
+        "TrnCompany"
+    ]
+}]#]
+    },
+    "enumerations": {
+        "FndBoolean": {
+            "name": "FndBoolean",
+            "values": [
+                "False",
+                "True"
+            ],
+            "labels": [
+                {
+                    "value": "False",
+                    "label": "[#[translateEnum:Fnd_Boolean_API.Decode('FALSE'):False]#]"
+                },
+                {
+                    "value": "True",
+                    "label": "[#[translateEnum:Fnd_Boolean_API.Decode('TRUE'):True]#]"
+                }
+            ]
+        },
+        "TrnCommunicationType": {
+            "name": "TrnCommunicationType",
+            "values": [
+                "Postal",
+                "Email",
+                "Phone"
+            ],
+            "labels": [
+                {
+                    "value": "Postal",
+                    "label": "[#[translateEnum:Trn_Communication_Type_API.Decode('POSTAL'):Postal]#]"
+                },
+                {
+                    "value": "Email",
+                    "label": "[#[translateEnum:Trn_Communication_Type_API.Decode('EMAIL'):Email]#]"
+                },
+                {
+                    "value": "Phone",
+                    "label": "[#[translateEnum:Trn_Communication_Type_API.Decode('PHONE'):Phone]#]"
+                }
+            ]
+        }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Enumeration_Metadata:{
+    "Projection": "InventoryHandling",
+    "Lu": [
+        "TrnInventoryCommMethod",
+        "TrnCountry",
+        "TrnBranch",
+        "TrnArea",
+        "TrnInventory",
+        "TrnCompany"
+    ]
+}]#]
+    },
+    "entities": {
+        "TrnInventory": {
+            "name": "TrnInventory",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update",
+            "luname": "TrnInventory",
+            "ludependencies": [
+                "TrnInventory"
+            ],
+            "keys": [
+                "CompanyId",
+                "BranchId",
+                "InventoryId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CompanyId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "BranchId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "InventoryId": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Name": {
+                    "datatype": "Text",
+                    "size": 200,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "PickingLeadTime": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CountryName": {
+                    "datatype": "Text",
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "AreaName": {
+                    "datatype": "Text",
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "InventoryHandling",
+    "Lu": "TrnInventory",
+    "View": "TRN_INVENTORY"
+}]#]
+            },
+            "references": {
+                "TrnCompanyRef": {
+                    "target": "TrnCompany",
+                    "datasource": "InventoryHandling.svc/Reference_TrnCompany?$filter=CompanyId eq $[CompanyId]",
+                    "mapping": {
+                        "CompanyId": "CompanyId"
+                    }
+                },
+                "TrnBranchRef": {
+                    "target": "TrnBranch",
+                    "datasource": "InventoryHandling.svc/Reference_TrnBranch?$filter=CompanyId eq $[CompanyId] and BranchId eq $[BranchId]",
+                    "mapping": {
+                        "CompanyId": "CompanyId",
+                        "BranchId": "BranchId"
+                    }
+                }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnInventory"}]#]
+            },
+            "arrays": {
+                "TrnInventoryCommMethodArray": {
+                    "target": "TrnInventoryCommMethod",
+                    "datasource": null,
+                    "mapping": {
+                        "CompanyId": "CompanyId",
+                        "BranchId": "BranchId",
+                        "InventoryId": "InventoryId"
+                    }
+                }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnInventory","Lu":"TrnInventory"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnBranch": {
+            "name": "TrnBranch",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnBranch",
+            "ludependencies": [
+                "TrnBranch"
+            ],
+            "keys": [
+                "CompanyId",
+                "BranchId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CompanyId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "BranchId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Name": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "TimeOffset": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CountryId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "AreaId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "InventoryHandling",
+    "Lu": "TrnBranch",
+    "View": "TRN_BRANCH"
+}]#]
+            },
+            "references": {
+                "TrnAreaRef": {
+                    "target": "TrnArea",
+                    "datasource": "InventoryHandling.svc/Reference_TrnArea?$filter=AreaId eq $[AreaId] and CountryId eq $[CountryId]",
+                    "mapping": {
+                        "AreaId": "AreaId",
+                        "CountryId": "CountryId"
+                    }
+                },
+                "TrnCompanyRef": {
+                    "target": "TrnCompany",
+                    "datasource": "InventoryHandling.svc/Reference_TrnCompany?$filter=CompanyId eq $[CompanyId]",
+                    "mapping": {
+                        "CompanyId": "CompanyId"
+                    }
+                },
+                "TrnCountryRef": {
+                    "target": "TrnCountry",
+                    "datasource": "InventoryHandling.svc/Reference_TrnCountry?$filter=CountryId eq $[CountryId]",
+                    "mapping": {
+                        "CountryId": "CountryId"
+                    }
+                }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnBranch"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnBranch","Lu":"TrnBranch"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnArea": {
+            "name": "TrnArea",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Read",
+            "luname": "TrnArea",
+            "ludependencies": [
+                "TrnArea"
+            ],
+            "keys": [
+                "CountryId",
+                "AreaId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CountryId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "AreaId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Area": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "InventoryHandling",
+    "Lu": "TrnArea",
+    "View": "TRN_AREA"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnArea"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnArea","Lu":"TrnArea"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            }
+        },
+        "TrnCompany": {
+            "name": "TrnCompany",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Read",
+            "luname": "TrnCompany",
+            "ludependencies": [
+                "TrnCompany"
+            ],
+            "keys": [
+                "CompanyId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CompanyId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Name": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Comments": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CreationDate": {
+                    "datatype": "Date",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "InventoryHandling",
+    "Lu": "TrnCompany",
+    "View": "TRN_COMPANY"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnCompany"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnCompany","Lu":"TrnCompany"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            }
+        },
+        "TrnCountry": {
+            "name": "TrnCountry",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Read",
+            "luname": "TrnCountry",
+            "ludependencies": [
+                "TrnCountry"
+            ],
+            "keys": [
+                "CountryId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CountryId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Country": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "InventoryHandling",
+    "Lu": "TrnCountry",
+    "View": "TRN_COUNTRY"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnCountry"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnCountry","Lu":"TrnCountry"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            }
+        },
+        "TrnInventoryCommMethod": {
+            "name": "TrnInventoryCommMethod",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnInventoryCommMethod",
+            "ludependencies": [
+                "TrnInventoryCommMethod"
+            ],
+            "keys": [
+                "CompanyId",
+                "BranchId",
+                "InventoryId",
+                "InventoryCommId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CompanyId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "BranchId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "InventoryId": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "InventoryCommId": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Address": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CommunicationType": {
+                    "datatype": "Enumeration",
+                    "size": 20,
+                    "subtype": "TrnCommunicationType",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "DefaultAddress": {
+                    "datatype": "Boolean",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "InventoryHandling",
+    "Lu": "TrnInventoryCommMethod",
+    "View": "TRN_INVENTORY_COMM_METHOD"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnInventoryCommMethod"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnInventoryCommMethod","Lu":"TrnInventoryCommMethod"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Type_Metadata:{
+    "Projection": "InventoryHandling",
+    "Lu": [
+        "TrnInventoryCommMethod",
+        "TrnCountry",
+        "TrnBranch",
+        "TrnArea",
+        "TrnInventory",
+        "TrnCompany"
+    ]
+}]#]
+    },
+    "structures": {
+        "TrnInventoryCopyValues": {
+            "name": "TrnInventoryCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnInventory",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "TrnBranchCopyValues": {
+            "name": "TrnBranchCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnBranch",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "TrnInventoryCommMethodCopyValues": {
+            "name": "TrnInventoryCommMethodCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnInventoryCommMethod",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        }
+    },
+    "actions": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Action_Metadata:{
+    "Projection": "InventoryHandling"
+}]#]
+    },
+    "functions": {
+        "GetFullName": {
+            "name": "GetFullName",
+            "ludependencies": [
+            ],
+            "parameters": [
+                {
+                    "Name": "FirstName",
+                    "DataType": "Text",
+                    "Collection": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "LastName",
+                    "DataType": "Text",
+                    "Collection": false,
+                    "Nullable": true
+                }
+            ]
+        }
+    },
+    "attachmentservices": {[#[callback:Object_Connection_Metadata_SYS.Enum_Entity_Services_:TrnArea,TrnBranch,TrnCompany,TrnCountry,TrnInventory,TrnInventoryCommMethod]#]
+}
+}

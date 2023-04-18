@@ -1,0 +1,188 @@
+client    InventoryHandling;
+component TRNINV;
+layer     Base;
+
+-------------------- TRN INVENTORY ------------------------------------------
+
+
+selector TrnInventorySelector for TrnInventory {
+   label = "${InventoryId}";
+   static CompanyId;
+   static BranchId;
+   static InventoryId;
+}
+
+-------------------- TRN BRANCH ---------------------------------------------
+
+
+selector TrnBranchSelector for TrnBranch {
+   label = "${BranchId}";
+   static CompanyId;
+   static BranchId;
+}
+
+list TrnBranchLovList for TrnBranch {
+   label = "";
+   static CompanyId;
+   static BranchId;
+   static Name;
+}
+-------------------- TRN AREA -----------------------------------------------
+
+
+selector TrnAreaSelector for TrnArea {
+   label = "${AreaId}";
+   static CountryId;
+   static AreaId;
+}
+
+list TrnAreaLovList for TrnArea {
+   label = "";
+   static CountryId;
+   static AreaId;
+   static Area;
+}
+-------------------- TRN COMPANY --------------------------------------------
+
+
+selector TrnCompanySelector for TrnCompany {
+   label = "${CompanyId}";
+   static CompanyId;
+}
+
+list TrnCompanyLovList for TrnCompany {
+   label = "";
+   static CompanyId;
+   static Name;
+   static Comments;
+   static CreationDate;
+}
+-------------------- TRN COUNTRY --------------------------------------------
+
+
+selector TrnCountrySelector for TrnCountry {
+   label = "${CountryId}";
+   static CountryId;
+}
+
+list TrnCountryLovList for TrnCountry {
+   label = "";
+   static CountryId;
+   static Country;
+}
+-------------------- TRN INVENTORY COMM METHOD ------------------------------
+
+
+selector TrnInventoryCommMethodSelector for TrnInventoryCommMethod {
+   label = "${InventoryCommId}";
+   static CompanyId;
+   static BranchId;
+   static InventoryId;
+   static InventoryCommId;
+}
+
+list TrnInventoryCommMethodLovList for TrnInventoryCommMethod {
+   label = "";
+   static CompanyId;
+   static BranchId;
+   static InventoryId;
+   static InventoryCommId;
+   static Address;
+   static CommunicationType;
+   static DefaultAddress;
+}
+
+-------------------- LOOKUP SUPPORT -----------------------------------------
+
+-------------------- REFERENCE SUPPORT --------------------------------------
+
+selector ReferenceTrnCompanySelector for TrnCompany {
+   label = "";
+   static CompanyId;
+   static Name;
+   static Comments;
+   static CreationDate;
+}
+
+selector ReferenceTrnBranchSelector for TrnBranch {
+   label = "";
+   static BranchId;
+   static Name;
+}
+
+selector ReferenceTrnAreaSelector for TrnArea {
+   label = "";
+   static AreaId;
+   static Area;
+}
+
+selector ReferenceTrnCountrySelector for TrnCountry {
+   label = "";
+   static CountryId;
+   static Country;
+}
+
+-------------------- STANDARD COMMANDS --------------------------------------
+
+@Final
+command Ok {
+   label = "OK";
+   enabled = [true];
+   execute {
+      exit OK;
+   }
+}
+
+@Final
+command Cancel {
+   label = "Cancel";
+   enabled = [true];
+   execute {
+      exit CANCEL;
+   }
+}
+
+@Final
+command Yes {
+   label = "Yes";
+   enabled = [true];
+   execute {
+      exit YES;
+   }
+}
+
+@Final
+command No {
+   label = "No";
+   enabled = [true];
+   execute {
+      exit NO;
+   }
+}
+
+@Final
+command Abort {
+   label = "Abort";
+   enabled = [true];
+   execute {
+      exit ABORT;
+   }
+}
+
+@Final
+command Ignore {
+   label = "Ignore";
+   enabled = [true];
+   execute {
+      exit IGNORE;
+   }
+}
+
+@Final
+command Retry {
+   label = "Retry";
+   enabled = [true];
+   execute {
+      exit RETRY;
+   }
+}

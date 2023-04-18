@@ -1,0 +1,68 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnInventoryCommMethod
+--  Type:         Entity
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- BASE VIEW DEFINITION -----------------------------------
+-----------------------------------------------------------------------------
+
+PROMPT Creating TRN_INVENTORY_COMM_METHOD view
+
+-- [IFS COMPLETE BLOCK VIEW TRN_INVENTORY_COMM_METHOD]
+CREATE OR REPLACE VIEW TRN_INVENTORY_COMM_METHOD AS
+SELECT
+       company_id                     company_id,
+       branch_id                      branch_id,
+       inventory_id                   inventory_id,
+       inventory_comm_id              inventory_comm_id,
+       address                        address,
+       Trn_Communication_Type_API.Decode(communication_type) communication_type,
+       communication_type             communication_type_db,
+       Fnd_Boolean_API.Decode(default_address) default_address,
+       default_address                default_address_db,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   trn_inventory_comm_method_tab
+WITH   READ ONLY;
+-- [END IFS COMPLETE BLOCK]
+
+COMMENT ON TABLE TRN_INVENTORY_COMM_METHOD
+   IS 'LU=TrnInventoryCommMethod^PROMPT=Trn Inventory Comm Method^MODULE=TRNINV^TABLE=TRN_INVENTORY_COMM_METHOD_TAB^';
+
+-- [IFS COMPLETE BLOCK DECLAREEND]
+DECLARE
+   PROCEDURE Alter_Column_Comment (
+      view_name_   IN VARCHAR2,
+      column_name_ IN VARCHAR2,
+      comment_     IN VARCHAR2)
+   IS
+      stmt_ VARCHAR2(32767) := 'COMMENT ON COLUMN ' || view_name_ || '.' || column_name_ || ' IS ''' || REPLACE(comment_, '''', '''''') || '''';
+   BEGIN
+      EXECUTE IMMEDIATE stmt_;
+   END Alter_Column_Comment;
+BEGIN
+   Alter_Column_Comment('TRN_INVENTORY_COMM_METHOD', 'company_id', 'FLAGS=PMI-L^DATATYPE=STRING(20)^PROMPT=Company Id^');
+   Alter_Column_Comment('TRN_INVENTORY_COMM_METHOD', 'branch_id', 'FLAGS=PMI-L^DATATYPE=STRING(20)^PROMPT=Branch Id^');
+   Alter_Column_Comment('TRN_INVENTORY_COMM_METHOD', 'inventory_id', 'FLAGS=PMI-L^DATATYPE=NUMBER^PROMPT=Inventory Id^REF=TrnInventory(company_id,branch_id)^');
+   Alter_Column_Comment('TRN_INVENTORY_COMM_METHOD', 'inventory_comm_id', 'FLAGS=K-I-L^DATATYPE=NUMBER^PROMPT=Inventory Comm Id^');
+   Alter_Column_Comment('TRN_INVENTORY_COMM_METHOD', 'address', 'FLAGS=AMIUL^DATATYPE=STRING(1000)^PROMPT=Address^');
+   Alter_Column_Comment('TRN_INVENTORY_COMM_METHOD', 'communication_type', 'FLAGS=AMIUL^DATATYPE=STRING(200)^ENUMERATION=TrnCommunicationType^PROMPT=Communication Type^');
+   Alter_Column_Comment('TRN_INVENTORY_COMM_METHOD', 'communication_type_db', 'FLAGS=A----^DATATYPE=STRING(20)^PROMPT=Communication Type^');
+   Alter_Column_Comment('TRN_INVENTORY_COMM_METHOD', 'default_address', 'FLAGS=AMIUL^DATATYPE=STRING(200)^ENUMERATION=FndBoolean^PROMPT=Default Address^');
+   Alter_Column_Comment('TRN_INVENTORY_COMM_METHOD', 'default_address_db', 'FLAGS=A----^DATATYPE=STRING(20)^PROMPT=Default Address^');
+   EXECUTE IMMEDIATE 'GRANT SELECT ON TRN_INVENTORY_COMM_METHOD TO IFSSYS';
+END;
+-- [END IFS COMPLETE BLOCK]
+/
+

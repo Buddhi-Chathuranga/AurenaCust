@@ -1,0 +1,7 @@
+projection TrninvNavigatorRoot;
+component  TRNINV;
+layer      Base;
+description "";
+
+
+

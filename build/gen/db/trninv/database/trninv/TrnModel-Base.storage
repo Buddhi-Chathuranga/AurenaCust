@@ -1,0 +1,37 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnModel
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- TABLE DEFINITIONS --------------------------------------
+
+TABLE trn_model_tab IS (
+   brand_id                       VARCHAR2(10)   NOT NULL,
+   category_id                    VARCHAR2(10)   NOT NULL,
+   model_id                       VARCHAR2(100)  NOT NULL,
+   description                    VARCHAR2(2000) NOT NULL,
+   rowversion                     DATE           NOT NULL,
+   rowkey                         VARCHAR2(50)   DEFAULT sys_guid() NOT NULL);
+
+
+PRIMARY KEY trn_model_pk IS trn_model_tab (
+   brand_id,
+   category_id,
+   model_id);
+
+
+UNIQUE CONSTRAINT trn_model_rk IS trn_model_tab (
+   rowkey);
+
+-------------------- OTHER DEFINITIONS --------------------------------------
+

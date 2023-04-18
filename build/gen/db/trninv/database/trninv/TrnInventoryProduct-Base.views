@@ -1,0 +1,68 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnInventoryProduct
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Company_Id IS
+   Flags      = 'PMI--'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'Company ID';
+COLUMN Branch_Id IS
+   Flags      = 'PMI--'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'Branch ID';
+COLUMN Inventory_Id IS
+   Flags      = 'PMI--'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Inventory ID'
+   Ref        = 'TrnInventory(company_id,branch_id)';
+COLUMN Product_Id IS
+   Flags      = 'PMI--'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Product ID'
+   Ref        = 'TrnProduct(company_id)';
+COLUMN Quantity IS
+   Flags      = 'AMIUL'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Quantity';
+COLUMN Reorder_Level IS
+   Flags      = 'AMIU-'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Reorder Level';
+COLUMN Reserved_Quantity IS
+   Flags      = 'AMIU-'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Reserved Quantity';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Trn_Inventory_Product IS
+   Prompt     = 'Trn Inventory Product'
+   Table      = 'TRN_INVENTORY_PRODUCT_TAB'
+SELECT
+       company_id                     company_id,
+       branch_id                      branch_id,
+       inventory_id                   inventory_id,
+       product_id                     product_id,
+       quantity                       quantity,
+       reorder_level                  reorder_level,
+       reserved_quantity              reserved_quantity,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   trn_inventory_product_tab;

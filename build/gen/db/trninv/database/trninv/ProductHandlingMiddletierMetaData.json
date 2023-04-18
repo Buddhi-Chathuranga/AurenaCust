@@ -1,0 +1,3903 @@
+{
+    "projection": {
+        "Name": "ProductHandling",
+        "Metadata": {
+            "Version": "[#[generate:version]#]",
+            "Description": "Used to handle all Product related activities",
+            "Category": [
+                "Users"
+            ]
+        },
+        "Container": {
+            "EntitySets": [
+                {
+                    "Name": "Reference_TrnInventory",
+                    "EntityType": "TrnInventory"
+                },
+                {
+                    "Name": "Reference_TrnBranch",
+                    "EntityType": "TrnBranch"
+                },
+                {
+                    "Name": "TrnUnitSet",
+                    "EntityType": "TrnUnit"
+                },
+                {
+                    "Name": "TrnProductSet",
+                    "EntityType": "TrnProduct"
+                },
+                {
+                    "Name": "TrnBrandSet",
+                    "EntityType": "TrnBrand"
+                },
+                {
+                    "Name": "TrnProductCategorySet",
+                    "EntityType": "TrnProdCategory"
+                },
+                {
+                    "Name": "TrnProductCategoryBrandSet",
+                    "EntityType": "TrnProdCategoryBrand"
+                },
+                {
+                    "Name": "TrnModelSet",
+                    "EntityType": "TrnModel"
+                },
+                {
+                    "Name": "TrnInventoryProductSet",
+                    "EntityType": "TrnInventoryProduct"
+                }[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entityset_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": [
+        "TrnBrand",
+        "TrnProdCategoryBrand",
+        "TrnProduct",
+        "TrnModel",
+        "TrnInventoryProduct",
+        "TrnBranch",
+        "TrnUnit",
+        "TrnProdCategory",
+        "TrnInventory"
+    ]
+}]#]
+            ],
+            "Singletons": [
+            ],
+            "Actions": [
+                {
+                    "Name": "MoveProduct",
+                    "Parameters": [
+                        {
+                            "Name": "CompanyId",
+                            "DataType": "Text",
+                            "Collection": false,
+                            "Nullable": true
+                        },
+                        {
+                            "Name": "SourceBranchId",
+                            "DataType": "Text",
+                            "Collection": false,
+                            "Nullable": true
+                        },
+                        {
+                            "Name": "SourceInventoryId",
+                            "DataType": "Number",
+                            "Collection": false,
+                            "Nullable": true
+                        },
+                        {
+                            "Name": "ProductId",
+                            "DataType": "Number",
+                            "Collection": false,
+                            "Nullable": true
+                        },
+                        {
+                            "Name": "DestBranchId",
+                            "DataType": "Text",
+                            "Collection": false,
+                            "Nullable": true
+                        },
+                        {
+                            "Name": "DestInventoryId",
+                            "DataType": "Number",
+                            "Collection": false,
+                            "Nullable": true
+                        },
+                        {
+                            "Name": "QuantitytoMove",
+                            "DataType": "Number",
+                            "Collection": false,
+                            "Nullable": true
+                        }
+                    ],
+                    "Execute": {
+                        "PL-SQL": {
+                            "MethodCall": "Product_Handling_SVC.Do_Move_Product(:CompanyId, :SourceBranchId, :SourceInventoryId, :ProductId, :DestBranchId, :DestInventoryId, :QuantitytoMove, unbound## => '')",
+                            "ReturnType": "Product_Handling_SVC.Empty_Arr",
+                            "Bind": [
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "CompanyId",
+                                    "ImplementationType": "VARCHAR2"
+                                },
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "SourceBranchId",
+                                    "ImplementationType": "VARCHAR2"
+                                },
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "SourceInventoryId",
+                                    "ImplementationType": "NUMBER"
+                                },
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "ProductId",
+                                    "ImplementationType": "NUMBER"
+                                },
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "DestBranchId",
+                                    "ImplementationType": "VARCHAR2"
+                                },
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "DestInventoryId",
+                                    "ImplementationType": "NUMBER"
+                                },
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "QuantitytoMove",
+                                    "ImplementationType": "NUMBER"
+                                }
+                            ]
+                        }
+                    }
+                }[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Action_Metadata:{"Projection":"ProductHandling"}]#]
+            ],
+            "Functions": [
+                {
+                    "Name": "GetCurrentQuantity",
+                    "DataType": "Number",
+                    "Collection": false,
+                    "Parameters": [
+                        {
+                            "Name": "ParaCompanyId",
+                            "DataType": "Text",
+                            "Collection": false,
+                            "Nullable": true
+                        },
+                        {
+                            "Name": "ParaBranchId",
+                            "DataType": "Text",
+                            "Collection": false,
+                            "Nullable": true
+                        },
+                        {
+                            "Name": "ParaInventoryId",
+                            "DataType": "Number",
+                            "Collection": false,
+                            "Nullable": true
+                        },
+                        {
+                            "Name": "ParaProductId",
+                            "DataType": "Number",
+                            "Collection": false,
+                            "Nullable": true
+                        }
+                    ],
+                    "Execute": {
+                        "SQL": {
+                            "From": "TABLE(Product_Handling_SVC.Rd_Get_Current_Quantity(:ParaCompanyId, :ParaBranchId, :ParaInventoryId, :ParaProductId, unbound## => ''))",
+                            "Bind": [
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "ParaCompanyId",
+                                    "ImplementationType": "VARCHAR2"
+                                },
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "ParaBranchId",
+                                    "ImplementationType": "VARCHAR2"
+                                },
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "ParaInventoryId",
+                                    "ImplementationType": "NUMBER"
+                                },
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "ParaProductId",
+                                    "ImplementationType": "NUMBER"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "Enumerations": [[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Enumeration_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": [
+        "TrnBrand",
+        "TrnProdCategoryBrand",
+        "TrnProduct",
+        "TrnModel",
+        "TrnInventoryProduct",
+        "TrnBranch",
+        "TrnUnit",
+        "TrnProdCategory",
+        "TrnInventory"
+    ]
+}]#]
+        ],
+        "Structures": [
+            {
+                "Name": "TrnUnitCopyValues",
+                "PLSQLRecordName": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC",
+                "Attributes": [
+                    {
+                        "Name": "ModifiedSource",
+                        "DataType": "Entity",
+                        "SubType": "TrnUnit",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "MODIFIED_SOURCE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnProductCopyValues",
+                "PLSQLRecordName": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC",
+                "Attributes": [
+                    {
+                        "Name": "ModifiedSource",
+                        "DataType": "Entity",
+                        "SubType": "TrnProduct",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "MODIFIED_SOURCE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnBrandCopyValues",
+                "PLSQLRecordName": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC",
+                "Attributes": [
+                    {
+                        "Name": "ModifiedSource",
+                        "DataType": "Entity",
+                        "SubType": "TrnBrand",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "MODIFIED_SOURCE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnProdCategoryCopyValues",
+                "PLSQLRecordName": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC",
+                "Attributes": [
+                    {
+                        "Name": "ModifiedSource",
+                        "DataType": "Entity",
+                        "SubType": "TrnProdCategory",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "MODIFIED_SOURCE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnProdCategoryBrandCopyValues",
+                "PLSQLRecordName": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC",
+                "Attributes": [
+                    {
+                        "Name": "ModifiedSource",
+                        "DataType": "Entity",
+                        "SubType": "TrnProdCategoryBrand",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "MODIFIED_SOURCE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnModelCopyValues",
+                "PLSQLRecordName": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC",
+                "Attributes": [
+                    {
+                        "Name": "ModifiedSource",
+                        "DataType": "Entity",
+                        "SubType": "TrnModel",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "MODIFIED_SOURCE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnInventoryProductCopyValues",
+                "PLSQLRecordName": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC",
+                "Attributes": [
+                    {
+                        "Name": "ModifiedSource",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventoryProduct",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "MODIFIED_SOURCE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "MoveProductDataStructure",
+                "PLSQLRecordName": "PRODUCT_HANDLING_SVC.MOVE_PRODUCT_DATA_STRUCTURE_REC",
+                "Attributes": [
+                    {
+                        "Name": "CompanyId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "COMPANY_ID",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "ProductId",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "PRODUCT_ID",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "NUMBER"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "SourceBranchId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "SOURCE_BRANCH_ID",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "SourceInventoryId",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "SOURCE_INVENTORY_ID",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "NUMBER"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "SourceQuantity",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "SOURCE_QUANTITY",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "NUMBER"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DestBranchId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Nullable": false,
+                        "AttrName": "DEST_BRANCH_ID",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DestInventoryId",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "AttrName": "DEST_INVENTORY_ID",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "NUMBER"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "QuantityAlreadyAvailable",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "QUANTITY_ALREADY_AVAILABLE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "NUMBER"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "QuantityToMove",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "AttrName": "QUANTITY_TO_MOVE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "NUMBER"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "StreamInfoRec",
+                "PLSQLRecordName": "PRODUCT_HANDLING_SVC.STREAM_INFO_REC",
+                "Attributes": [
+                    {
+                        "Name": "FileName",
+                        "DataType": "Text"
+                    },
+                    {
+                        "Name": "MimeType",
+                        "DataType": "Text"
+                    }
+                ]
+            },
+            {
+                "Name": "EntityDec",
+                "PLSQLRecordName": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "Text"
+                    },
+                    {
+                        "Name": "Info",
+                        "DataType": "Text"
+                    },
+                    {
+                        "Name": "Attr",
+                        "DataType": "Text"
+                    }
+                ]
+            }[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Structure_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": [
+        "TrnBrand",
+        "TrnProdCategoryBrand",
+        "TrnProduct",
+        "TrnModel",
+        "TrnInventoryProduct",
+        "TrnBranch",
+        "TrnUnit",
+        "TrnProdCategory",
+        "TrnInventory"
+    ]
+}]#]
+        ],
+        "Entities": [
+            {
+                "Name": "TrnUnit",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"ProductHandling","Lu":"TrnUnit","View":"TRN_UNIT"}]#]"
+                    }
+                },
+                "Keys": [
+                    "Unit"
+                ],
+                "KeysWhere": "(unit = :Unit)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnUnit'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'UNIT='||unit||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Unit",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "UNIT",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "unit",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "unit"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Description",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 1000,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "DESCRIPTION",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "description",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "description"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"ProductHandling","Lu":"TrnUnit","Type":"Entity","Name":"TrnUnit","View":"TRN_UNIT"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnUnit'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'UNIT='||unit||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"ProductHandling","Entity":"TrnUnit","Lu":"TrnUnit","View":"TRN_UNIT"}]#]
+                ],
+                "CRUD": [
+                    {
+                        "Name": "Default",
+                        "DataType": "Entity",
+                        "SubType": "TrnUnit",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "SQL": {
+                                "From": "TABLE(Product_Handling_SVC.CRUD_Default(:Attr, trn_unit## => ''))",
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnUnit",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnUnitCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:CopyValues, trn_unit## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Create",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Create(:Attr, :Action$, trn_unit## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Update",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Update(:ETag, :Unit, :Attr, :Action$, trn_unit## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "Unit",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Delete",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Delete(:ETag, :Unit, :Action$, trn_unit## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "Unit",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnUnit",
+                        "Collection": false,
+                        "CrudOperation": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnUnitCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:ETag, :Unit, :CopyValues, trn_unit## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "Unit",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnProduct",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"ProductHandling","Lu":"TrnProduct","View":"TRN_PRODUCT"}]#]"
+                    }
+                },
+                "Keys": [
+                    "CompanyId",
+                    "ProductId"
+                ],
+                "KeysWhere": "(company_id = :CompanyId AND product_id = :ProductId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnProduct'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'COMPANY_ID='||company_id||'^'||'PRODUCT_ID='||product_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CompanyId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "COMPANY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "company_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "company_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "ProductId",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "PRODUCT_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "product_id",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "product_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Description",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 1000,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "DESCRIPTION",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "description",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "description"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Price",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "PRICE",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "price",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "price"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Comments",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "COMMENTS",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "comments",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "comments"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Unit",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "UNIT",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "unit",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "unit"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "BrandId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "BRAND_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "brand_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "brand_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CategoryId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "CATEGORY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "category_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "category_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "ModelId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 100,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "MODEL_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "model_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "model_id"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"ProductHandling","Lu":"TrnProduct","Type":"Entity","Name":"TrnProduct","View":"TRN_PRODUCT"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnProduct'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'COMPANY_ID='||company_id||'^'||'PRODUCT_ID='||product_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"ProductHandling","Entity":"TrnProduct","Lu":"TrnProduct","View":"TRN_PRODUCT"}]#]
+                ],
+                "CRUD": [
+                    {
+                        "Name": "Default",
+                        "DataType": "Entity",
+                        "SubType": "TrnProduct",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "SQL": {
+                                "From": "TABLE(Product_Handling_SVC.CRUD_Default(:Attr, trn_product## => ''))",
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnProduct",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnProductCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:CopyValues, trn_product## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Create",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Create(:Attr, :Action$, trn_product## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Update",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Update(:ETag, :CompanyId, :ProductId, :Attr, :Action$, trn_product## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "ProductId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Delete",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Delete(:ETag, :CompanyId, :ProductId, :Action$, trn_product## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "ProductId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnProduct",
+                        "Collection": false,
+                        "CrudOperation": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnProductCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:ETag, :CompanyId, :ProductId, :CopyValues, trn_product## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "ProductId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnBrand",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"ProductHandling","Lu":"TrnBrand","View":"TRN_BRAND"}]#]"
+                    }
+                },
+                "Keys": [
+                    "BrandId"
+                ],
+                "KeysWhere": "(brand_id = :BrandId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnBrand'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRAND_ID='||brand_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "BrandId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "BRAND_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "brand_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "brand_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Name",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 1000,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "NAME",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "name",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "name"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Comments",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "COMMENTS",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "comments",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "comments"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"ProductHandling","Lu":"TrnBrand","Type":"Entity","Name":"TrnBrand","View":"TRN_BRAND"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnBrand'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRAND_ID='||brand_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"ProductHandling","Entity":"TrnBrand","Lu":"TrnBrand","View":"TRN_BRAND"}]#]
+                ],
+                "CRUD": [
+                    {
+                        "Name": "Default",
+                        "DataType": "Entity",
+                        "SubType": "TrnBrand",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "SQL": {
+                                "From": "TABLE(Product_Handling_SVC.CRUD_Default(:Attr, trn_brand## => ''))",
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnBrand",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnBrandCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:CopyValues, trn_brand## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Create",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Create(:Attr, :Action$, trn_brand## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Update",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Update(:ETag, :BrandId, :Attr, :Action$, trn_brand## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BrandId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Delete",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Delete(:ETag, :BrandId, :Action$, trn_brand## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BrandId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnBrand",
+                        "Collection": false,
+                        "CrudOperation": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnBrandCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:ETag, :BrandId, :CopyValues, trn_brand## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BrandId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnProdCategory",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"ProductHandling","Lu":"TrnProdCategory","View":"TRN_PROD_CATEGORY"}]#]"
+                    }
+                },
+                "Keys": [
+                    "CategoryId"
+                ],
+                "KeysWhere": "(category_id = :CategoryId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnProdCategory'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'CATEGORY_ID='||category_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CategoryId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "CATEGORY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "category_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "category_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Name",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 1000,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "NAME",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "name",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "name"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Comments",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "COMMENTS",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "comments",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "comments"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"ProductHandling","Lu":"TrnProdCategory","Type":"Entity","Name":"TrnProdCategory","View":"TRN_PROD_CATEGORY"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnProdCategory'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'CATEGORY_ID='||category_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"ProductHandling","Entity":"TrnProdCategory","Lu":"TrnProdCategory","View":"TRN_PROD_CATEGORY"}]#]
+                ],
+                "CRUD": [
+                    {
+                        "Name": "Default",
+                        "DataType": "Entity",
+                        "SubType": "TrnProdCategory",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "SQL": {
+                                "From": "TABLE(Product_Handling_SVC.CRUD_Default(:Attr, trn_prod_category## => ''))",
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnProdCategory",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnProdCategoryCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:CopyValues, trn_prod_category## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Create",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Create(:Attr, :Action$, trn_prod_category## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Update",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Update(:ETag, :CategoryId, :Attr, :Action$, trn_prod_category## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CategoryId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Delete",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Delete(:ETag, :CategoryId, :Action$, trn_prod_category## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CategoryId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnProdCategory",
+                        "Collection": false,
+                        "CrudOperation": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnProdCategoryCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:ETag, :CategoryId, :CopyValues, trn_prod_category## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CategoryId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnProdCategoryBrand",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"ProductHandling","Lu":"TrnProdCategoryBrand","View":"TRN_PROD_CATEGORY_BRAND"}]#]"
+                    }
+                },
+                "Keys": [
+                    "BrandId",
+                    "CategoryId"
+                ],
+                "KeysWhere": "(brand_id = :BrandId AND category_id = :CategoryId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnProdCategoryBrand'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRAND_ID='||brand_id||'^'||'CATEGORY_ID='||category_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "BrandId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "BRAND_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "brand_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "brand_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CategoryId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "CATEGORY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "category_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "category_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Brand",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "BRAND",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "Trn_Brand_API.Get_Name(brand_id)",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "brand"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Category",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "CATEGORY",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "Trn_Prod_Category_API.Get_Name(category_id)",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "category"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"ProductHandling","Lu":"TrnProdCategoryBrand","Type":"Entity","Name":"TrnProdCategoryBrand","View":"TRN_PROD_CATEGORY_BRAND"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnProdCategoryBrand'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRAND_ID='||brand_id||'^'||'CATEGORY_ID='||category_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"ProductHandling","Entity":"TrnProdCategoryBrand","Lu":"TrnProdCategoryBrand","View":"TRN_PROD_CATEGORY_BRAND"}]#]
+                ],
+                "CRUD": [
+                    {
+                        "Name": "Default",
+                        "DataType": "Entity",
+                        "SubType": "TrnProdCategoryBrand",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "SQL": {
+                                "From": "TABLE(Product_Handling_SVC.CRUD_Default(:Attr, trn_prod_category_brand## => ''))",
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnProdCategoryBrand",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnProdCategoryBrandCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:CopyValues, trn_prod_category_brand## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Create",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Create(:Attr, :Action$, trn_prod_category_brand## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Update",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Update(:ETag, :BrandId, :CategoryId, :Attr, :Action$, trn_prod_category_brand## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BrandId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CategoryId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Delete",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Delete(:ETag, :BrandId, :CategoryId, :Action$, trn_prod_category_brand## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BrandId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CategoryId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnProdCategoryBrand",
+                        "Collection": false,
+                        "CrudOperation": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnProdCategoryBrandCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:ETag, :BrandId, :CategoryId, :CopyValues, trn_prod_category_brand## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BrandId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CategoryId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnModel",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"ProductHandling","Lu":"TrnModel","View":"TRN_MODEL"}]#]"
+                    }
+                },
+                "Keys": [
+                    "BrandId",
+                    "CategoryId",
+                    "ModelId"
+                ],
+                "KeysWhere": "(brand_id = :BrandId AND category_id = :CategoryId AND model_id = :ModelId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnModel'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRAND_ID='||brand_id||'^'||'CATEGORY_ID='||category_id||'^'||'MODEL_ID='||model_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "BrandId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "BRAND_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "brand_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "brand_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CategoryId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "CATEGORY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "category_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "category_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "ModelId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 100,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "MODEL_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "model_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "model_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Description",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "DESCRIPTION",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "description",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "description"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"ProductHandling","Lu":"TrnModel","Type":"Entity","Name":"TrnModel","View":"TRN_MODEL"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnModel'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRAND_ID='||brand_id||'^'||'CATEGORY_ID='||category_id||'^'||'MODEL_ID='||model_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"ProductHandling","Entity":"TrnModel","Lu":"TrnModel","View":"TRN_MODEL"}]#]
+                ],
+                "CRUD": [
+                    {
+                        "Name": "Default",
+                        "DataType": "Entity",
+                        "SubType": "TrnModel",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "SQL": {
+                                "From": "TABLE(Product_Handling_SVC.CRUD_Default(:Attr, trn_model## => ''))",
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnModel",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnModelCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:CopyValues, trn_model## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Create",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Create(:Attr, :Action$, trn_model## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Update",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Update(:ETag, :BrandId, :CategoryId, :ModelId, :Attr, :Action$, trn_model## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BrandId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CategoryId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "ModelId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Delete",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Delete(:ETag, :BrandId, :CategoryId, :ModelId, :Action$, trn_model## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BrandId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CategoryId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "ModelId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnModel",
+                        "Collection": false,
+                        "CrudOperation": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnModelCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:ETag, :BrandId, :CategoryId, :ModelId, :CopyValues, trn_model## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BrandId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CategoryId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "ModelId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnInventoryProduct",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"ProductHandling","Lu":"TrnInventoryProduct","View":"TRN_INVENTORY_PRODUCT"}]#]"
+                    }
+                },
+                "Keys": [
+                    "CompanyId",
+                    "BranchId",
+                    "InventoryId",
+                    "ProductId"
+                ],
+                "KeysWhere": "(company_id = :CompanyId AND branch_id = :BranchId AND inventory_id = :InventoryId AND product_id = :ProductId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnInventoryProduct'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'||'INVENTORY_ID='||inventory_id||'^'||'PRODUCT_ID='||product_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CompanyId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "COMPANY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "company_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "company_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "BranchId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "BRANCH_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "branch_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "branch_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "InventoryId",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "INVENTORY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "inventory_id",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "inventory_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "ProductId",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "PRODUCT_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "product_id",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "product_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Quantity",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "QUANTITY",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "quantity",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "quantity"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "ReorderLevel",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "REORDER_LEVEL",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "reorder_level",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "reorder_level"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "ReservedQuantity",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "RESERVED_QUANTITY",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "reserved_quantity",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "reserved_quantity"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"ProductHandling","Lu":"TrnInventoryProduct","Type":"Entity","Name":"TrnInventoryProduct","View":"TRN_INVENTORY_PRODUCT"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnInventoryProduct'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'||'INVENTORY_ID='||inventory_id||'^'||'PRODUCT_ID='||product_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"ProductHandling","Entity":"TrnInventoryProduct","Lu":"TrnInventoryProduct","View":"TRN_INVENTORY_PRODUCT"}]#]
+                ],
+                "CRUD": [
+                    {
+                        "Name": "Default",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventoryProduct",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "SQL": {
+                                "From": "TABLE(Product_Handling_SVC.CRUD_Default(:Attr, trn_inventory_product## => ''))",
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventoryProduct",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnInventoryProductCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:CopyValues, trn_inventory_product## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Create",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Create(:Attr, :Action$, trn_inventory_product## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Update",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Update(:ETag, :CompanyId, :BranchId, :InventoryId, :ProductId, :Attr, :Action$, trn_inventory_product## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BranchId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "InventoryId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "ProductId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Delete",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Product_Handling_SVC.CRUD_Delete(:ETag, :CompanyId, :BranchId, :InventoryId, :ProductId, :Action$, trn_inventory_product## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BranchId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "InventoryId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "ProductId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventoryProduct",
+                        "Collection": false,
+                        "CrudOperation": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnInventoryProductCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Product_Handling_SVC.CRUD_Default_Copy(:ETag, :CompanyId, :BranchId, :InventoryId, :ProductId, :CopyValues, trn_inventory_product## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BranchId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "InventoryId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "ProductId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "PRODUCT_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnInventory",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"ProductHandling","Lu":"TrnInventory","View":"TRN_INVENTORY"}]#]"
+                    }
+                },
+                "Keys": [
+                    "CompanyId",
+                    "BranchId",
+                    "InventoryId"
+                ],
+                "KeysWhere": "(company_id = :CompanyId AND branch_id = :BranchId AND inventory_id = :InventoryId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnInventory'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'||'INVENTORY_ID='||inventory_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CompanyId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "COMPANY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "company_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "company_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "BranchId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "BRANCH_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "branch_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "branch_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "InventoryId",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": true,
+                        "Updatable": false,
+                        "AttrName": "INVENTORY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "inventory_id",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "inventory_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Name",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 200,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "NAME",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "name",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "name"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "PickingLeadTime",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "PICKING_LEAD_TIME",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "picking_lead_time",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "picking_lead_time"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"ProductHandling","Lu":"TrnInventory","Type":"Entity","Name":"TrnInventory","View":"TRN_INVENTORY"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnInventory'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'||'INVENTORY_ID='||inventory_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"ProductHandling","Entity":"TrnInventory","Lu":"TrnInventory","View":"TRN_INVENTORY"}]#]
+                ],
+                "CRUD": [
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                ]
+            },
+            {
+                "Name": "TrnBranch",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"ProductHandling","Lu":"TrnBranch","View":"TRN_BRANCH"}]#]"
+                    }
+                },
+                "Keys": [
+                    "CompanyId",
+                    "BranchId"
+                ],
+                "KeysWhere": "(company_id = :CompanyId AND branch_id = :BranchId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnBranch'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CompanyId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "COMPANY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "company_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "company_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "BranchId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "BRANCH_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "branch_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "branch_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Name",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 1000,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "NAME",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "name",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "name"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "TimeOffset",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "TIME_OFFSET",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "time_offset",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "time_offset"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CountryId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "COUNTRY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "country_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "country_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "AreaId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "AREA_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "area_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "area_id"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"ProductHandling","Lu":"TrnBranch","Type":"Entity","Name":"TrnBranch","View":"TRN_BRANCH"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnBranch'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"ProductHandling","Entity":"TrnBranch","Lu":"TrnBranch","View":"TRN_BRANCH"}]#]
+                ],
+                "CRUD": [
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                ]
+            }[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Type_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": [
+        "TrnBrand",
+        "TrnProdCategoryBrand",
+        "TrnProduct",
+        "TrnModel",
+        "TrnInventoryProduct",
+        "TrnBranch",
+        "TrnUnit",
+        "TrnProdCategory",
+        "TrnInventory"
+    ]
+}]#]
+        ]
+    }
+}

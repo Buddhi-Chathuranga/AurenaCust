@@ -1,0 +1,76 @@
+{
+    "projection": {
+        "Name": "TrninvNavigatorRoot",
+        "Metadata": {
+            "Version": "[#[generate:version]#]",
+            "Description": "Dummy Projection for TrninvNavigatorRoot Client",
+            "Category": [
+                "Users"
+            ]
+        },
+        "Container": {
+            "EntitySets": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entityset_Metadata:{
+    "Projection": "TrninvNavigatorRoot",
+    "Lu": [
+    ]
+}]#]
+            ],
+            "Singletons": [
+            ],
+            "Actions": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Action_Metadata:{"Projection":"TrninvNavigatorRoot"}]#]
+            ],
+            "Functions": [
+            ]
+        },
+        "Enumerations": [[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Enumeration_Metadata:{
+    "Projection": "TrninvNavigatorRoot",
+    "Lu": [
+    ]
+}]#]
+        ],
+        "Structures": [
+            {
+                "Name": "StreamInfoRec",
+                "PLSQLRecordName": "TRNINV_NAVIGATOR_ROOT_SVC.STREAM_INFO_REC",
+                "Attributes": [
+                    {
+                        "Name": "FileName",
+                        "DataType": "Text"
+                    },
+                    {
+                        "Name": "MimeType",
+                        "DataType": "Text"
+                    }
+                ]
+            },
+            {
+                "Name": "EntityDec",
+                "PLSQLRecordName": "TRNINV_NAVIGATOR_ROOT_SVC.ENTITY_DEC",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "Text"
+                    },
+                    {
+                        "Name": "Info",
+                        "DataType": "Text"
+                    },
+                    {
+                        "Name": "Attr",
+                        "DataType": "Text"
+                    }
+                ]
+            }[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Structure_Metadata:{
+    "Projection": "TrninvNavigatorRoot",
+    "Lu": [
+    ]
+}]#]
+        ],
+        "Entities": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Type_Metadata:{
+    "Projection": "TrninvNavigatorRoot",
+    "Lu": [
+    ]
+}]#]
+        ]
+    }
+}

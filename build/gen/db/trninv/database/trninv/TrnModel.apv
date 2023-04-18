@@ -1,0 +1,58 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnModel
+--  Type:         Entity
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- BASE VIEW DEFINITION -----------------------------------
+-----------------------------------------------------------------------------
+
+PROMPT Creating TRN_MODEL view
+
+-- [IFS COMPLETE BLOCK VIEW TRN_MODEL]
+CREATE OR REPLACE VIEW TRN_MODEL AS
+SELECT
+       brand_id                       brand_id,
+       category_id                    category_id,
+       model_id                       model_id,
+       description                    description,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   trn_model_tab
+WITH   READ ONLY;
+-- [END IFS COMPLETE BLOCK]
+
+COMMENT ON TABLE TRN_MODEL
+   IS 'LU=TrnModel^PROMPT=Trn Model^MODULE=TRNINV^TABLE=TRN_MODEL_TAB^';
+
+-- [IFS COMPLETE BLOCK DECLAREEND]
+DECLARE
+   PROCEDURE Alter_Column_Comment (
+      view_name_   IN VARCHAR2,
+      column_name_ IN VARCHAR2,
+      comment_     IN VARCHAR2)
+   IS
+      stmt_ VARCHAR2(32767) := 'COMMENT ON COLUMN ' || view_name_ || '.' || column_name_ || ' IS ''' || REPLACE(comment_, '''', '''''') || '''';
+   BEGIN
+      EXECUTE IMMEDIATE stmt_;
+   END Alter_Column_Comment;
+BEGIN
+   Alter_Column_Comment('TRN_MODEL', 'brand_id', 'FLAGS=PMI--^DATATYPE=STRING(10)^PROMPT=Brand ID^');
+   Alter_Column_Comment('TRN_MODEL', 'category_id', 'FLAGS=PMI--^DATATYPE=STRING(10)^PROMPT=Category ID^REF=TrnProdCategoryBrand(brand_id)^');
+   Alter_Column_Comment('TRN_MODEL', 'model_id', 'FLAGS=KMI-L^DATATYPE=STRING(100)^PROMPT=Model ID^');
+   Alter_Column_Comment('TRN_MODEL', 'description', 'FLAGS=AMIUL^DATATYPE=STRING(2000)^PROMPT=Description^');
+   EXECUTE IMMEDIATE 'GRANT SELECT ON TRN_MODEL TO IFSSYS';
+END;
+-- [END IFS COMPLETE BLOCK]
+/
+

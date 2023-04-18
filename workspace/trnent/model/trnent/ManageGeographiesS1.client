@@ -1,0 +1,150 @@
+client ManageGeographiesS1;
+component TRNENT;
+layer Core;
+projection EnterpriseOverviewS1;
+
+
+description "Put some useful description here ...";
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+----------------------------- NAVIGATOR ENTRIES -----------------------------
+
+navigator {
+   entry CountryOverviewNavEntry parent TrnentNavigatorRoot.GeographicDetailsNavEntry at index 0 {
+
+      label = "Country Overview";
+
+      page TrnCountryOverview;
+   }
+
+   entry CountryDetailsNavEntry parent TrnentNavigatorRoot.GeographicDetailsNavEntry at index 1 {
+
+      label = "Country Details";
+
+      page TrnCountryDetails;
+   }
+
+   entry AreaOverviewNavDetails parent TrnentNavigatorRoot.GeographicDetailsNavEntry at index 2 {
+
+      label = "Area Overview";
+
+      page TrnAreaOverview;
+
+   }
+
+   
+
+}
+
+-------------------------------- MAIN PAGES ---------------------------------
+
+page TrnCountryOverview using TrnCountrySet {
+
+   label = "Country Overview";
+   list TrnCountryList;
+
+}
+
+page TrnCountryDetails using TrnCountrySet {
+
+   selector TrnCountryS1Selector;
+   group TrnCountryGroup bind TrnCountryS1Selector;
+
+//   group TrnCountryGroup;
+   list TrnAreaList(TrnAreaArray);
+
+}
+
+page TrnAreaOverview using TrnAreaSet {
+   label = "Area Overview";
+   list TrnAreaList;
+}
+//
+//page TrnCompanyOverview using TrnCompanySet {
+//
+//   label = "Company Overview";
+//
+//   list TrnCompanyList;
+//
+//
+//}
+
+
+
+--------------------------------- COMMANDS ----------------------------------
+
+
+--------------------------------- SELECTORS ---------------------------------
+
+selector TrnCountryS1Selector for TrnCountry {
+
+   label = "Country ID - ${CountryId}, Country - ${Country}";
+
+   static CountryId;
+   static Country;
+
+
+}
+
+
+---------------------------------- GROUPS -----------------------------------
+
+group TrnCountryGroup for TrnCountry {
+
+   label = "Country Details";
+
+
+   field CountryId;
+   field Country;
+
+
+}
+
+
+----------------------------------- LISTS -----------------------------------
+
+list TrnCountryList for TrnCountry {
+
+   label = "Countries";
+   field CountryId;
+   field Country {
+      label = "Country Name";
+   }
+
+}
+
+list TrnAreaList for TrnArea {
+
+
+   field AreaId;
+   field Area;
+
+}
+
+
+---------------------------------- DIALOGS ----------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------
+
+
+---------------------------------- CHARTS -----------------------------------
+
+
+--------------------------------- CALENDERS ---------------------------------
+
+
+---------------------------------- SHEETS -----------------------------------
+
+
+----------------------------- STATE INDICATORS ------------------------------
+
+
+----------------------------------- TREES -----------------------------------
+
+
+---------------------------------- PLUGINS ----------------------------------
+
+
+------------------------------- IMAGE VIEWERS -------------------------------

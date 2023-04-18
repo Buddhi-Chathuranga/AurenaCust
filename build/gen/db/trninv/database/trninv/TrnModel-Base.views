@@ -1,0 +1,52 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnModel
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Brand_Id IS
+   Flags      = 'PMI--'
+   Datatype   = 'STRING(10)'
+   Prompt     = 'Brand ID';
+COLUMN Category_Id IS
+   Flags      = 'PMI--'
+   Datatype   = 'STRING(10)'
+   Prompt     = 'Category ID'
+   Ref        = 'TrnProdCategoryBrand(brand_id)';
+COLUMN Model_Id IS
+   Flags      = 'KMI-L'
+   Datatype   = 'STRING(100)'
+   Prompt     = 'Model ID';
+COLUMN Description IS
+   Flags      = 'AMIUL'
+   Datatype   = 'STRING(2000)'
+   Prompt     = 'Description';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Trn_Model IS
+   Prompt     = 'Trn Model'
+   Table      = 'TRN_MODEL_TAB'
+SELECT
+       brand_id                       brand_id,
+       category_id                    category_id,
+       model_id                       model_id,
+       description                    description,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   trn_model_tab;

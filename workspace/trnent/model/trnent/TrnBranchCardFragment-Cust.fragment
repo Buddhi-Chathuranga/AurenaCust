@@ -1,0 +1,45 @@
+fragment TrnBranchCardFragment;
+component TRNENT;
+layer Cust;
+description "Put some useful description here ...";
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+
+----------------------------- CLIENT FRAGMENTS ------------------------------
+card TrnBranchCard for TrnBranch {
+   label = "${BranchId}";
+   field BranchId;
+   field Name;
+//   field CompanyId;
+   field TrnCompanyRef {
+      label = "Company Id";
+   }
+   field TrnCompanyRef.Name;
+
+   field TimeOffset;
+   field TrnCountryRef {
+      label = "Country Id";
+
+   }
+//   field CountryId;
+   field TrnCountryRef.Country;
+//   field TrnAreaRef {
+//      label = "Area Id";
+//
+//   }
+   field AreaId;
+   field TrnAreaRef.Area {
+      label = "Area Name";
+   }
+}
+
+--------------------------- PROJECTION FRAGMENTS ----------------------------
+@Override
+entity TrnBranch {
+
+   reference TrnAreaRef(AreaId, CountryId) to TrnArea(AreaId, CountryId);
+   reference TrnCompanyRef(CompanyId) to TrnCompany(CompanyId);
+   reference TrnCountryRef(CountryId) to TrnCountry(CountryId);
+
+}

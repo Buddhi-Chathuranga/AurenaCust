@@ -1,0 +1,2169 @@
+{
+    "name": "ManageInventories",
+    "version": "-1212491350:-745350432",
+    "projection": {
+        "name": "InventoryHandling",
+        "service": "InventoryHandling.svc",
+        "version": "-745350432",
+        "contains": {
+            "Reference_TrnBranch": {
+                "name": "Reference_TrnBranch",
+                "entity": "TrnBranch",
+                "array": true,
+                "defaultfilter": false
+            },
+            "Reference_TrnArea": {
+                "name": "Reference_TrnArea",
+                "entity": "TrnArea",
+                "array": true,
+                "defaultfilter": false
+            },
+            "Reference_TrnCompany": {
+                "name": "Reference_TrnCompany",
+                "entity": "TrnCompany",
+                "array": true,
+                "defaultfilter": false
+            },
+            "Reference_TrnCountry": {
+                "name": "Reference_TrnCountry",
+                "entity": "TrnCountry",
+                "array": true,
+                "defaultfilter": false
+            },
+            "Reference_TrnInventoryCommMethod": {
+                "name": "Reference_TrnInventoryCommMethod",
+                "entity": "TrnInventoryCommMethod",
+                "array": true,
+                "defaultfilter": false
+            },
+            "TrnInventorySet": {
+                "name": "TrnInventorySet",
+                "entity": "TrnInventory",
+                "array": true,
+                "defaultfilter": false
+            }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entityset_Metadata:{
+        "Projection": "InventoryHandling",
+        "Lu": [
+            "TrnInventoryCommMethod",
+            "TrnCountry",
+            "TrnBranch",
+            "TrnArea",
+            "TrnInventory",
+            "TrnCompany"
+        ]
+    }]#]
+        },
+        "enumerations": {
+            "FndBoolean": {
+                "name": "FndBoolean",
+                "values": [
+                    "False",
+                    "True"
+                ],
+                "labels": [
+                    {
+                        "value": "False",
+                        "label": "[#[translateEnum:Fnd_Boolean_API.Decode('FALSE'):False]#]"
+                    },
+                    {
+                        "value": "True",
+                        "label": "[#[translateEnum:Fnd_Boolean_API.Decode('TRUE'):True]#]"
+                    }
+                ]
+            },
+            "TrnCommunicationType": {
+                "name": "TrnCommunicationType",
+                "values": [
+                    "Postal",
+                    "Email",
+                    "Phone"
+                ],
+                "labels": [
+                    {
+                        "value": "Postal",
+                        "label": "[#[translateEnum:Trn_Communication_Type_API.Decode('POSTAL'):Postal]#]"
+                    },
+                    {
+                        "value": "Email",
+                        "label": "[#[translateEnum:Trn_Communication_Type_API.Decode('EMAIL'):Email]#]"
+                    },
+                    {
+                        "value": "Phone",
+                        "label": "[#[translateEnum:Trn_Communication_Type_API.Decode('PHONE'):Phone]#]"
+                    }
+                ]
+            }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Enumeration_Metadata:{
+        "Projection": "InventoryHandling",
+        "Lu": [
+            "TrnInventoryCommMethod",
+            "TrnCountry",
+            "TrnBranch",
+            "TrnArea",
+            "TrnInventory",
+            "TrnCompany"
+        ]
+    }]#]
+        },
+        "entities": {
+            "TrnInventory": {
+                "name": "TrnInventory",
+                "hasETag": true,
+                "hasKeys": true,
+                "CRUD": "Create,Read,Update",
+                "luname": "TrnInventory",
+                "ludependencies": [
+                    "TrnInventory"
+                ],
+                "keys": [
+                    "CompanyId",
+                    "BranchId",
+                    "InventoryId"
+                ],
+                "attributes": {
+                    "Objgrants": {
+                        "datatype": "Text",
+                        "size": 2000,
+                        "keygeneration": "Server",
+                        "required": false,
+                        "editable": false,
+                        "updatable": false,
+                        "insertable": false,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "CompanyId": {
+                        "datatype": "Text",
+                        "size": 20,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "BranchId": {
+                        "datatype": "Text",
+                        "size": 20,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "InventoryId": {
+                        "datatype": "Number",
+                        "keygeneration": "User",
+                        "required": false,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "Name": {
+                        "datatype": "Text",
+                        "size": 200,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "PickingLeadTime": {
+                        "datatype": "Number",
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "CountryName": {
+                        "datatype": "Text",
+                        "keygeneration": "Server",
+                        "required": false,
+                        "editable": false,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "AreaName": {
+                        "datatype": "Text",
+                        "keygeneration": "Server",
+                        "required": false,
+                        "editable": false,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+        "Projection": "InventoryHandling",
+        "Lu": "TrnInventory",
+        "View": "TRN_INVENTORY"
+    }]#]
+                },
+                "references": {
+                    "TrnCompanyRef": {
+                        "target": "TrnCompany",
+                        "datasource": "InventoryHandling.svc/Reference_TrnCompany?$filter=CompanyId eq $[CompanyId]",
+                        "mapping": {
+                            "CompanyId": "CompanyId"
+                        }
+                    },
+                    "TrnBranchRef": {
+                        "target": "TrnBranch",
+                        "datasource": "InventoryHandling.svc/Reference_TrnBranch?$filter=CompanyId eq $[CompanyId] and BranchId eq $[BranchId]",
+                        "mapping": {
+                            "CompanyId": "CompanyId",
+                            "BranchId": "BranchId"
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnInventory"}]#]
+                },
+                "arrays": {
+                    "TrnInventoryCommMethodArray": {
+                        "target": "TrnInventoryCommMethod",
+                        "datasource": null,
+                        "mapping": {
+                            "CompanyId": "CompanyId",
+                            "BranchId": "BranchId",
+                            "InventoryId": "InventoryId"
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnInventory","Lu":"TrnInventory"}]#]
+                },
+                "actions": {
+                },
+                "functions": {
+                },
+                "defaultcopyapplicable": true
+            },
+            "TrnBranch": {
+                "name": "TrnBranch",
+                "hasETag": true,
+                "hasKeys": true,
+                "CRUD": "Create,Read,Update,Delete",
+                "luname": "TrnBranch",
+                "ludependencies": [
+                    "TrnBranch"
+                ],
+                "keys": [
+                    "CompanyId",
+                    "BranchId"
+                ],
+                "attributes": {
+                    "Objgrants": {
+                        "datatype": "Text",
+                        "size": 2000,
+                        "keygeneration": "Server",
+                        "required": false,
+                        "editable": false,
+                        "updatable": false,
+                        "insertable": false,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "CompanyId": {
+                        "datatype": "Text",
+                        "size": 20,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "BranchId": {
+                        "datatype": "Text",
+                        "size": 20,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "Name": {
+                        "datatype": "Text",
+                        "size": 1000,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "TimeOffset": {
+                        "datatype": "Number",
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "CountryId": {
+                        "datatype": "Text",
+                        "size": 10,
+                        "keygeneration": "User",
+                        "required": false,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "AreaId": {
+                        "datatype": "Text",
+                        "size": 10,
+                        "keygeneration": "User",
+                        "required": false,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+        "Projection": "InventoryHandling",
+        "Lu": "TrnBranch",
+        "View": "TRN_BRANCH"
+    }]#]
+                },
+                "references": {
+                    "TrnAreaRef": {
+                        "target": "TrnArea",
+                        "datasource": "InventoryHandling.svc/Reference_TrnArea?$filter=AreaId eq $[AreaId] and CountryId eq $[CountryId]",
+                        "mapping": {
+                            "AreaId": "AreaId",
+                            "CountryId": "CountryId"
+                        }
+                    },
+                    "TrnCompanyRef": {
+                        "target": "TrnCompany",
+                        "datasource": "InventoryHandling.svc/Reference_TrnCompany?$filter=CompanyId eq $[CompanyId]",
+                        "mapping": {
+                            "CompanyId": "CompanyId"
+                        }
+                    },
+                    "TrnCountryRef": {
+                        "target": "TrnCountry",
+                        "datasource": "InventoryHandling.svc/Reference_TrnCountry?$filter=CountryId eq $[CountryId]",
+                        "mapping": {
+                            "CountryId": "CountryId"
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnBranch"}]#]
+                },
+                "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnBranch","Lu":"TrnBranch"}]#]
+                },
+                "actions": {
+                },
+                "functions": {
+                },
+                "defaultcopyapplicable": true
+            },
+            "TrnArea": {
+                "name": "TrnArea",
+                "hasETag": true,
+                "hasKeys": true,
+                "CRUD": "Read",
+                "luname": "TrnArea",
+                "ludependencies": [
+                    "TrnArea"
+                ],
+                "keys": [
+                    "CountryId",
+                    "AreaId"
+                ],
+                "attributes": {
+                    "Objgrants": {
+                        "datatype": "Text",
+                        "size": 2000,
+                        "keygeneration": "Server",
+                        "required": false,
+                        "editable": false,
+                        "updatable": false,
+                        "insertable": false,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "CountryId": {
+                        "datatype": "Text",
+                        "size": 10,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "AreaId": {
+                        "datatype": "Text",
+                        "size": 10,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "Area": {
+                        "datatype": "Text",
+                        "size": 1000,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+        "Projection": "InventoryHandling",
+        "Lu": "TrnArea",
+        "View": "TRN_AREA"
+    }]#]
+                },
+                "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnArea"}]#]
+                },
+                "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnArea","Lu":"TrnArea"}]#]
+                },
+                "actions": {
+                },
+                "functions": {
+                }
+            },
+            "TrnCompany": {
+                "name": "TrnCompany",
+                "hasETag": true,
+                "hasKeys": true,
+                "CRUD": "Read",
+                "luname": "TrnCompany",
+                "ludependencies": [
+                    "TrnCompany"
+                ],
+                "keys": [
+                    "CompanyId"
+                ],
+                "attributes": {
+                    "Objgrants": {
+                        "datatype": "Text",
+                        "size": 2000,
+                        "keygeneration": "Server",
+                        "required": false,
+                        "editable": false,
+                        "updatable": false,
+                        "insertable": false,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "CompanyId": {
+                        "datatype": "Text",
+                        "size": 20,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "Name": {
+                        "datatype": "Text",
+                        "size": 1000,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "Comments": {
+                        "datatype": "Text",
+                        "size": 2000,
+                        "keygeneration": "User",
+                        "required": false,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "CreationDate": {
+                        "datatype": "Date",
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+        "Projection": "InventoryHandling",
+        "Lu": "TrnCompany",
+        "View": "TRN_COMPANY"
+    }]#]
+                },
+                "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnCompany"}]#]
+                },
+                "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnCompany","Lu":"TrnCompany"}]#]
+                },
+                "actions": {
+                },
+                "functions": {
+                }
+            },
+            "TrnCountry": {
+                "name": "TrnCountry",
+                "hasETag": true,
+                "hasKeys": true,
+                "CRUD": "Read",
+                "luname": "TrnCountry",
+                "ludependencies": [
+                    "TrnCountry"
+                ],
+                "keys": [
+                    "CountryId"
+                ],
+                "attributes": {
+                    "Objgrants": {
+                        "datatype": "Text",
+                        "size": 2000,
+                        "keygeneration": "Server",
+                        "required": false,
+                        "editable": false,
+                        "updatable": false,
+                        "insertable": false,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "CountryId": {
+                        "datatype": "Text",
+                        "size": 10,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "Country": {
+                        "datatype": "Text",
+                        "size": 1000,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+        "Projection": "InventoryHandling",
+        "Lu": "TrnCountry",
+        "View": "TRN_COUNTRY"
+    }]#]
+                },
+                "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnCountry"}]#]
+                },
+                "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnCountry","Lu":"TrnCountry"}]#]
+                },
+                "actions": {
+                },
+                "functions": {
+                }
+            },
+            "TrnInventoryCommMethod": {
+                "name": "TrnInventoryCommMethod",
+                "hasETag": true,
+                "hasKeys": true,
+                "CRUD": "Create,Read,Update,Delete",
+                "luname": "TrnInventoryCommMethod",
+                "ludependencies": [
+                    "TrnInventoryCommMethod"
+                ],
+                "keys": [
+                    "CompanyId",
+                    "BranchId",
+                    "InventoryId",
+                    "InventoryCommId"
+                ],
+                "attributes": {
+                    "Objgrants": {
+                        "datatype": "Text",
+                        "size": 2000,
+                        "keygeneration": "Server",
+                        "required": false,
+                        "editable": false,
+                        "updatable": false,
+                        "insertable": false,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "CompanyId": {
+                        "datatype": "Text",
+                        "size": 20,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "BranchId": {
+                        "datatype": "Text",
+                        "size": 20,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "InventoryId": {
+                        "datatype": "Number",
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "InventoryCommId": {
+                        "datatype": "Number",
+                        "keygeneration": "User",
+                        "required": false,
+                        "editable": {
+        "==": [
+            {
+                "var": "record.etag"
+            },
+            null
+        ]
+    },
+                        "updatable": false,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "Address": {
+                        "datatype": "Text",
+                        "size": 1000,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "CommunicationType": {
+                        "datatype": "Enumeration",
+                        "size": 20,
+                        "subtype": "TrnCommunicationType",
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    },
+                    "DefaultAddress": {
+                        "datatype": "Boolean",
+                        "size": 20,
+                        "keygeneration": "User",
+                        "required": true,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+        "Projection": "InventoryHandling",
+        "Lu": "TrnInventoryCommMethod",
+        "View": "TRN_INVENTORY_COMM_METHOD"
+    }]#]
+                },
+                "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Lu":"TrnInventoryCommMethod"}]#]
+                },
+                "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"InventoryHandling","Entity":"TrnInventoryCommMethod","Lu":"TrnInventoryCommMethod"}]#]
+                },
+                "actions": {
+                },
+                "functions": {
+                },
+                "defaultcopyapplicable": true
+            }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Type_Metadata:{
+        "Projection": "InventoryHandling",
+        "Lu": [
+            "TrnInventoryCommMethod",
+            "TrnCountry",
+            "TrnBranch",
+            "TrnArea",
+            "TrnInventory",
+            "TrnCompany"
+        ]
+    }]#]
+        },
+        "structures": {
+            "TrnInventoryCopyValues$": {
+                "name": "TrnInventoryCopyValues$",
+                "attributes": {
+                    "ModifiedSource": {
+                        "datatype": "Entity",
+                        "subtype": "TrnInventory",
+                        "required": false,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    }
+                },
+                "references": {
+                },
+                "arrays": {
+                }
+            },
+            "TrnBranchCopyValues$": {
+                "name": "TrnBranchCopyValues$",
+                "attributes": {
+                    "ModifiedSource": {
+                        "datatype": "Entity",
+                        "subtype": "TrnBranch",
+                        "required": false,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    }
+                },
+                "references": {
+                },
+                "arrays": {
+                }
+            },
+            "TrnInventoryCommMethodCopyValues$": {
+                "name": "TrnInventoryCommMethodCopyValues$",
+                "attributes": {
+                    "ModifiedSource": {
+                        "datatype": "Entity",
+                        "subtype": "TrnInventoryCommMethod",
+                        "required": false,
+                        "editable": true,
+                        "updatable": true,
+                        "insertable": true,
+                        "unbound": false,
+                        "multiselect": false
+                    }
+                },
+                "references": {
+                },
+                "arrays": {
+                }
+            }
+        },
+        "actions": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Action_Metadata:{
+        "Projection": "InventoryHandling"
+    }]#]
+        },
+        "functions": {
+            "GetFullName": {
+                "name": "GetFullName",
+                "ludependencies": [
+                ],
+                "parameters": [
+                    {
+                        "Name": "FirstName",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Nullable": true
+                    },
+                    {
+                        "Name": "LastName",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Nullable": true
+                    }
+                ]
+            }
+        },
+        "attachmentservices": {[#[callback:Object_Connection_Metadata_SYS.Enum_Entity_Services_:TrnArea,TrnBranch,TrnCompany,TrnCountry,TrnInventory,TrnInventoryCommMethod]#]
+    }
+    },
+    "component": "TRNINV",
+    "layout": {
+        "cards": {
+            "TrnBranchCard": {
+                "name": "TrnBranchCard",
+                "selectAttributes": [
+                    "BranchId"
+                ],
+                "label": "${BranchId}",
+                "entity": "TrnBranch",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "BranchId",
+                            "attribute": "BranchId",
+                            "control": "field",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.card.TrnBranchCard.cardcontent.field.BranchId:BranchId:WEB:Branch Id]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": {
+                                "==": [
+                                    {
+                                        "var": "record.etag"
+                                    },
+                                    null
+                                ]
+                            },
+                            "required": true
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Name",
+                            "attribute": "Name",
+                            "control": "field",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.card.TrnBranchCard.cardcontent.field.Name:Name:WEB:Name]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": true,
+                            "required": true
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TrnCompanyRef",
+                            "selectAttributes": [
+                                "CompanyId"
+                            ],
+                            "attribute": "CompanyId",
+                            "control": "lookup",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.card.TrnBranchCard.cardcontent.field.TrnCompanyRef:TrnCompanyRef:WEB:Company Id]#]",
+                            "datatype": "Text",
+                            "reference": "TrnCompanyRef",
+                            "lov": {
+                                "selector": "ReferenceTrnCompanySelector",
+                                "advancedview": "TrnCompanyLovList",
+                                "datasourceProjection": "InventoryHandling",
+                                "datasourceEntitySet": "Reference_TrnCompany"
+                            },
+                            "update": {
+                                "datasourceProjection": "InventoryHandling",
+                                "datasourceEntitySet": "Reference_TrnCompany",
+                                "datasourceAggregateRefs": {
+                                    "CompanyId": "${CompanyId}"
+                                },
+                                "copy": {
+                                    "CompanyId": "CompanyId"
+                                },
+                                "fetch": {
+                                },
+                                "item": "TrnCompanyRef"
+                            },
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": {
+                                "==": [
+                                    {
+                                        "var": "record.etag"
+                                    },
+                                    null
+                                ]
+                            },
+                            "required": true
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TrnCompanyRef.Name",
+                            "attribute": "TrnCompanyRef.Name",
+                            "control": "field",
+                            "entity": "TrnCompany",
+                            "label": "[#[translatesys:Data Field:ManageInventories.card.TrnBranchCard.cardcontent.field.TrnCompanyRef$Name:TrnCompanyRef$Name:WEB:Name]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": true,
+                            "required": true
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TimeOffset",
+                            "attribute": "TimeOffset",
+                            "control": "field",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.card.TrnBranchCard.cardcontent.field.TimeOffset:TimeOffset:WEB:Time Offset]#]",
+                            "datatype": "Number",
+                            "array": false,
+                            "editable": true,
+                            "required": true
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TrnCountryRef",
+                            "selectAttributes": [
+                                "CountryId"
+                            ],
+                            "attribute": "CountryId",
+                            "control": "lookup",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.card.TrnBranchCard.cardcontent.field.TrnCountryRef:TrnCountryRef:WEB:Country Id]#]",
+                            "datatype": "Text",
+                            "reference": "TrnCountryRef",
+                            "lov": {
+                                "selector": "ReferenceTrnCountrySelector",
+                                "advancedview": "TrnCountryLovList",
+                                "datasourceProjection": "InventoryHandling",
+                                "datasourceEntitySet": "Reference_TrnCountry"
+                            },
+                            "update": {
+                                "datasourceProjection": "InventoryHandling",
+                                "datasourceEntitySet": "Reference_TrnCountry",
+                                "datasourceAggregateRefs": {
+                                    "CountryId": "${CountryId}"
+                                },
+                                "copy": {
+                                    "CountryId": "CountryId"
+                                },
+                                "fetch": {
+                                },
+                                "item": "TrnCountryRef"
+                            },
+                            "array": false,
+                            "maxlength": 10,
+                            "editable": true,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TrnCountryRef.Country",
+                            "attribute": "TrnCountryRef.Country",
+                            "control": "field",
+                            "entity": "TrnCountry",
+                            "label": "[#[translatesys:Data Field:ManageInventories.card.TrnBranchCard.cardcontent.field.TrnCountryRef$Country:TrnCountryRef$Country:WEB:Country]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": true,
+                            "required": true
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "AreaId",
+                            "attribute": "AreaId",
+                            "control": "field",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.card.TrnBranchCard.cardcontent.field.AreaId:AreaId:WEB:Area Id]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 10,
+                            "editable": true,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TrnAreaRef.Area",
+                            "attribute": "TrnAreaRef.Area",
+                            "control": "field",
+                            "entity": "TrnArea",
+                            "label": "[#[translatesys:Data Field:ManageInventories.card.TrnBranchCard.cardcontent.field.TrnAreaRef$Area:TrnAreaRef$Area:WEB:Area Name]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": true,
+                            "required": true
+                        }
+                    }
+                ]
+            }
+        },
+        "groups": {
+            "TrnInventoryGroup": {
+                "name": "TrnInventoryGroup",
+                "label": "[#[translatesys:Group Box:ManageInventories.group.TrnInventoryGroup.$this:$this:WEB:Trn Inventory Group]#]",
+                "entity": "TrnInventory",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TrnCompanyRef",
+                            "selectAttributes": [
+                                "CompanyId"
+                            ],
+                            "attribute": "CompanyId",
+                            "control": "lookup",
+                            "entity": "TrnInventory",
+                            "label": "[#[translatesys:Data Field:ManageInventories.group.TrnInventoryGroup.groupcontent.field.TrnCompanyRef:TrnCompanyRef:WEB:Company Id]#]",
+                            "translationKey": "ManageInventories.group.TrnInventoryGroup.groupcontent.field.TrnCompanyRef",
+                            "datatype": "Text",
+                            "reference": "TrnCompanyRef",
+                            "lov": {
+                                "selector": "ReferenceTrnCompanySelector",
+                                "advancedview": "TrnCompanyLovList",
+                                "datasourceProjection": "InventoryHandling",
+                                "datasourceEntitySet": "Reference_TrnCompany"
+                            },
+                            "update": {
+                                "datasourceProjection": "InventoryHandling",
+                                "datasourceEntitySet": "Reference_TrnCompany",
+                                "datasourceAggregateRefs": {
+                                    "CompanyId": "${CompanyId}"
+                                },
+                                "copy": {
+                                    "CompanyId": "CompanyId"
+                                },
+                                "fetch": {
+                                },
+                                "item": "TrnCompanyRef"
+                            },
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": {
+                                "==": [
+                                    {
+                                        "var": "record.etag"
+                                    },
+                                    null
+                                ]
+                            },
+                            "required": true,
+                            "validateCommand": {
+                                "name": "TrnInventoryGroup_TrnCompanyRef_validateCommand",
+                                "entity": "TrnInventory",
+                                "vars": {
+                                },
+                                "execute": [
+                                    {
+                                        "call": {
+                                            "method": "toast",
+                                            "args": {
+                                                "type": "info",
+                                                "msg": "[#[translatesys:Message:ManageInventories.group.TrnInventoryGroup.groupcontent.field.TrnCompanyRef.validatecommand.execute.executeaction.executeinfoaction.message:executeinfoaction:WEB:Company ID ${CompanyId} is added]#]"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TrnBranchRef",
+                            "selectAttributes": [
+                                "BranchId",
+                                "CompanyId"
+                            ],
+                            "attribute": "BranchId",
+                            "control": "lookup",
+                            "entity": "TrnInventory",
+                            "label": "[#[translatesys:Data Field:ManageInventories.group.TrnInventoryGroup.groupcontent.lookup.TrnBranchRef:TrnBranchRef:WEB:Branch Id]#]",
+                            "translationKey": "ManageInventories.group.TrnInventoryGroup.groupcontent.lookup.TrnBranchRef",
+                            "datatype": "Text",
+                            "detailPage": "page/ManageCompanies/TrnBranchOverview?$filter=CompanyId eq $[CompanyId] and BranchId eq $[BranchId]",
+                            "reference": "TrnBranchRef",
+                            "view": {
+                                "card": "TrnBranchCard"
+                            },
+                            "lov": {
+                                "selector": "TrnlovBranchS1Selector",
+                                "advancedview": "TrnBranchLovList",
+                                "datasourceProjection": "InventoryHandling",
+                                "datasourceEntitySet": "Reference_TrnBranch",
+                                "search": [
+                                    "BranchId",
+                                    "CountryId",
+                                    "AreaId"
+                                ]
+                            },
+                            "update": {
+                                "datasourceProjection": "InventoryHandling",
+                                "datasourceEntitySet": "Reference_TrnBranch",
+                                "datasourceAggregateRefs": {
+                                    "CompanyId": "${CompanyId}",
+                                    "BranchId": "${BranchId}"
+                                },
+                                "copy": {
+                                    "CompanyId": "CompanyId",
+                                    "BranchId": "BranchId"
+                                },
+                                "fetch": {
+                                },
+                                "item": "TrnBranchRef"
+                            },
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": {
+                                "==": [
+                                    {
+                                        "var": "record.etag"
+                                    },
+                                    null
+                                ]
+                            },
+                            "required": true
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "InventoryId",
+                            "attribute": "InventoryId",
+                            "control": "field",
+                            "entity": "TrnInventory",
+                            "label": "[#[translatesys:Data Field:ManageInventories.group.TrnInventoryGroup.groupcontent.field.InventoryId:InventoryId:WEB:Inventory ID]#]",
+                            "translationKey": "ManageInventories.group.TrnInventoryGroup.groupcontent.field.InventoryId",
+                            "datatype": "Number",
+                            "array": false,
+                            "editable": {
+                                "==": [
+                                    {
+                                        "var": "record.etag"
+                                    },
+                                    null
+                                ]
+                            },
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Name",
+                            "attribute": "Name",
+                            "control": "field",
+                            "entity": "TrnInventory",
+                            "label": "[#[translatesys:Data Field:ManageInventories.group.TrnInventoryGroup.groupcontent.field.Name:Name:WEB:Name]#]",
+                            "translationKey": "ManageInventories.group.TrnInventoryGroup.groupcontent.field.Name",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 200,
+                            "editable": true,
+                            "required": true
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "PickingLeadTime",
+                            "attribute": "PickingLeadTime",
+                            "control": "field",
+                            "entity": "TrnInventory",
+                            "label": "[#[translatesys:Data Field:ManageInventories.group.TrnInventoryGroup.groupcontent.field.PickingLeadTime:PickingLeadTime:WEB:Picking Lead Time]#]",
+                            "translationKey": "ManageInventories.group.TrnInventoryGroup.groupcontent.field.PickingLeadTime",
+                            "datatype": "Number",
+                            "array": false,
+                            "editable": false,
+                            "required": true
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TrnBranchRef.CountryId",
+                            "attribute": "TrnBranchRef.CountryId",
+                            "control": "field",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.group.TrnInventoryGroup.groupcontent.field.TrnBranchRef$CountryId:TrnBranchRef$CountryId:WEB:Country Id]#]",
+                            "translationKey": "ManageInventories.group.TrnInventoryGroup.groupcontent.field.TrnBranchRef$CountryId",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 10,
+                            "editable": true,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CountryName",
+                            "attribute": "CountryName",
+                            "control": "field",
+                            "entity": "TrnInventory",
+                            "label": "[#[translatesys:Data Field:ManageInventories.group.TrnInventoryGroup.groupcontent.field.CountryName:CountryName:WEB:Country Name]#]",
+                            "translationKey": "ManageInventories.group.TrnInventoryGroup.groupcontent.field.CountryName",
+                            "datatype": "Text",
+                            "array": false,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TrnBranchRef.AreaId",
+                            "attribute": "TrnBranchRef.AreaId",
+                            "control": "field",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.group.TrnInventoryGroup.groupcontent.field.TrnBranchRef$AreaId:TrnBranchRef$AreaId:WEB:Area Id]#]",
+                            "translationKey": "ManageInventories.group.TrnInventoryGroup.groupcontent.field.TrnBranchRef$AreaId",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 10,
+                            "editable": true,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "AreaName",
+                            "attribute": "AreaName",
+                            "control": "field",
+                            "entity": "TrnInventory",
+                            "label": "[#[translatesys:Data Field:ManageInventories.group.TrnInventoryGroup.groupcontent.field.AreaName:AreaName:WEB:Area Name]#]",
+                            "translationKey": "ManageInventories.group.TrnInventoryGroup.groupcontent.field.AreaName",
+                            "datatype": "Text",
+                            "array": false,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            }
+        },
+        "lists": {
+            "TrnBranchLovList": {
+                "name": "TrnBranchLovList",
+                "label": "",
+                "entity": "TrnBranch",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CompanyId",
+                            "attribute": "CompanyId",
+                            "control": "static",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnBranchLovList.listcontent.static.CompanyId:CompanyId:WEB:Company Id]#]",
+                            "translationKey": "ManageInventories.list.TrnBranchLovList.listcontent.static.CompanyId",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "BranchId",
+                            "attribute": "BranchId",
+                            "control": "static",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnBranchLovList.listcontent.static.BranchId:BranchId:WEB:Branch Id]#]",
+                            "translationKey": "ManageInventories.list.TrnBranchLovList.listcontent.static.BranchId",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Name",
+                            "attribute": "Name",
+                            "control": "static",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnBranchLovList.listcontent.static.Name:Name:WEB:Name]#]",
+                            "translationKey": "ManageInventories.list.TrnBranchLovList.listcontent.static.Name",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            },
+            "TrnAreaLovList": {
+                "name": "TrnAreaLovList",
+                "label": "",
+                "entity": "TrnArea",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CountryId",
+                            "attribute": "CountryId",
+                            "control": "static",
+                            "entity": "TrnArea",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnAreaLovList.listcontent.static.CountryId:CountryId:WEB:Country Id]#]",
+                            "translationKey": "ManageInventories.list.TrnAreaLovList.listcontent.static.CountryId",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 10,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "AreaId",
+                            "attribute": "AreaId",
+                            "control": "static",
+                            "entity": "TrnArea",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnAreaLovList.listcontent.static.AreaId:AreaId:WEB:Area Id]#]",
+                            "translationKey": "ManageInventories.list.TrnAreaLovList.listcontent.static.AreaId",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 10,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Area",
+                            "attribute": "Area",
+                            "control": "static",
+                            "entity": "TrnArea",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnAreaLovList.listcontent.static.Area:Area:WEB:Area]#]",
+                            "translationKey": "ManageInventories.list.TrnAreaLovList.listcontent.static.Area",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            },
+            "TrnCompanyLovList": {
+                "name": "TrnCompanyLovList",
+                "label": "",
+                "entity": "TrnCompany",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CompanyId",
+                            "attribute": "CompanyId",
+                            "control": "static",
+                            "entity": "TrnCompany",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnCompanyLovList.listcontent.static.CompanyId:CompanyId:WEB:Company Id]#]",
+                            "translationKey": "ManageInventories.list.TrnCompanyLovList.listcontent.static.CompanyId",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Name",
+                            "attribute": "Name",
+                            "control": "static",
+                            "entity": "TrnCompany",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnCompanyLovList.listcontent.static.Name:Name:WEB:Name]#]",
+                            "translationKey": "ManageInventories.list.TrnCompanyLovList.listcontent.static.Name",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Comments",
+                            "attribute": "Comments",
+                            "control": "static",
+                            "entity": "TrnCompany",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnCompanyLovList.listcontent.static.Comments:Comments:WEB:Comments]#]",
+                            "translationKey": "ManageInventories.list.TrnCompanyLovList.listcontent.static.Comments",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 2000,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CreationDate",
+                            "attribute": "CreationDate",
+                            "control": "static",
+                            "entity": "TrnCompany",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnCompanyLovList.listcontent.static.CreationDate:CreationDate:WEB:Creation Date]#]",
+                            "translationKey": "ManageInventories.list.TrnCompanyLovList.listcontent.static.CreationDate",
+                            "datatype": "Date",
+                            "array": false,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            },
+            "TrnCountryLovList": {
+                "name": "TrnCountryLovList",
+                "label": "",
+                "entity": "TrnCountry",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CountryId",
+                            "attribute": "CountryId",
+                            "control": "static",
+                            "entity": "TrnCountry",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnCountryLovList.listcontent.static.CountryId:CountryId:WEB:Country Id]#]",
+                            "translationKey": "ManageInventories.list.TrnCountryLovList.listcontent.static.CountryId",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 10,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Country",
+                            "attribute": "Country",
+                            "control": "static",
+                            "entity": "TrnCountry",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnCountryLovList.listcontent.static.Country:Country:WEB:Country]#]",
+                            "translationKey": "ManageInventories.list.TrnCountryLovList.listcontent.static.Country",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            },
+            "TrnInventoryCommMethodLovList": {
+                "name": "TrnInventoryCommMethodLovList",
+                "label": "",
+                "entity": "TrnInventoryCommMethod",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CompanyId",
+                            "attribute": "CompanyId",
+                            "control": "static",
+                            "entity": "TrnInventoryCommMethod",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.CompanyId:CompanyId:WEB:Company Id]#]",
+                            "translationKey": "ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.CompanyId",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "BranchId",
+                            "attribute": "BranchId",
+                            "control": "static",
+                            "entity": "TrnInventoryCommMethod",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.BranchId:BranchId:WEB:Branch Id]#]",
+                            "translationKey": "ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.BranchId",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "InventoryId",
+                            "attribute": "InventoryId",
+                            "control": "static",
+                            "entity": "TrnInventoryCommMethod",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.InventoryId:InventoryId:WEB:Inventory Id]#]",
+                            "translationKey": "ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.InventoryId",
+                            "datatype": "Number",
+                            "array": false,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "InventoryCommId",
+                            "attribute": "InventoryCommId",
+                            "control": "static",
+                            "entity": "TrnInventoryCommMethod",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.InventoryCommId:InventoryCommId:WEB:Inventory Comm Id]#]",
+                            "translationKey": "ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.InventoryCommId",
+                            "datatype": "Number",
+                            "array": false,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Address",
+                            "attribute": "Address",
+                            "control": "static",
+                            "entity": "TrnInventoryCommMethod",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.Address:Address:WEB:Address]#]",
+                            "translationKey": "ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.Address",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CommunicationType",
+                            "attribute": "CommunicationType",
+                            "control": "static",
+                            "entity": "TrnInventoryCommMethod",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.CommunicationType:CommunicationType:WEB:Communication Type]#]",
+                            "translationKey": "ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.CommunicationType",
+                            "datatype": "Enumeration",
+                            "enumeration": "TrnCommunicationType",
+                            "array": false,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "DefaultAddress",
+                            "attribute": "DefaultAddress",
+                            "control": "static",
+                            "entity": "TrnInventoryCommMethod",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.DefaultAddress:DefaultAddress:WEB:Default Address]#]",
+                            "translationKey": "ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.DefaultAddress",
+                            "datatype": "Boolean",
+                            "array": false,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            },
+            "TrnInventoryCommMethodList": {
+                "name": "TrnInventoryCommMethodList",
+                "selectAttributes": [
+                    "parent.BranchId"
+                ],
+                "label": "[#[translatesys:Table Window:ManageInventories.list.TrnInventoryCommMethodList.$this:$this:WEB:Trn Inventory Comm Method List]#]",
+                "entity": "TrnInventoryCommMethod",
+                "editmode": "MultiRowEdit",
+                "crudactions": {
+                    "new": {
+                        "enabled": true
+                    },
+                    "edit": {
+                        "enabled": {
+                            "!=": [
+                                {
+                                    "var": "record.parent.BranchId"
+                                },
+                                "COL-01"
+                            ]
+                        }
+                    }
+                },
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "InventoryCommId",
+                            "attribute": "InventoryCommId",
+                            "control": "field",
+                            "entity": "TrnInventoryCommMethod",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.InventoryCommId:InventoryCommId:WEB:Inventory Comm Id]#]",
+                            "translationKey": "ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.InventoryCommId",
+                            "datatype": "Number",
+                            "array": false,
+                            "editable": {
+                                "==": [
+                                    {
+                                        "var": "record.etag"
+                                    },
+                                    null
+                                ]
+                            },
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Address",
+                            "attribute": "Address",
+                            "control": "field",
+                            "entity": "TrnInventoryCommMethod",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.Address:Address:WEB:Address]#]",
+                            "translationKey": "ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.Address",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": true,
+                            "required": true
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CommunicationType",
+                            "attribute": "CommunicationType",
+                            "control": "field",
+                            "entity": "TrnInventoryCommMethod",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.CommunicationType:CommunicationType:WEB:Communication Type]#]",
+                            "translationKey": "ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.CommunicationType",
+                            "datatype": "Enumeration",
+                            "enumeration": "TrnCommunicationType",
+                            "array": false,
+                            "editable": true,
+                            "required": true
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "DefaultAddress",
+                            "attribute": "DefaultAddress",
+                            "control": "field",
+                            "entity": "TrnInventoryCommMethod",
+                            "label": "[#[translatesys:Data Field:ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.DefaultAddress:DefaultAddress:WEB:Default Address]#]",
+                            "translationKey": "ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.DefaultAddress",
+                            "datatype": "Boolean",
+                            "array": false,
+                            "editable": true,
+                            "required": true
+                        }
+                    }
+                ]
+            }
+        },
+        "pages": {
+            "TrnInventoryDetailsPage": {
+                "name": "TrnInventoryDetailsPage",
+                "label": "[#[translatesys:Form Window:ManageInventories.page.TrnInventoryDetailsPage.$this:$this:WEB:Inventory Details]#]",
+                "crudactions": {
+                    "new": {
+                        "enabled": true
+                    }
+                },
+                "editmode": "Inline",
+                "datasourceProjection": "InventoryHandling",
+                "datasourceEntitySet": "TrnInventorySet",
+                "entity": "TrnInventory",
+                "content": [
+                    {
+                        "elementType": "selector",
+                        "isReference": true,
+                        "selector": "TrnInventoryS1Selector",
+                        "id": "TrnInventoryS1Selector"
+                    },
+                    {
+                        "elementType": "group",
+                        "isReference": true,
+                        "group": "TrnInventoryGroup",
+                        "id": "TrnInventoryGroup",
+                        "binding": {
+                            "bindname": "TrnInventoryS1Selector"
+                        }
+                    },
+                    {
+                        "elementType": "list",
+                        "isReference": true,
+                        "list": "TrnInventoryCommMethodList",
+                        "id": "TrnInventoryCommMethodList",
+                        "binding": {
+                            "bindname": "TrnInventoryS1Selector",
+                            "property": "TrnInventoryCommMethodArray"
+                        }
+                    }
+                ]
+            }
+        },
+        "selectors": {
+            "ReferenceTrnCompanySelector": {
+                "name": "ReferenceTrnCompanySelector",
+                "label": "",
+                "entity": "TrnCompany",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CompanyId",
+                            "attribute": "CompanyId",
+                            "control": "static",
+                            "entity": "TrnCompany",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.ReferenceTrnCompanySelector.selectorcontent.static.CompanyId:CompanyId:WEB:Company Id]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Name",
+                            "attribute": "Name",
+                            "control": "static",
+                            "entity": "TrnCompany",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.ReferenceTrnCompanySelector.selectorcontent.static.Name:Name:WEB:Name]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Comments",
+                            "attribute": "Comments",
+                            "control": "static",
+                            "entity": "TrnCompany",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.ReferenceTrnCompanySelector.selectorcontent.static.Comments:Comments:WEB:Comments]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 2000,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CreationDate",
+                            "attribute": "CreationDate",
+                            "control": "static",
+                            "entity": "TrnCompany",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.ReferenceTrnCompanySelector.selectorcontent.static.CreationDate:CreationDate:WEB:Creation Date]#]",
+                            "datatype": "Date",
+                            "array": false,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            },
+            "ReferenceTrnBranchSelector": {
+                "name": "ReferenceTrnBranchSelector",
+                "label": "",
+                "entity": "TrnBranch",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "BranchId",
+                            "attribute": "BranchId",
+                            "control": "static",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.ReferenceTrnBranchSelector.selectorcontent.static.BranchId:BranchId:WEB:Branch Id]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Name",
+                            "attribute": "Name",
+                            "control": "static",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.ReferenceTrnBranchSelector.selectorcontent.static.Name:Name:WEB:Name]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            },
+            "ReferenceTrnAreaSelector": {
+                "name": "ReferenceTrnAreaSelector",
+                "label": "",
+                "entity": "TrnArea",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "AreaId",
+                            "attribute": "AreaId",
+                            "control": "static",
+                            "entity": "TrnArea",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.ReferenceTrnAreaSelector.selectorcontent.static.AreaId:AreaId:WEB:Area Id]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 10,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Area",
+                            "attribute": "Area",
+                            "control": "static",
+                            "entity": "TrnArea",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.ReferenceTrnAreaSelector.selectorcontent.static.Area:Area:WEB:Area]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            },
+            "ReferenceTrnCountrySelector": {
+                "name": "ReferenceTrnCountrySelector",
+                "label": "",
+                "entity": "TrnCountry",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CountryId",
+                            "attribute": "CountryId",
+                            "control": "static",
+                            "entity": "TrnCountry",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.ReferenceTrnCountrySelector.selectorcontent.static.CountryId:CountryId:WEB:Country Id]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 10,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Country",
+                            "attribute": "Country",
+                            "control": "static",
+                            "entity": "TrnCountry",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.ReferenceTrnCountrySelector.selectorcontent.static.Country:Country:WEB:Country]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            },
+            "TrnInventoryS1Selector": {
+                "name": "TrnInventoryS1Selector",
+                "label": "",
+                "entity": "TrnInventory",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CompanyId",
+                            "attribute": "CompanyId",
+                            "control": "static",
+                            "entity": "TrnInventory",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.TrnInventoryS1Selector.selectorcontent.static.CompanyId:CompanyId:WEB:Company ID]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TrnBranchRef.BranchId",
+                            "attribute": "TrnBranchRef.BranchId",
+                            "control": "static",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.TrnInventoryS1Selector.selectorcontent.static.TrnBranchRef$BranchId:TrnBranchRef$BranchId:WEB:Branch Id]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "InventoryId",
+                            "attribute": "InventoryId",
+                            "control": "static",
+                            "entity": "TrnInventory",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.TrnInventoryS1Selector.selectorcontent.static.InventoryId:InventoryId:WEB:Inventory ID]#]",
+                            "datatype": "Number",
+                            "array": false,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Name",
+                            "attribute": "Name",
+                            "control": "static",
+                            "entity": "TrnInventory",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.TrnInventoryS1Selector.selectorcontent.static.Name:Name:WEB:Name]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 200,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "PickingLeadTime",
+                            "attribute": "PickingLeadTime",
+                            "control": "static",
+                            "entity": "TrnInventory",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.TrnInventoryS1Selector.selectorcontent.static.PickingLeadTime:PickingLeadTime:WEB:Picking Lead Time]#]",
+                            "datatype": "Number",
+                            "array": false,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            },
+            "TrnlovBranchS1Selector": {
+                "name": "TrnlovBranchS1Selector",
+                "label": "[#[translatesys:Menu Item:ManageInventories.selector.TrnlovBranchS1Selector.$this:$this:WEB:Trnlov Branch S1 Selector]#]",
+                "entity": "TrnBranch",
+                "content": [
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "BranchId",
+                            "attribute": "BranchId",
+                            "control": "static",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.TrnlovBranchS1Selector.selectorcontent.static.BranchId:BranchId:WEB:Branch Id]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 20,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "Name",
+                            "attribute": "Name",
+                            "control": "static",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.TrnlovBranchS1Selector.selectorcontent.static.Name:Name:WEB:Name]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 1000,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "TimeOffset",
+                            "attribute": "TimeOffset",
+                            "control": "static",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.TrnlovBranchS1Selector.selectorcontent.static.TimeOffset:TimeOffset:WEB:Time Offset]#]",
+                            "datatype": "Number",
+                            "array": false,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "CountryId",
+                            "attribute": "CountryId",
+                            "control": "static",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.TrnlovBranchS1Selector.selectorcontent.static.CountryId:CountryId:WEB:Country Id]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 10,
+                            "editable": false,
+                            "required": false
+                        }
+                    },
+                    {
+                        "elementType": "field",
+                        "field": {
+                            "name": "AreaId",
+                            "attribute": "AreaId",
+                            "control": "static",
+                            "entity": "TrnBranch",
+                            "label": "[#[translatesys:Data Field:ManageInventories.selector.TrnlovBranchS1Selector.selectorcontent.static.AreaId:AreaId:WEB:Area Id]#]",
+                            "datatype": "Text",
+                            "array": false,
+                            "maxlength": 10,
+                            "editable": false,
+                            "required": false
+                        }
+                    }
+                ]
+            }
+        },
+        "warnings": {
+            "warningsEnabled": {
+                "entities": [
+                ],
+                "actions": [
+                ]
+            }
+        }
+    }
+}

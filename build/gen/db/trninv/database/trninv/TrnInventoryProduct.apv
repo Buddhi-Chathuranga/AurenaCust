@@ -1,0 +1,64 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnInventoryProduct
+--  Type:         Entity
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- BASE VIEW DEFINITION -----------------------------------
+-----------------------------------------------------------------------------
+
+PROMPT Creating TRN_INVENTORY_PRODUCT view
+
+-- [IFS COMPLETE BLOCK VIEW TRN_INVENTORY_PRODUCT]
+CREATE OR REPLACE VIEW TRN_INVENTORY_PRODUCT AS
+SELECT
+       company_id                     company_id,
+       branch_id                      branch_id,
+       inventory_id                   inventory_id,
+       product_id                     product_id,
+       quantity                       quantity,
+       reorder_level                  reorder_level,
+       reserved_quantity              reserved_quantity,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   trn_inventory_product_tab
+WITH   READ ONLY;
+-- [END IFS COMPLETE BLOCK]
+
+COMMENT ON TABLE TRN_INVENTORY_PRODUCT
+   IS 'LU=TrnInventoryProduct^PROMPT=Trn Inventory Product^MODULE=TRNINV^TABLE=TRN_INVENTORY_PRODUCT_TAB^';
+
+-- [IFS COMPLETE BLOCK DECLAREEND]
+DECLARE
+   PROCEDURE Alter_Column_Comment (
+      view_name_   IN VARCHAR2,
+      column_name_ IN VARCHAR2,
+      comment_     IN VARCHAR2)
+   IS
+      stmt_ VARCHAR2(32767) := 'COMMENT ON COLUMN ' || view_name_ || '.' || column_name_ || ' IS ''' || REPLACE(comment_, '''', '''''') || '''';
+   BEGIN
+      EXECUTE IMMEDIATE stmt_;
+   END Alter_Column_Comment;
+BEGIN
+   Alter_Column_Comment('TRN_INVENTORY_PRODUCT', 'company_id', 'FLAGS=PMI--^DATATYPE=STRING(20)^PROMPT=Company ID^');
+   Alter_Column_Comment('TRN_INVENTORY_PRODUCT', 'branch_id', 'FLAGS=PMI--^DATATYPE=STRING(20)^PROMPT=Branch ID^');
+   Alter_Column_Comment('TRN_INVENTORY_PRODUCT', 'inventory_id', 'FLAGS=PMI--^DATATYPE=NUMBER^PROMPT=Inventory ID^REF=TrnInventory(company_id,branch_id)^');
+   Alter_Column_Comment('TRN_INVENTORY_PRODUCT', 'product_id', 'FLAGS=PMI--^DATATYPE=NUMBER^PROMPT=Product ID^REF=TrnProduct(company_id)^');
+   Alter_Column_Comment('TRN_INVENTORY_PRODUCT', 'quantity', 'FLAGS=AMIUL^DATATYPE=NUMBER^PROMPT=Quantity^');
+   Alter_Column_Comment('TRN_INVENTORY_PRODUCT', 'reorder_level', 'FLAGS=AMIU-^DATATYPE=NUMBER^PROMPT=Reorder Level^');
+   Alter_Column_Comment('TRN_INVENTORY_PRODUCT', 'reserved_quantity', 'FLAGS=AMIU-^DATATYPE=NUMBER^PROMPT=Reserved Quantity^');
+   EXECUTE IMMEDIATE 'GRANT SELECT ON TRN_INVENTORY_PRODUCT TO IFSSYS';
+END;
+-- [END IFS COMPLETE BLOCK]
+/
+

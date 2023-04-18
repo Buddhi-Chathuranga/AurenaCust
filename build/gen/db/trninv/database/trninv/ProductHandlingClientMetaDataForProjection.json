@@ -1,0 +1,1388 @@
+{
+    "name": "ProductHandling",
+    "service": "ProductHandling.svc",
+    "version": "-915746320",
+    "contains": {
+        "Reference_TrnInventory": {
+            "name": "Reference_TrnInventory",
+            "entity": "TrnInventory",
+            "array": true,
+            "defaultfilter": false
+        },
+        "Reference_TrnBranch": {
+            "name": "Reference_TrnBranch",
+            "entity": "TrnBranch",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnUnitSet": {
+            "name": "TrnUnitSet",
+            "entity": "TrnUnit",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnProductSet": {
+            "name": "TrnProductSet",
+            "entity": "TrnProduct",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnBrandSet": {
+            "name": "TrnBrandSet",
+            "entity": "TrnBrand",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnProductCategorySet": {
+            "name": "TrnProductCategorySet",
+            "entity": "TrnProdCategory",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnProductCategoryBrandSet": {
+            "name": "TrnProductCategoryBrandSet",
+            "entity": "TrnProdCategoryBrand",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnModelSet": {
+            "name": "TrnModelSet",
+            "entity": "TrnModel",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnInventoryProductSet": {
+            "name": "TrnInventoryProductSet",
+            "entity": "TrnInventoryProduct",
+            "array": true,
+            "defaultfilter": false
+        }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entityset_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": [
+        "TrnBrand",
+        "TrnProdCategoryBrand",
+        "TrnProduct",
+        "TrnModel",
+        "TrnInventoryProduct",
+        "TrnBranch",
+        "TrnUnit",
+        "TrnProdCategory",
+        "TrnInventory"
+    ]
+}]#]
+    },
+    "enumerations": {[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Enumeration_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": [
+        "TrnBrand",
+        "TrnProdCategoryBrand",
+        "TrnProduct",
+        "TrnModel",
+        "TrnInventoryProduct",
+        "TrnBranch",
+        "TrnUnit",
+        "TrnProdCategory",
+        "TrnInventory"
+    ]
+}]#]
+    },
+    "entities": {
+        "TrnUnit": {
+            "name": "TrnUnit",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnUnit",
+            "ludependencies": [
+                "TrnUnit"
+            ],
+            "keys": [
+                "Unit"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Unit": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Description": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": "TrnUnit",
+    "View": "TRN_UNIT"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"ProductHandling","Lu":"TrnUnit"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"ProductHandling","Entity":"TrnUnit","Lu":"TrnUnit"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnProduct": {
+            "name": "TrnProduct",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnProduct",
+            "ludependencies": [
+                "TrnProduct"
+            ],
+            "keys": [
+                "CompanyId",
+                "ProductId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CompanyId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "ProductId": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Description": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Price": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Comments": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Unit": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "BrandId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CategoryId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "ModelId": {
+                    "datatype": "Text",
+                    "size": 100,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": "TrnProduct",
+    "View": "TRN_PRODUCT"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"ProductHandling","Lu":"TrnProduct"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"ProductHandling","Entity":"TrnProduct","Lu":"TrnProduct"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnBrand": {
+            "name": "TrnBrand",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnBrand",
+            "ludependencies": [
+                "TrnBrand"
+            ],
+            "keys": [
+                "BrandId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "BrandId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Name": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Comments": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": "TrnBrand",
+    "View": "TRN_BRAND"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"ProductHandling","Lu":"TrnBrand"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"ProductHandling","Entity":"TrnBrand","Lu":"TrnBrand"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnProdCategory": {
+            "name": "TrnProdCategory",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnProdCategory",
+            "ludependencies": [
+                "TrnProdCategory"
+            ],
+            "keys": [
+                "CategoryId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CategoryId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Name": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Comments": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": "TrnProdCategory",
+    "View": "TRN_PROD_CATEGORY"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"ProductHandling","Lu":"TrnProdCategory"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"ProductHandling","Entity":"TrnProdCategory","Lu":"TrnProdCategory"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnProdCategoryBrand": {
+            "name": "TrnProdCategoryBrand",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnProdCategoryBrand",
+            "ludependencies": [
+                "TrnProdCategoryBrand"
+            ],
+            "keys": [
+                "BrandId",
+                "CategoryId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "BrandId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CategoryId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Brand": {
+                    "datatype": "Text",
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Category": {
+                    "datatype": "Text",
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": "TrnProdCategoryBrand",
+    "View": "TRN_PROD_CATEGORY_BRAND"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"ProductHandling","Lu":"TrnProdCategoryBrand"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"ProductHandling","Entity":"TrnProdCategoryBrand","Lu":"TrnProdCategoryBrand"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnModel": {
+            "name": "TrnModel",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnModel",
+            "ludependencies": [
+                "TrnModel"
+            ],
+            "keys": [
+                "BrandId",
+                "CategoryId",
+                "ModelId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "BrandId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CategoryId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "ModelId": {
+                    "datatype": "Text",
+                    "size": 100,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Description": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": "TrnModel",
+    "View": "TRN_MODEL"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"ProductHandling","Lu":"TrnModel"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"ProductHandling","Entity":"TrnModel","Lu":"TrnModel"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnInventoryProduct": {
+            "name": "TrnInventoryProduct",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnInventoryProduct",
+            "ludependencies": [
+                "TrnInventoryProduct"
+            ],
+            "keys": [
+                "CompanyId",
+                "BranchId",
+                "InventoryId",
+                "ProductId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CompanyId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "BranchId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "InventoryId": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "ProductId": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Quantity": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "ReorderLevel": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "ReservedQuantity": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": "TrnInventoryProduct",
+    "View": "TRN_INVENTORY_PRODUCT"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"ProductHandling","Lu":"TrnInventoryProduct"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"ProductHandling","Entity":"TrnInventoryProduct","Lu":"TrnInventoryProduct"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnInventory": {
+            "name": "TrnInventory",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Read",
+            "luname": "TrnInventory",
+            "ludependencies": [
+                "TrnInventory"
+            ],
+            "keys": [
+                "CompanyId",
+                "BranchId",
+                "InventoryId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CompanyId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "BranchId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "InventoryId": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Name": {
+                    "datatype": "Text",
+                    "size": 200,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "PickingLeadTime": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": "TrnInventory",
+    "View": "TRN_INVENTORY"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"ProductHandling","Lu":"TrnInventory"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"ProductHandling","Entity":"TrnInventory","Lu":"TrnInventory"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            }
+        },
+        "TrnBranch": {
+            "name": "TrnBranch",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Read",
+            "luname": "TrnBranch",
+            "ludependencies": [
+                "TrnBranch"
+            ],
+            "keys": [
+                "CompanyId",
+                "BranchId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CompanyId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "BranchId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Name": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "TimeOffset": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CountryId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "AreaId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": "TrnBranch",
+    "View": "TRN_BRANCH"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"ProductHandling","Lu":"TrnBranch"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"ProductHandling","Entity":"TrnBranch","Lu":"TrnBranch"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            }
+        }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Type_Metadata:{
+    "Projection": "ProductHandling",
+    "Lu": [
+        "TrnBrand",
+        "TrnProdCategoryBrand",
+        "TrnProduct",
+        "TrnModel",
+        "TrnInventoryProduct",
+        "TrnBranch",
+        "TrnUnit",
+        "TrnProdCategory",
+        "TrnInventory"
+    ]
+}]#]
+    },
+    "structures": {
+        "TrnUnitCopyValues": {
+            "name": "TrnUnitCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnUnit",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "TrnProductCopyValues": {
+            "name": "TrnProductCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnProduct",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "TrnBrandCopyValues": {
+            "name": "TrnBrandCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnBrand",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "TrnProdCategoryCopyValues": {
+            "name": "TrnProdCategoryCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnProdCategory",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "TrnProdCategoryBrandCopyValues": {
+            "name": "TrnProdCategoryBrandCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnProdCategoryBrand",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "TrnModelCopyValues": {
+            "name": "TrnModelCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnModel",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "TrnInventoryProductCopyValues": {
+            "name": "TrnInventoryProductCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnInventoryProduct",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "MoveProductDataStructure": {
+            "name": "MoveProductDataStructure",
+            "attributes": {
+                "CompanyId": {
+                    "datatype": "Text",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "ProductId": {
+                    "datatype": "Number",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "SourceBranchId": {
+                    "datatype": "Text",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "SourceInventoryId": {
+                    "datatype": "Number",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "SourceQuantity": {
+                    "datatype": "Number",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "DestBranchId": {
+                    "datatype": "Text",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "DestInventoryId": {
+                    "datatype": "Number",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "QuantityAlreadyAvailable": {
+                    "datatype": "Number",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "QuantityToMove": {
+                    "datatype": "Number",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+                "TrnInventoryRef": {
+                    "target": "TrnInventory",
+                    "datasource": "ProductHandling.svc/Reference_TrnInventory?$filter=CompanyId eq $[CompanyId] and BranchId eq $[DestBranchId] and InventoryId eq $[DestInventoryId]",
+                    "mapping": {
+                        "CompanyId": "CompanyId",
+                        "DestBranchId": "BranchId",
+                        "DestInventoryId": "InventoryId"
+                    }
+                },
+                "TrnBranchtoInventoryRef": {
+                    "target": "TrnBranch",
+                    "datasource": "ProductHandling.svc/Reference_TrnBranch?$filter=CompanyId eq $[CompanyId] and BranchId eq $[DestBranchId]",
+                    "mapping": {
+                        "CompanyId": "CompanyId",
+                        "DestBranchId": "BranchId"
+                    }
+                }
+            },
+            "arrays": {
+            }
+        }
+    },
+    "actions": {
+        "MoveProduct": {
+            "name": "MoveProduct",
+            "ludependencies": [
+                "TrnInventoryProduct"
+            ],
+            "parameters": [
+                {
+                    "Name": "CompanyId",
+                    "DataType": "Text",
+                    "Collection": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "SourceBranchId",
+                    "DataType": "Text",
+                    "Collection": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "SourceInventoryId",
+                    "DataType": "Number",
+                    "Collection": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "ProductId",
+                    "DataType": "Number",
+                    "Collection": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "DestBranchId",
+                    "DataType": "Text",
+                    "Collection": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "DestInventoryId",
+                    "DataType": "Number",
+                    "Collection": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "QuantitytoMove",
+                    "DataType": "Number",
+                    "Collection": false,
+                    "Nullable": true
+                }
+            ]
+        }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Action_Metadata:{
+    "Projection": "ProductHandling"
+}]#]
+    },
+    "functions": {
+        "GetCurrentQuantity": {
+            "name": "GetCurrentQuantity",
+            "ludependencies": [
+            ],
+            "parameters": [
+                {
+                    "Name": "ParaCompanyId",
+                    "DataType": "Text",
+                    "Collection": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "ParaBranchId",
+                    "DataType": "Text",
+                    "Collection": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "ParaInventoryId",
+                    "DataType": "Number",
+                    "Collection": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "ParaProductId",
+                    "DataType": "Number",
+                    "Collection": false,
+                    "Nullable": true
+                }
+            ]
+        }
+    },
+    "attachmentservices": {[#[callback:Object_Connection_Metadata_SYS.Enum_Entity_Services_:TrnBranch,TrnBrand,TrnInventory,TrnInventoryProduct,TrnModel,TrnProdCategory,TrnProdCategoryBrand,TrnProduct,TrnUnit]#]
+}
+}

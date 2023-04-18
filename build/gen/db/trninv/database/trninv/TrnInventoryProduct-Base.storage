@@ -1,0 +1,41 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnInventoryProduct
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- TABLE DEFINITIONS --------------------------------------
+
+TABLE trn_inventory_product_tab IS (
+   company_id                     VARCHAR2(20)   NOT NULL,
+   branch_id                      VARCHAR2(20)   NOT NULL,
+   inventory_id                   NUMBER         NOT NULL,
+   product_id                     NUMBER         NOT NULL,
+   quantity                       NUMBER         NOT NULL,
+   reorder_level                  NUMBER         NOT NULL,
+   reserved_quantity              NUMBER         NOT NULL,
+   rowversion                     DATE           NOT NULL,
+   rowkey                         VARCHAR2(50)   DEFAULT sys_guid() NOT NULL);
+
+
+PRIMARY KEY trn_inventory_product_pk IS trn_inventory_product_tab (
+   company_id,
+   branch_id,
+   inventory_id,
+   product_id);
+
+
+UNIQUE CONSTRAINT trn_inventory_product_rk IS trn_inventory_product_tab (
+   rowkey);
+
+-------------------- OTHER DEFINITIONS --------------------------------------
+

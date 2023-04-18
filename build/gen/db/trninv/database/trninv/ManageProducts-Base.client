@@ -1,0 +1,176 @@
+client    ProductHandling;
+component TRNINV;
+layer     Base;
+
+-------------------- TRN UNIT -----------------------------------------------
+
+
+selector TrnUnitSelector for TrnUnit {
+   label = "${Description}";
+   static Unit;
+}
+
+-------------------- TRN PRODUCT --------------------------------------------
+
+
+selector TrnProductSelector for TrnProduct {
+   label = "${Description}";
+   static CompanyId;
+   static ProductId;
+}
+
+-------------------- TRN BRAND ----------------------------------------------
+
+
+selector TrnBrandSelector for TrnBrand {
+   label = "${BrandId}";
+   static BrandId;
+}
+
+-------------------- TRN PROD CATEGORY --------------------------------------
+
+
+selector TrnProdCategorySelector for TrnProdCategory {
+   label = "${CategoryId}";
+   static CategoryId;
+}
+
+-------------------- TRN PROD CATEGORY BRAND --------------------------------
+
+
+selector TrnProdCategoryBrandSelector for TrnProdCategoryBrand {
+   label = "${CategoryId}";
+   static BrandId;
+   static CategoryId;
+}
+
+-------------------- TRN MODEL ----------------------------------------------
+
+
+selector TrnModelSelector for TrnModel {
+   label = "${Description}";
+   static BrandId;
+   static CategoryId;
+   static ModelId;
+}
+
+-------------------- TRN INVENTORY PRODUCT ----------------------------------
+
+
+selector TrnInventoryProductSelector for TrnInventoryProduct {
+   label = "${ProductId}";
+   static CompanyId;
+   static BranchId;
+   static InventoryId;
+   static ProductId;
+}
+
+-------------------- TRN INVENTORY ------------------------------------------
+
+
+selector TrnInventorySelector for TrnInventory {
+   label = "${InventoryId}";
+   static CompanyId;
+   static BranchId;
+   static InventoryId;
+}
+
+list TrnInventoryLovList for TrnInventory {
+   label = "";
+   static InventoryId;
+}
+-------------------- TRN BRANCH ---------------------------------------------
+
+
+selector TrnBranchSelector for TrnBranch {
+   label = "${BranchId}";
+   static CompanyId;
+   static BranchId;
+}
+
+list TrnBranchLovList for TrnBranch {
+   label = "";
+   static CompanyId;
+   static BranchId;
+   static Name;
+}
+
+-------------------- LOOKUP SUPPORT -----------------------------------------
+
+-------------------- REFERENCE SUPPORT --------------------------------------
+
+selector ReferenceTrnInventorySelector for TrnInventory {
+   label = "";
+   static InventoryId;
+}
+
+selector ReferenceTrnBranchSelector for TrnBranch {
+   label = "";
+   static BranchId;
+   static Name;
+}
+
+-------------------- STANDARD COMMANDS --------------------------------------
+
+@Final
+command Ok {
+   label = "OK";
+   enabled = [true];
+   execute {
+      exit OK;
+   }
+}
+
+@Final
+command Cancel {
+   label = "Cancel";
+   enabled = [true];
+   execute {
+      exit CANCEL;
+   }
+}
+
+@Final
+command Yes {
+   label = "Yes";
+   enabled = [true];
+   execute {
+      exit YES;
+   }
+}
+
+@Final
+command No {
+   label = "No";
+   enabled = [true];
+   execute {
+      exit NO;
+   }
+}
+
+@Final
+command Abort {
+   label = "Abort";
+   enabled = [true];
+   execute {
+      exit ABORT;
+   }
+}
+
+@Final
+command Ignore {
+   label = "Ignore";
+   enabled = [true];
+   execute {
+      exit IGNORE;
+   }
+}
+
+@Final
+command Retry {
+   label = "Retry";
+   enabled = [true];
+   execute {
+      exit RETRY;
+   }
+}

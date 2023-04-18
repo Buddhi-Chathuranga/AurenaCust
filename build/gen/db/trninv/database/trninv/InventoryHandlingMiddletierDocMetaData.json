@@ -1,0 +1,2210 @@
+{
+    "projection": {
+        "Name": "InventoryHandling",
+        "Metadata": {
+            "Version": "[#[generate:version]#]",
+            "Description": "Put some useful description here ...",
+            "Category": [
+                "Users"
+            ]
+        },
+        "Container": {
+            "EntitySets": [
+                {
+                    "Name": "Reference_TrnBranch",
+                    "EntityType": "TrnBranch"
+                },
+                {
+                    "Name": "Reference_TrnArea",
+                    "EntityType": "TrnArea"
+                },
+                {
+                    "Name": "Reference_TrnCompany",
+                    "EntityType": "TrnCompany"
+                },
+                {
+                    "Name": "Reference_TrnCountry",
+                    "EntityType": "TrnCountry"
+                },
+                {
+                    "Name": "Reference_TrnInventoryCommMethod",
+                    "EntityType": "TrnInventoryCommMethod"
+                },
+                {
+                    "Name": "TrnInventorySet",
+                    "EntityType": "TrnInventory"
+                }
+            ],
+            "Singletons": [
+            ],
+            "Actions": [
+            ],
+            "Functions": [
+                {
+                    "Name": "GetFullName",
+                    "DataType": "Text",
+                    "Collection": false,
+                    "Parameters": [
+                        {
+                            "Name": "FirstName",
+                            "DataType": "Text",
+                            "Collection": false,
+                            "Nullable": true
+                        },
+                        {
+                            "Name": "LastName",
+                            "DataType": "Text",
+                            "Collection": false,
+                            "Nullable": true
+                        }
+                    ],
+                    "Execute": {
+                        "SQL": {
+                            "From": "TABLE(Inventory_Handling_SVC.Rd_Get_Full_Name(:FirstName, :LastName, unbound## => ''))",
+                            "Bind": [
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "FirstName",
+                                    "ImplementationType": "VARCHAR2"
+                                },
+                                {
+                                    "Kind": "Parameter",
+                                    "Name": "LastName",
+                                    "ImplementationType": "VARCHAR2"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "Enumerations": [
+            {
+                "Name": "FndBoolean",
+                "Values": [
+                    {
+                        "Identifier": "False",
+                        "DbValue": "FALSE"
+                    },
+                    {
+                        "Identifier": "True",
+                        "DbValue": "TRUE"
+                    }
+                ]
+            },
+            {
+                "Name": "TrnCommunicationType",
+                "Values": [
+                    {
+                        "Identifier": "Postal",
+                        "DbValue": "POSTAL"
+                    },
+                    {
+                        "Identifier": "Email",
+                        "DbValue": "EMAIL"
+                    },
+                    {
+                        "Identifier": "Phone",
+                        "DbValue": "PHONE"
+                    }
+                ]
+            }
+        ],
+        "Structures": [
+            {
+                "Name": "TrnInventoryCopyValues",
+                "PLSQLRecordName": "INVENTORY_HANDLING_SVC.COPY_VALUES_REC",
+                "Attributes": [
+                    {
+                        "Name": "ModifiedSource",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventory",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "MODIFIED_SOURCE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnBranchCopyValues",
+                "PLSQLRecordName": "INVENTORY_HANDLING_SVC.COPY_VALUES_REC",
+                "Attributes": [
+                    {
+                        "Name": "ModifiedSource",
+                        "DataType": "Entity",
+                        "SubType": "TrnBranch",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "MODIFIED_SOURCE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnInventoryCommMethodCopyValues",
+                "PLSQLRecordName": "INVENTORY_HANDLING_SVC.COPY_VALUES_REC",
+                "Attributes": [
+                    {
+                        "Name": "ModifiedSource",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventoryCommMethod",
+                        "Collection": false,
+                        "Nullable": true,
+                        "AttrName": "MODIFIED_SOURCE",
+                        "Execute": {
+                            "SQL": {
+                                "ImplementationType": "VARCHAR2"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "StreamInfoRec",
+                "PLSQLRecordName": "INVENTORY_HANDLING_SVC.STREAM_INFO_REC",
+                "Attributes": [
+                    {
+                        "Name": "FileName",
+                        "DataType": "Text"
+                    },
+                    {
+                        "Name": "MimeType",
+                        "DataType": "Text"
+                    }
+                ]
+            },
+            {
+                "Name": "EntityDec",
+                "PLSQLRecordName": "INVENTORY_HANDLING_SVC.ENTITY_DEC",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "Text"
+                    },
+                    {
+                        "Name": "Info",
+                        "DataType": "Text"
+                    },
+                    {
+                        "Name": "Attr",
+                        "DataType": "Text"
+                    }
+                ]
+            }
+        ],
+        "Entities": [
+            {
+                "Name": "TrnInventory",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"InventoryHandling","Lu":"TrnInventory","View":"TRN_INVENTORY"}]#]"
+                    }
+                },
+                "Keys": [
+                    "CompanyId",
+                    "BranchId",
+                    "InventoryId"
+                ],
+                "KeysWhere": "(company_id = :CompanyId AND branch_id = :BranchId AND inventory_id = :InventoryId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnInventory'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'||'INVENTORY_ID='||inventory_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CompanyId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "COMPANY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "company_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "company_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "BranchId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "BRANCH_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "branch_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "branch_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "InventoryId",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": true,
+                        "Updatable": false,
+                        "AttrName": "INVENTORY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "inventory_id",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "inventory_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Name",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 200,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "NAME",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "name",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "name"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "PickingLeadTime",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "PICKING_LEAD_TIME",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "picking_lead_time",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "picking_lead_time"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CountryName",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "COUNTRY_NAME",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "Trn_Country_API.Get_country(Trn_Branch_API.Get_Country_Id(company_id, branch_id))",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "country_name"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "AreaName",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "AREA_NAME",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "Trn_Area_API.Get_Area(Trn_Branch_API.Get_Country_Id(company_id, branch_id), Trn_Branch_API.Get_Area_Id(company_id, branch_id))",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "area_name"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"InventoryHandling","Lu":"TrnInventory","Type":"Entity","Name":"TrnInventory","View":"TRN_INVENTORY"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnInventory'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'||'INVENTORY_ID='||inventory_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [
+                    {
+                        "Name": "TrnInventoryCommMethodArray",
+                        "Collection": true,
+                        "Target": "TrnInventoryCommMethod",
+                        "Keys": [
+                            {
+                                "ThisAttribute": "CompanyId",
+                                "TargetAttribute": "CompanyId"
+                            },
+                            {
+                                "ThisAttribute": "BranchId",
+                                "TargetAttribute": "BranchId"
+                            },
+                            {
+                                "ThisAttribute": "InventoryId",
+                                "TargetAttribute": "InventoryId"
+                            }
+                        ],
+                        "ParentAttributes": [
+                            "CompanyId",
+                            "BranchId",
+                            "InventoryId"
+                        ],
+                        "ChildAttributes": [
+                            "CompanyId",
+                            "BranchId",
+                            "InventoryId"
+                        ],
+                        "Where": "(:parent.company_id = :child.company_id AND :parent.branch_id = :child.branch_id AND :parent.inventory_id = :child.inventory_id)"
+                    },
+                    {
+                        "Name": "TrnCompanyRef",
+                        "Collection": false,
+                        "Target": "TrnCompany",
+                        "Keys": [
+                            {
+                                "ThisAttribute": "CompanyId",
+                                "TargetAttribute": "CompanyId"
+                            }
+                        ],
+                        "ParentAttributes": [
+                            "CompanyId"
+                        ],
+                        "ChildAttributes": [
+                            "CompanyId"
+                        ],
+                        "Where": "(:parent.company_id = :child.company_id)"
+                    },
+                    {
+                        "Name": "TrnBranchRef",
+                        "Collection": false,
+                        "Target": "TrnBranch",
+                        "Keys": [
+                            {
+                                "ThisAttribute": "CompanyId",
+                                "TargetAttribute": "CompanyId"
+                            },
+                            {
+                                "ThisAttribute": "BranchId",
+                                "TargetAttribute": "BranchId"
+                            }
+                        ],
+                        "ParentAttributes": [
+                            "CompanyId",
+                            "BranchId"
+                        ],
+                        "ChildAttributes": [
+                            "CompanyId",
+                            "BranchId"
+                        ],
+                        "Where": "(:parent.company_id = :child.company_id AND :parent.branch_id = :child.branch_id)"
+                    }[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Entity":"TrnInventory","Lu":"TrnInventory","View":"TRN_INVENTORY"}]#]
+                ],
+                "CRUD": [
+                    {
+                        "Name": "Default",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventory",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "SQL": {
+                                "From": "TABLE(Inventory_Handling_SVC.CRUD_Default(:Attr, trn_inventory## => ''))",
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventory",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnInventoryCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Inventory_Handling_SVC.CRUD_Default_Copy(:CopyValues, trn_inventory## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Create",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Inventory_Handling_SVC.CRUD_Create(:Attr, :Action$, trn_inventory## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Update",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Inventory_Handling_SVC.CRUD_Update(:ETag, :CompanyId, :BranchId, :InventoryId, :Attr, :Action$, trn_inventory## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BranchId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "InventoryId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventory",
+                        "Collection": false,
+                        "CrudOperation": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnInventoryCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Inventory_Handling_SVC.CRUD_Default_Copy(:ETag, :CompanyId, :BranchId, :InventoryId, :CopyValues, trn_inventory## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BranchId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "InventoryId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnBranch",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"InventoryHandling","Lu":"TrnBranch","View":"TRN_BRANCH"}]#]"
+                    }
+                },
+                "Keys": [
+                    "CompanyId",
+                    "BranchId"
+                ],
+                "KeysWhere": "(company_id = :CompanyId AND branch_id = :BranchId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnBranch'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CompanyId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "COMPANY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "company_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "company_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "BranchId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "BRANCH_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "branch_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "branch_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Name",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 1000,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "NAME",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "name",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "name"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "TimeOffset",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "TIME_OFFSET",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "time_offset",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "time_offset"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CountryId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "COUNTRY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "country_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "country_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "AreaId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "AREA_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "area_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "area_id"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"InventoryHandling","Lu":"TrnBranch","Type":"Entity","Name":"TrnBranch","View":"TRN_BRANCH"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnBranch'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [
+                    {
+                        "Name": "TrnAreaRef",
+                        "Collection": false,
+                        "Target": "TrnArea",
+                        "Keys": [
+                            {
+                                "ThisAttribute": "AreaId",
+                                "TargetAttribute": "AreaId"
+                            },
+                            {
+                                "ThisAttribute": "CountryId",
+                                "TargetAttribute": "CountryId"
+                            }
+                        ],
+                        "ParentAttributes": [
+                            "AreaId",
+                            "CountryId"
+                        ],
+                        "ChildAttributes": [
+                            "AreaId",
+                            "CountryId"
+                        ],
+                        "Where": "(:parent.area_id = :child.area_id AND :parent.country_id = :child.country_id)"
+                    },
+                    {
+                        "Name": "TrnCompanyRef",
+                        "Collection": false,
+                        "Target": "TrnCompany",
+                        "Keys": [
+                            {
+                                "ThisAttribute": "CompanyId",
+                                "TargetAttribute": "CompanyId"
+                            }
+                        ],
+                        "ParentAttributes": [
+                            "CompanyId"
+                        ],
+                        "ChildAttributes": [
+                            "CompanyId"
+                        ],
+                        "Where": "(:parent.company_id = :child.company_id)"
+                    },
+                    {
+                        "Name": "TrnCountryRef",
+                        "Collection": false,
+                        "Target": "TrnCountry",
+                        "Keys": [
+                            {
+                                "ThisAttribute": "CountryId",
+                                "TargetAttribute": "CountryId"
+                            }
+                        ],
+                        "ParentAttributes": [
+                            "CountryId"
+                        ],
+                        "ChildAttributes": [
+                            "CountryId"
+                        ],
+                        "Where": "(:parent.country_id = :child.country_id)"
+                    }[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Entity":"TrnBranch","Lu":"TrnBranch","View":"TRN_BRANCH"}]#]
+                ],
+                "CRUD": [
+                    {
+                        "Name": "Default",
+                        "DataType": "Entity",
+                        "SubType": "TrnBranch",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "SQL": {
+                                "From": "TABLE(Inventory_Handling_SVC.CRUD_Default(:Attr, trn_branch## => ''))",
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnBranch",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnBranchCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Inventory_Handling_SVC.CRUD_Default_Copy(:CopyValues, trn_branch## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Create",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Inventory_Handling_SVC.CRUD_Create(:Attr, :Action$, trn_branch## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Update",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Inventory_Handling_SVC.CRUD_Update(:ETag, :CompanyId, :BranchId, :Attr, :Action$, trn_branch## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BranchId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Delete",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Inventory_Handling_SVC.CRUD_Delete(:ETag, :CompanyId, :BranchId, :Action$, trn_branch## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BranchId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnBranch",
+                        "Collection": false,
+                        "CrudOperation": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnBranchCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Inventory_Handling_SVC.CRUD_Default_Copy(:ETag, :CompanyId, :BranchId, :CopyValues, trn_branch## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BranchId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "Name": "TrnArea",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"InventoryHandling","Lu":"TrnArea","View":"TRN_AREA"}]#]"
+                    }
+                },
+                "Keys": [
+                    "CountryId",
+                    "AreaId"
+                ],
+                "KeysWhere": "(country_id = :CountryId AND area_id = :AreaId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnArea'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'AREA_ID='||area_id||'^'||'COUNTRY_ID='||country_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CountryId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "COUNTRY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "country_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "country_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "AreaId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "AREA_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "area_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "area_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Area",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 1000,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "AREA",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "area",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "area"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"InventoryHandling","Lu":"TrnArea","Type":"Entity","Name":"TrnArea","View":"TRN_AREA"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnArea'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'AREA_ID='||area_id||'^'||'COUNTRY_ID='||country_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Entity":"TrnArea","Lu":"TrnArea","View":"TRN_AREA"}]#]
+                ],
+                "CRUD": [
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                ]
+            },
+            {
+                "Name": "TrnCompany",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"InventoryHandling","Lu":"TrnCompany","View":"TRN_COMPANY"}]#]"
+                    }
+                },
+                "Keys": [
+                    "CompanyId"
+                ],
+                "KeysWhere": "(company_id = :CompanyId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnCompany'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'COMPANY_ID='||company_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CompanyId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "COMPANY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "company_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "company_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Name",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 1000,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "NAME",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "name",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "name"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Comments",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Updatable": true,
+                        "AttrName": "COMMENTS",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "comments",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "comments"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CreationDate",
+                        "DataType": "Date",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "CREATION_DATE",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "creation_date",
+                                "ImplementationType": "DATE",
+                                "Alias": "creation_date"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"InventoryHandling","Lu":"TrnCompany","Type":"Entity","Name":"TrnCompany","View":"TRN_COMPANY"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnCompany'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'COMPANY_ID='||company_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Entity":"TrnCompany","Lu":"TrnCompany","View":"TRN_COMPANY"}]#]
+                ],
+                "CRUD": [
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                ]
+            },
+            {
+                "Name": "TrnCountry",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"InventoryHandling","Lu":"TrnCountry","View":"TRN_COUNTRY"}]#]"
+                    }
+                },
+                "Keys": [
+                    "CountryId"
+                ],
+                "KeysWhere": "(country_id = :CountryId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnCountry'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'COUNTRY_ID='||country_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CountryId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 10,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "COUNTRY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "country_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "country_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Country",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 1000,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "COUNTRY",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "country",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "country"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"InventoryHandling","Lu":"TrnCountry","Type":"Entity","Name":"TrnCountry","View":"TRN_COUNTRY"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnCountry'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'COUNTRY_ID='||country_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Entity":"TrnCountry","Lu":"TrnCountry","View":"TRN_COUNTRY"}]#]
+                ],
+                "CRUD": [
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                ]
+            },
+            {
+                "Name": "TrnInventoryCommMethod",
+                "SupportWarnings": false,
+                "Execute": {
+                    "SQL": {
+                        "From": "[#[callback:Custom_Object_Proxy_SYS.Server_View_Metadata:{"Projection":"InventoryHandling","Lu":"TrnInventoryCommMethod","View":"TRN_INVENTORY_COMM_METHOD"}]#]"
+                    }
+                },
+                "Keys": [
+                    "CompanyId",
+                    "BranchId",
+                    "InventoryId",
+                    "InventoryCommId"
+                ],
+                "KeysWhere": "(company_id = :CompanyId AND branch_id = :BranchId AND inventory_id = :InventoryId AND inventory_comm_id = :InventoryCommId)",
+                "Attributes": [
+                    {
+                        "Name": "ETag",
+                        "DataType": "ETag",
+                        "Collection": false,
+                        "Size": 128,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'W/\"'||objid||':'||objversion||'\"'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "etag"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnInventoryCommMethod'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'||'INVENTORY_COMM_ID='||inventory_comm_id||'^'||'INVENTORY_ID='||inventory_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Objgrants",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 2000,
+                        "Nullable": true,
+                        "Insertable": false,
+                        "Updatable": false,
+                        "AttrName": "OBJGRANTS",
+                        "Keygeneration": "Server",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "NULL",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "objgrants"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CompanyId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "COMPANY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "company_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "company_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "BranchId",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "BRANCH_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "branch_id",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "branch_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "InventoryId",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": false,
+                        "Updatable": false,
+                        "AttrName": "INVENTORY_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "inventory_id",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "inventory_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "InventoryCommId",
+                        "DataType": "Number",
+                        "Collection": false,
+                        "Nullable": true,
+                        "Updatable": false,
+                        "AttrName": "INVENTORY_COMM_ID",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "inventory_comm_id",
+                                "ImplementationType": "NUMBER",
+                                "Alias": "inventory_comm_id"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Address",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 1000,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "ADDRESS",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "address",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "address"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "CommunicationType",
+                        "DataType": "Enumeration",
+                        "SubType": "TrnCommunicationType",
+                        "Collection": false,
+                        "Size": 20,
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "COMMUNICATION_TYPE_DB",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "communication_type_db",
+                                "OrderBy": "communication_type",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "communication_type"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DefaultAddress",
+                        "DataType": "Boolean",
+                        "Collection": false,
+                        "Size": 20,
+                        "TrueValue": "TRUE",
+                        "FalseValue": "FALSE",
+                        "Nullable": false,
+                        "Updatable": true,
+                        "AttrName": "DEFAULT_ADDRESS_DB",
+                        "Keygeneration": "User",
+                        "Execute": {
+                            "SQL": {
+                                "Select": "default_address_db",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "default_address"
+                            }
+                        }
+                    }[#[jsoncallback:Custom_Object_Proxy_SYS.Server_Attribute_Metadata:{"Projection":"InventoryHandling","Lu":"TrnInventoryCommMethod","Type":"Entity","Name":"TrnInventoryCommMethod","View":"TRN_INVENTORY_COMM_METHOD"}]#]
+                ],
+                "Computed": [
+                ],
+                "Annotations": [
+                    {
+                        "Name": "luname",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 80,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'TrnInventoryCommMethod'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "luname"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "keyref",
+                        "DataType": "Text",
+                        "Collection": false,
+                        "Size": 4000,
+                        "Nullable": true,
+                        "Execute": {
+                            "SQL": {
+                                "Select": "'BRANCH_ID='||branch_id||'^'||'COMPANY_ID='||company_id||'^'||'INVENTORY_COMM_ID='||inventory_comm_id||'^'||'INVENTORY_ID='||inventory_id||'^'",
+                                "ImplementationType": "VARCHAR2",
+                                "Alias": "keyref"
+                            }
+                        }
+                    }
+                ],
+                "Navigation": [[#[jsoncallback:Custom_Object_Proxy_Sys.Server_Entity_Nav_Metadata:{"Projection":"InventoryHandling","Entity":"TrnInventoryCommMethod","Lu":"TrnInventoryCommMethod","View":"TRN_INVENTORY_COMM_METHOD"}]#]
+                ],
+                "CRUD": [
+                    {
+                        "Name": "Default",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventoryCommMethod",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "SQL": {
+                                "From": "TABLE(Inventory_Handling_SVC.CRUD_Default(:Attr, trn_inventory_comm_method## => ''))",
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventoryCommMethod",
+                        "Collection": false,
+                        "CollectionBound": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnInventoryCommMethodCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Inventory_Handling_SVC.CRUD_Default_Copy(:CopyValues, trn_inventory_comm_method## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Create",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Inventory_Handling_SVC.CRUD_Create(:Attr, :Action$, trn_inventory_comm_method## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Update",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Inventory_Handling_SVC.CRUD_Update(:ETag, :CompanyId, :BranchId, :InventoryId, :InventoryCommId, :Attr, :Action$, trn_inventory_comm_method## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BranchId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "InventoryId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "InventoryCommId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "ClientSYS.AttributeString",
+                                        "Name": "Attr",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "Name": "Delete",
+                        "DataType": "Structure",
+                        "SubType": "EntityDec",
+                        "Collection": false,
+                        "Parameters": [
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    "   :Return_$ := Inventory_Handling_SVC.CRUD_Delete(:ETag, :CompanyId, :BranchId, :InventoryId, :InventoryCommId, :Action$, trn_inventory_comm_method## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BranchId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "InventoryId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "InventoryCommId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Action",
+                                        "Name": "Action$",
+                                        "ImplementationType": "VARCHAR2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Actions": [
+                ],
+                "Functions": [
+                    {
+                        "Name": "DefaultCopy",
+                        "DataType": "Entity",
+                        "SubType": "TrnInventoryCommMethod",
+                        "Collection": false,
+                        "CrudOperation": true,
+                        "Parameters": [
+                            {
+                                "Name": "CopyValues",
+                                "DataType": "Structure",
+                                "SubType": "TrnInventoryCommMethodCopyValues",
+                                "Collection": false,
+                                "Nullable": true
+                            }
+                        ],
+                        "Execute": {
+                            "PL-SQL": {
+                                "Code": [
+                                    "BEGIN",
+                                    " :Return_$ := Inventory_Handling_SVC.CRUD_Default_Copy(:ETag, :CompanyId, :BranchId, :InventoryId, :InventoryCommId, :CopyValues, trn_inventory_comm_method## => '');",
+                                    "END;"
+                                ],
+                                "Bind": [
+                                    {
+                                        "Kind": "ETag",
+                                        "Name": "ETag",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "CompanyId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "BranchId",
+                                        "ImplementationType": "VARCHAR2"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "InventoryId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Attribute",
+                                        "Name": "InventoryCommId",
+                                        "ImplementationType": "NUMBER"
+                                    },
+                                    {
+                                        "Kind": "Parameter",
+                                        "Name": "CopyValues",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.COPY_VALUES_REC"
+                                    },
+                                    {
+                                        "Kind": "EntityDec$",
+                                        "Name": "Return_$",
+                                        "ImplementationType": "STRUCTURE",
+                                        "SubType": "INVENTORY_HANDLING_SVC.ENTITY_DEC",
+                                        "Direction": "OUT"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

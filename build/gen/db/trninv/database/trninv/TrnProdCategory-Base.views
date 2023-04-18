@@ -1,0 +1,46 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnProdCategory
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio (unit-test)
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Category_Id IS
+   Flags      = 'KMI-L'
+   Datatype   = 'STRING(10)'
+   Prompt     = 'Category ID';
+COLUMN Name IS
+   Flags      = 'AMIUL'
+   Datatype   = 'STRING(1000)'
+   Prompt     = 'Name';
+COLUMN Comments IS
+   Flags      = 'A-IU-'
+   Datatype   = 'STRING(2000)'
+   Prompt     = 'Comments';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Trn_Prod_Category IS
+   Prompt     = 'Trn Prod Category'
+   Table      = 'TRN_PROD_CATEGORY_TAB'
+SELECT
+       category_id                    category_id,
+       name                           name,
+       comments                       comments,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   trn_prod_category_tab;

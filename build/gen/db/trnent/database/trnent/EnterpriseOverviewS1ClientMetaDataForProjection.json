@@ -1,0 +1,568 @@
+{
+    "name": "EnterpriseOverviewS1",
+    "service": "EnterpriseOverviewS1.svc",
+    "version": "-1186458005",
+    "contains": {
+        "Reference_TrnCountry": {
+            "name": "Reference_TrnCountry",
+            "entity": "TrnCountry",
+            "array": true,
+            "defaultfilter": false
+        },
+        "Reference_TrnArea": {
+            "name": "Reference_TrnArea",
+            "entity": "TrnArea",
+            "array": true,
+            "defaultfilter": false
+        },
+        "Reference_TrnCompany": {
+            "name": "Reference_TrnCompany",
+            "entity": "TrnCompany",
+            "array": true,
+            "defaultfilter": false
+        },
+        "Reference_TrnBranch": {
+            "name": "Reference_TrnBranch",
+            "entity": "TrnBranch",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnCountrySet": {
+            "name": "TrnCountrySet",
+            "entity": "TrnCountry",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnAreaSet": {
+            "name": "TrnAreaSet",
+            "entity": "TrnArea",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnCompanySet": {
+            "name": "TrnCompanySet",
+            "entity": "TrnCompany",
+            "array": true,
+            "defaultfilter": false
+        },
+        "TrnBranchSet": {
+            "name": "TrnBranchSet",
+            "entity": "TrnBranch",
+            "array": true,
+            "defaultfilter": false
+        }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entityset_Metadata:{
+    "Projection": "EnterpriseOverviewS1",
+    "Lu": [
+        "TrnCountry",
+        "TrnBranch",
+        "TrnArea",
+        "TrnCompany"
+    ]
+}]#]
+    },
+    "enumerations": {[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Enumeration_Metadata:{
+    "Projection": "EnterpriseOverviewS1",
+    "Lu": [
+        "TrnCountry",
+        "TrnBranch",
+        "TrnArea",
+        "TrnCompany"
+    ]
+}]#]
+    },
+    "entities": {
+        "TrnCountry": {
+            "name": "TrnCountry",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnCountry",
+            "ludependencies": [
+                "TrnCountry"
+            ],
+            "keys": [
+                "CountryId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CountryId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Country": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "EnterpriseOverviewS1",
+    "Lu": "TrnCountry",
+    "View": "TRN_COUNTRY"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"EnterpriseOverviewS1","Lu":"TrnCountry"}]#]
+            },
+            "arrays": {
+                "TrnAreaArray": {
+                    "target": "TrnArea",
+                    "datasource": null,
+                    "mapping": {
+                        "CountryId": "CountryId"
+                    }
+                }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"EnterpriseOverviewS1","Entity":"TrnCountry","Lu":"TrnCountry"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnArea": {
+            "name": "TrnArea",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnArea",
+            "ludependencies": [
+                "TrnArea"
+            ],
+            "keys": [
+                "CountryId",
+                "AreaId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CountryId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "AreaId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Area": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "EnterpriseOverviewS1",
+    "Lu": "TrnArea",
+    "View": "TRN_AREA"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"EnterpriseOverviewS1","Lu":"TrnArea"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"EnterpriseOverviewS1","Entity":"TrnArea","Lu":"TrnArea"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnCompany": {
+            "name": "TrnCompany",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnCompany",
+            "ludependencies": [
+                "TrnCompany"
+            ],
+            "keys": [
+                "CompanyId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CompanyId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Name": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Comments": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CreationDate": {
+                    "datatype": "Date",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "EnterpriseOverviewS1",
+    "Lu": "TrnCompany",
+    "View": "TRN_COMPANY"
+}]#]
+            },
+            "references": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"EnterpriseOverviewS1","Lu":"TrnCompany"}]#]
+            },
+            "arrays": {
+                "TrnBranchArray": {
+                    "target": "TrnBranch",
+                    "datasource": null,
+                    "mapping": {
+                        "CompanyId": "CompanyId"
+                    }
+                }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"EnterpriseOverviewS1","Entity":"TrnCompany","Lu":"TrnCompany"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        },
+        "TrnBranch": {
+            "name": "TrnBranch",
+            "hasETag": true,
+            "hasKeys": true,
+            "CRUD": "Create,Read,Update,Delete",
+            "luname": "TrnBranch",
+            "ludependencies": [
+                "TrnBranch"
+            ],
+            "keys": [
+                "CompanyId",
+                "BranchId"
+            ],
+            "attributes": {
+                "Objgrants": {
+                    "datatype": "Text",
+                    "size": 2000,
+                    "keygeneration": "Server",
+                    "required": false,
+                    "editable": false,
+                    "updatable": false,
+                    "insertable": false,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CompanyId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "BranchId": {
+                    "datatype": "Text",
+                    "size": 20,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": {
+    "==": [
+        {
+            "var": "record.etag"
+        },
+        null
+    ]
+},
+                    "updatable": false,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "Name": {
+                    "datatype": "Text",
+                    "size": 1000,
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "TimeOffset": {
+                    "datatype": "Number",
+                    "keygeneration": "User",
+                    "required": true,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "CountryId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                },
+                "AreaId": {
+                    "datatype": "Text",
+                    "size": 10,
+                    "keygeneration": "User",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }[#[jsoncallback:Custom_Object_Proxy_SYS.Client_Attribute_Metadata:{
+    "Projection": "EnterpriseOverviewS1",
+    "Lu": "TrnBranch",
+    "View": "TRN_BRANCH"
+}]#]
+            },
+            "references": {
+                "TrnAreaRef": {
+                    "target": "TrnArea",
+                    "datasource": "EnterpriseOverviewS1.svc/Reference_TrnArea?$filter=AreaId eq $[AreaId] and CountryId eq $[CountryId]",
+                    "mapping": {
+                        "AreaId": "AreaId",
+                        "CountryId": "CountryId"
+                    }
+                },
+                "TrnCompanyRef": {
+                    "target": "TrnCompany",
+                    "datasource": "EnterpriseOverviewS1.svc/Reference_TrnCompany?$filter=CompanyId eq $[CompanyId]",
+                    "mapping": {
+                        "CompanyId": "CompanyId"
+                    }
+                },
+                "TrnCountryRef": {
+                    "target": "TrnCountry",
+                    "datasource": "EnterpriseOverviewS1.svc/Reference_TrnCountry?$filter=CountryId eq $[CountryId]",
+                    "mapping": {
+                        "CountryId": "CountryId"
+                    }
+                }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Nav_Metadata:{"Projection":"EnterpriseOverviewS1","Lu":"TrnBranch"}]#]
+            },
+            "arrays": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Array_Metadata:{"Projection":"EnterpriseOverviewS1","Entity":"TrnBranch","Lu":"TrnBranch"}]#]
+            },
+            "actions": {
+            },
+            "functions": {
+            },
+            "defaultcopyapplicable": true
+        }[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Entity_Type_Metadata:{
+    "Projection": "EnterpriseOverviewS1",
+    "Lu": [
+        "TrnCountry",
+        "TrnBranch",
+        "TrnArea",
+        "TrnCompany"
+    ]
+}]#]
+    },
+    "structures": {
+        "TrnCountryCopyValues": {
+            "name": "TrnCountryCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnCountry",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "TrnAreaCopyValues": {
+            "name": "TrnAreaCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnArea",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "TrnCompanyCopyValues": {
+            "name": "TrnCompanyCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnCompany",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        },
+        "TrnBranchCopyValues": {
+            "name": "TrnBranchCopyValues",
+            "attributes": {
+                "ModifiedSource": {
+                    "datatype": "Entity",
+                    "subtype": "TrnBranch",
+                    "required": false,
+                    "editable": true,
+                    "updatable": true,
+                    "insertable": true,
+                    "unbound": false,
+                    "multiselect": false
+                }
+            },
+            "references": {
+            },
+            "arrays": {
+            }
+        }
+    },
+    "actions": {[#[jsoncallback:Custom_Object_Proxy_Sys.Client_Action_Metadata:{
+    "Projection": "EnterpriseOverviewS1"
+}]#]
+    },
+    "functions": {
+    },
+    "attachmentservices": {[#[callback:Object_Connection_Metadata_SYS.Enum_Entity_Services_:TrnArea,TrnBranch,TrnCompany,TrnCountry]#]
+}
+}

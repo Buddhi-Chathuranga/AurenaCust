@@ -1,0 +1,78 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: TrnInventoryProdUtil
+--  Type:         Utility
+--  Component:    TRNINV
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- API PACKAGE IMPLEMENTATION -----------------------------
+-----------------------------------------------------------------------------
+
+PROMPT Creating Trn_Inventory_Prod_Util_API implementation
+
+-- [IFS COMPLETE BLOCK PACKAGEBODY Trn_Inventory_Prod_Util_API]
+CREATE OR REPLACE PACKAGE BODY Trn_Inventory_Prod_Util_API IS
+
+-----------------------------------------------------------------------------
+-------------------- PRIVATE DECLARATIONS -----------------------------------
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PUBLIC METHODS -----------------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Move_Items (
+   company_id_               IN VARCHAR2,
+   source_branch_id_         IN VARCHAR2,
+   source_inventory_id_      IN NUMBER,
+   source_product_id_        IN NUMBER,
+   destination_branch_id_    IN VARCHAR2,
+   destination_inventory_id_ IN NUMBER,
+   quantity_                 IN NUMBER )
+IS
+BEGIN
+   General_SYS.Init_Method(Trn_Inventory_Prod_Util_API.lu_name_, 'Trn_Inventory_Prod_Util_API', 'Move_Items');
+   Trn_Inventory_Product_API.Move_Item(company_id_,
+                                       source_branch_id_,
+                                       source_inventory_id_,
+                                       source_product_id_,
+                                       quantity_,
+                                       'OUT');
+   Trn_Inventory_Product_API.Move_Item(company_id_,
+                                       destination_branch_id_,
+                                       destination_inventory_id_,
+                                       source_product_id_,
+                                       quantity_,
+                                       'IN');
+END Move_Items;
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Init
+IS
+BEGIN
+   NULL;
+END Init;
+
+BEGIN
+   Init;
+END Trn_Inventory_Prod_Util_API;
+-- [END IFS COMPLETE BLOCK]
+/
+SHOW ERROR
+
+GRANT EXECUTE ON Trn_Inventory_Prod_Util_API TO IFSSYS
+/

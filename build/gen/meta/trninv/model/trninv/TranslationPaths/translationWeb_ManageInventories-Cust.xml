@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TranslatableResources type="WEB" module="TRNINV" version="1.1" layer="Cust" xmlns="types.scan.translation.fnd.ifsworld.com">
+   <TranslatableResource type="Global Data" ID="ManageInventories" name="ManageInventories">
+      <Resource subtype="Global Data" ID="ManageInventories.menu.InventoryDetailsNavEntry" control="menu.InventoryDetailsNavEntry">
+         <Resource subtype="Menu Item" ID="ManageInventories.menu.InventoryDetailsNavEntry.$this" control="$this">
+            <Text>Inventory Details</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.selector.ReferenceTrnCompanySelector" control="selector.ReferenceTrnCompanySelector">
+         <Resource subtype="Data Field" ID="ManageInventories.selector.ReferenceTrnCompanySelector.selectorcontent.static.CompanyId" control="CompanyId">
+            <Text>Company Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.ReferenceTrnCompanySelector.selectorcontent.static.Name" control="Name">
+            <Text>Name</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.ReferenceTrnCompanySelector.selectorcontent.static.Comments" control="Comments">
+            <Text>Comments</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.ReferenceTrnCompanySelector.selectorcontent.static.CreationDate" control="CreationDate">
+            <Text>Creation Date</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.selector.ReferenceTrnBranchSelector" control="selector.ReferenceTrnBranchSelector">
+         <Resource subtype="Data Field" ID="ManageInventories.selector.ReferenceTrnBranchSelector.selectorcontent.static.BranchId" control="BranchId">
+            <Text>Branch Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.ReferenceTrnBranchSelector.selectorcontent.static.Name" control="Name">
+            <Text>Name</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.selector.ReferenceTrnAreaSelector" control="selector.ReferenceTrnAreaSelector">
+         <Resource subtype="Data Field" ID="ManageInventories.selector.ReferenceTrnAreaSelector.selectorcontent.static.AreaId" control="AreaId">
+            <Text>Area Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.ReferenceTrnAreaSelector.selectorcontent.static.Area" control="Area">
+            <Text>Area</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.selector.ReferenceTrnCountrySelector" control="selector.ReferenceTrnCountrySelector">
+         <Resource subtype="Data Field" ID="ManageInventories.selector.ReferenceTrnCountrySelector.selectorcontent.static.CountryId" control="CountryId">
+            <Text>Country Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.ReferenceTrnCountrySelector.selectorcontent.static.Country" control="Country">
+            <Text>Country</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.selector.TrnInventoryS1Selector" control="selector.TrnInventoryS1Selector">
+         <Resource subtype="Data Field" ID="ManageInventories.selector.TrnInventoryS1Selector.selectorcontent.static.CompanyId" control="CompanyId">
+            <Text>Company ID</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.TrnInventoryS1Selector.selectorcontent.static.TrnBranchRef$BranchId" control="TrnBranchRef$BranchId">
+            <Text>Branch Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.TrnInventoryS1Selector.selectorcontent.static.InventoryId" control="InventoryId">
+            <Text>Inventory ID</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.TrnInventoryS1Selector.selectorcontent.static.Name" control="Name">
+            <Text>Name</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.TrnInventoryS1Selector.selectorcontent.static.PickingLeadTime" control="PickingLeadTime">
+            <Text>Picking Lead Time</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.selector.TrnlovBranchS1Selector" control="selector.TrnlovBranchS1Selector">
+         <Resource subtype="Menu Item" ID="ManageInventories.selector.TrnlovBranchS1Selector.$this" control="$this">
+            <Text>Trnlov Branch S1 Selector</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.TrnlovBranchS1Selector.selectorcontent.static.BranchId" control="BranchId">
+            <Text>Branch Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.TrnlovBranchS1Selector.selectorcontent.static.Name" control="Name">
+            <Text>Name</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.TrnlovBranchS1Selector.selectorcontent.static.TimeOffset" control="TimeOffset">
+            <Text>Time Offset</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.TrnlovBranchS1Selector.selectorcontent.static.CountryId" control="CountryId">
+            <Text>Country Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.selector.TrnlovBranchS1Selector.selectorcontent.static.AreaId" control="AreaId">
+            <Text>Area Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.list.TrnBranchLovList" control="list.TrnBranchLovList">
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnBranchLovList.listcontent.static.CompanyId" control="CompanyId">
+            <Text>Company Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnBranchLovList.listcontent.static.BranchId" control="BranchId">
+            <Text>Branch Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnBranchLovList.listcontent.static.Name" control="Name">
+            <Text>Name</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.list.TrnAreaLovList" control="list.TrnAreaLovList">
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnAreaLovList.listcontent.static.CountryId" control="CountryId">
+            <Text>Country Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnAreaLovList.listcontent.static.AreaId" control="AreaId">
+            <Text>Area Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnAreaLovList.listcontent.static.Area" control="Area">
+            <Text>Area</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.list.TrnCompanyLovList" control="list.TrnCompanyLovList">
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnCompanyLovList.listcontent.static.CompanyId" control="CompanyId">
+            <Text>Company Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnCompanyLovList.listcontent.static.Name" control="Name">
+            <Text>Name</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnCompanyLovList.listcontent.static.Comments" control="Comments">
+            <Text>Comments</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnCompanyLovList.listcontent.static.CreationDate" control="CreationDate">
+            <Text>Creation Date</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.list.TrnCountryLovList" control="list.TrnCountryLovList">
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnCountryLovList.listcontent.static.CountryId" control="CountryId">
+            <Text>Country Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnCountryLovList.listcontent.static.Country" control="Country">
+            <Text>Country</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.list.TrnInventoryCommMethodLovList" control="list.TrnInventoryCommMethodLovList">
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.CompanyId" control="CompanyId">
+            <Text>Company Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.BranchId" control="BranchId">
+            <Text>Branch Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.InventoryId" control="InventoryId">
+            <Text>Inventory Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.InventoryCommId" control="InventoryCommId">
+            <Text>Inventory Comm Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.Address" control="Address">
+            <Text>Address</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.CommunicationType" control="CommunicationType">
+            <Text>Communication Type</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnInventoryCommMethodLovList.listcontent.static.DefaultAddress" control="DefaultAddress">
+            <Text>Default Address</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.list.TrnInventoryCommMethodList" control="list.TrnInventoryCommMethodList">
+         <Resource subtype="Table Window" ID="ManageInventories.list.TrnInventoryCommMethodList.$this" control="$this">
+            <Text>Trn Inventory Comm Method List</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.InventoryCommId" control="InventoryCommId">
+            <Text>Inventory Comm Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.Address" control="Address">
+            <Text>Address</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.CommunicationType" control="CommunicationType">
+            <Text>Communication Type</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.list.TrnInventoryCommMethodList.listcontent.field.DefaultAddress" control="DefaultAddress">
+            <Text>Default Address</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.card.TrnBranchCard" control="card.TrnBranchCard">
+         <Resource subtype="Data Field" ID="ManageInventories.card.TrnBranchCard.cardcontent.field.BranchId" control="BranchId" origin="TrnBranchCardFragment.card.TrnBranchCard.cardcontent.field.BranchId">
+            <Text>Branch Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.card.TrnBranchCard.cardcontent.field.Name" control="Name" origin="TrnBranchCardFragment.card.TrnBranchCard.cardcontent.field.Name">
+            <Text>Name</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.card.TrnBranchCard.cardcontent.field.TrnCompanyRef" control="TrnCompanyRef" origin="TrnBranchCardFragment.card.TrnBranchCard.cardcontent.field.TrnCompanyRef">
+            <Text>Company Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.card.TrnBranchCard.cardcontent.field.TrnCompanyRef$Name" control="TrnCompanyRef$Name" origin="TrnBranchCardFragment.card.TrnBranchCard.cardcontent.field.TrnCompanyRef$Name">
+            <Text>Name</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.card.TrnBranchCard.cardcontent.field.TimeOffset" control="TimeOffset" origin="TrnBranchCardFragment.card.TrnBranchCard.cardcontent.field.TimeOffset">
+            <Text>Time Offset</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.card.TrnBranchCard.cardcontent.field.TrnCountryRef" control="TrnCountryRef" origin="TrnBranchCardFragment.card.TrnBranchCard.cardcontent.field.TrnCountryRef">
+            <Text>Country Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.card.TrnBranchCard.cardcontent.field.TrnCountryRef$Country" control="TrnCountryRef$Country" origin="TrnBranchCardFragment.card.TrnBranchCard.cardcontent.field.TrnCountryRef$Country">
+            <Text>Country</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.card.TrnBranchCard.cardcontent.field.AreaId" control="AreaId" origin="TrnBranchCardFragment.card.TrnBranchCard.cardcontent.field.AreaId">
+            <Text>Area Id</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.card.TrnBranchCard.cardcontent.field.TrnAreaRef$Area" control="TrnAreaRef$Area" origin="TrnBranchCardFragment.card.TrnBranchCard.cardcontent.field.TrnAreaRef$Area">
+            <Text>Area Name</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.page.TrnInventoryDetailsPage" control="page.TrnInventoryDetailsPage">
+         <Resource subtype="Form Window" ID="ManageInventories.page.TrnInventoryDetailsPage.$this" control="$this">
+            <Text>Inventory Details</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+      <Resource subtype="Global Data" ID="ManageInventories.group.TrnInventoryGroup" control="group.TrnInventoryGroup">
+         <Resource subtype="Group Box" ID="ManageInventories.group.TrnInventoryGroup.$this" control="$this">
+            <Text>Trn Inventory Group</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.group.TrnInventoryGroup.groupcontent.field.TrnCompanyRef" control="TrnCompanyRef">
+            <Text>Company Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Message" ID="ManageInventories.group.TrnInventoryGroup.groupcontent.field.TrnCompanyRef.validatecommand.execute.executeaction.executeinfoaction.message" control="executeinfoaction">
+            <Text>Company ID ${CompanyId} is added</Text>
+            <FieldDescription>False</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.group.TrnInventoryGroup.groupcontent.lookup.TrnBranchRef" control="TrnBranchRef">
+            <Text>Branch Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.group.TrnInventoryGroup.groupcontent.field.InventoryId" control="InventoryId">
+            <Text>Inventory ID</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.group.TrnInventoryGroup.groupcontent.field.Name" control="Name">
+            <Text>Name</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.group.TrnInventoryGroup.groupcontent.field.PickingLeadTime" control="PickingLeadTime">
+            <Text>Picking Lead Time</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.group.TrnInventoryGroup.groupcontent.field.TrnBranchRef$CountryId" control="TrnBranchRef$CountryId">
+            <Text>Country Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.group.TrnInventoryGroup.groupcontent.field.CountryName" control="CountryName">
+            <Text>Country Name</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.group.TrnInventoryGroup.groupcontent.field.TrnBranchRef$AreaId" control="TrnBranchRef$AreaId">
+            <Text>Area Id</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+         <Resource subtype="Data Field" ID="ManageInventories.group.TrnInventoryGroup.groupcontent.field.AreaName" control="AreaName">
+            <Text>Area Name</Text>
+            <FieldDescription>True</FieldDescription>
+            <LongProgText />
+         </Resource>
+      </Resource>
+   </TranslatableResource>
+   </TranslatableResources>
